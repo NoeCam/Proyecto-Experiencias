@@ -1,10 +1,12 @@
 import express from "express";
 
+import entriesRouter from './entriesRouter.js';
+import userRouter from './userRouter.js';
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('¡Bienvenido al servidor de Experiencias Diferentes!');
-  });
+router.use(entriesRouter);
+router.use(userRouter);
 
 export default router;
 

@@ -1,6 +1,6 @@
 import getPool from "./getPool.js";
 
-const { MYSQL_DATABASE } = process.env;
+const { MYSQL_DATABASE, ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_FIRST_NAME, ADMIN_LAST_NAME } = process.env;
 
 async function createDB() {
   try {
@@ -8,9 +8,9 @@ async function createDB() {
 
     await pool.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
 
-    console.log("Base de datos creada");
+    // console.log("Base de datos creada");
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
     throw new Error("Error al crear la BBDD", { cause: error });
   }
 }
@@ -21,14 +21,14 @@ async function createTables() {
 
     await pool.query(`USE ${MYSQL_DATABASE}`);
 
-    console.log("Borrando tablas...");
+    // console.log("Borrando tablas...");
     await pool.query(`
-      DROP TABLE IF EXISTS usuarios, experiencias;
+      DROP TABLE IF EXISTS users, experiences, reservations, valorations;
       `);
 
-    console.log("Creando tabla de usuarios...");
+    // console.log("Creando tabla de usuarios...");
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS usuarios (
+      CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         email VARCHAR(100) UNIQUE NOT NULL,
         firstName VARCHAR(50) DEFAULT NULL,
@@ -36,7 +36,7 @@ async function createTables() {
         password VARCHAR(100) NOT NULL,
         avatar VARCHAR(100) DEFAULT NULL,
         active BOOLEAN DEFAULT false,
-        role ENUM('admin', 'normal') DEFAULT 'normal',
+        role ENUM('admin', 'normal') DEFAULT 'normal' NOT NULL,
         registrationCode CHAR(30),
         recoverPassCode CHAR(10),
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
@@ -44,41 +44,65 @@ async function createTables() {
         )
       `);
 
-    console.log("Creando tabla de experiencias...");
+    // console.log("Creando tabla de experiencias...");
     await pool.query(`
-      CREATE TABLE experiencias(
+      CREATE TABLE experiences(
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         title VARCHAR(50) NOT NULL,
         place VARCHAR(30) NOT NULL,
         description TEXT NOT NULL,
-        image VARCHAR(100) DEFAULT NOT NULL,
+        image VARCHAR(100) NOT NULL,
         date DATE,
         price VARCHAR(30),
         numMinPlaces INT,
         numTotalPlaces INT,
-        usuarioId INT NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP, 
-        FOREIGN KEY (usuarioId) REFERENCES usuarios(id)
+        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
       )
       `);
 
-    console.log("Creando tabla de valoraciones_experiencias...");
+    // console.log("Creando tabla de reservaciones...");
     await pool.query(`
-        CREATE TABLE IF NOT EXISTS valoraciones_experiencias (
-            id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            value TINYINT UNSIGNED NOT NULL,
-            usuarioId INT NOT NULL,
-            experienciaId INT NOT NULL,
-            createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (usuarioId) REFERENCES usuarios(id),
-            FOREIGN KEY (experienciaId) REFERENCES experiencias(id)
-        )
+       CREATE TABLE IF NOT EXISTS reservations (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        numberOfReserve INT,
+        userId INT NOT NULL,
+        experienceId INT NOT NULL,
+        FOREIGN KEY (userId) REFERENCES users(id),
+        FOREIGN KEY (experienceId) REFERENCES experiences(id)
+      )
         `);
 
+    // console.log("Creando tabla de valoraciones...");
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS valorations (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        value TINYINT UNSIGNED NOT NULL,
+        userId INT UNIQUE NOT NULL,
+        experienceId INT NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (userId) REFERENCES users(id),
+        FOREIGN KEY (experienceId) REFERENCES experiences(id)
+      )
+      `);
+
     console.log("Tablas creadas");
+
+    await pool.query(`
+      INSERT INTO users(email, password, firstName, lastName, active, role)
+      VALUES (
+        "${ ADMIN_EMAIL }",
+        "${ ADMIN_PASSWORD }",
+        "${ ADMIN_FIRST_NAME }",
+        "${ ADMIN_LAST_NAME }",
+        true,
+        "admin");
+      `);
+
+      console.log("ADMIN ingresado correctamente");
+    
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });
   }
 }
@@ -90,7 +114,7 @@ async function initDB() {
 
     process.exit(0);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     process.exit(1);
   }
 }
