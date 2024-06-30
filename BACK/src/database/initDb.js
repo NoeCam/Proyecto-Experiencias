@@ -1,6 +1,12 @@
 import getPool from "./getPool.js";
 
-const { MYSQL_DATABASE, ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_FIRST_NAME, ADMIN_LAST_NAME } = process.env;
+const {
+  MYSQL_DATABASE,
+  ADMIN_EMAIL,
+  ADMIN_PASSWORD,
+  ADMIN_FIRST_NAME,
+  ADMIN_LAST_NAME,
+} = process.env;
 
 async function createDB() {
   try {
@@ -31,6 +37,7 @@ async function createTables() {
       CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         email VARCHAR(100) UNIQUE NOT NULL,
+        userName VARCHAR(20) NOT NULL,
         firstName VARCHAR(50) DEFAULT NULL,
         lastName VARCHAR(50) DEFAULT NULL,
         password VARCHAR(100) NOT NULL,
@@ -92,16 +99,15 @@ async function createTables() {
     await pool.query(`
       INSERT INTO users(email, password, firstName, lastName, active, role)
       VALUES (
-        "${ ADMIN_EMAIL }",
-        "${ ADMIN_PASSWORD }",
-        "${ ADMIN_FIRST_NAME }",
-        "${ ADMIN_LAST_NAME }",
+        "${ADMIN_EMAIL}",
+        "${ADMIN_PASSWORD}",
+        "${ADMIN_FIRST_NAME}",
+        "${ADMIN_LAST_NAME}",
         true,
         "admin");
       `);
 
-      // console.log("ADMIN ingresado correctamente");
-    
+
   } catch (error) {
     // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });
