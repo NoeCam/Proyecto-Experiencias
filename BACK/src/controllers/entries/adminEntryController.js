@@ -14,7 +14,7 @@ import express from 'express';
 const experienciaSchema = Joi.object({
    title: Joi.string().max(50).required(),
    description: Joi.string().required(),
-   place: Joi.string().max(30).required(),
+   location: Joi.string().max(30).required(),
    image: Joi.string().uri().required(),
    date: Joi.date().required(),
    price: Joi.number().positive().required(),
@@ -26,7 +26,7 @@ const experienciaSchema = Joi.object({
 // Función controladora final que agrega una nueva entrada.
 const adminEntryController = async (req, res, next) => {
     try {
-        const { title, description, place, image, date, price, numMinPlaces, numTotalPlaces } = req.body;
+        const { title, description, location, image, date, price, numMinPlaces, numTotalPlaces } = req.body;
 
         console.log(Object.assign(req.body, req.files));
 
@@ -39,7 +39,7 @@ const adminEntryController = async (req, res, next) => {
         const entryId = await insertEntryModel(
             title,
             description,
-            place,
+            location,
             image,
             date,
             price,

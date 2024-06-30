@@ -3,6 +3,7 @@ import express from 'express';
 
 //*************** Funciones controladoras intermedias *********/
 import { adminEntryController, experienciaSchema } from '../controllers/entries/adminEntryController.js';
+import verifyAdmin from '../middleware/verifyAdminController.js';
 
 //*************** Funciones controladoras finales *************/
 import experiencesListController from '../controllers/entries/experiencesListController.js'
@@ -19,6 +20,16 @@ router.post('/experiencias', adminEntryController, (req, res) => {
 
 // Obtención de la lista de experiencias
 router.get('/experiencias', experiencesListController);
+
+// Endpoints para para desactivar, activar y confirmar la experiencia
+  //? Desactivar
+router.put('/experiencias/:experienceId/deactivate', verifyAdmin, experiencesListController);
+  //? Activar
+router.put('/experiencias/:experienceId/activate', verifyAdmin, experiencesListController);
+  //? Confirmar
+router.put('/experiencias/:experienceId/confirmExperience', verifyAdmin, experiencesListController);
+
+
 
 
 export default router;

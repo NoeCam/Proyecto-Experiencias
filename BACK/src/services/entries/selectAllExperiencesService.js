@@ -8,7 +8,7 @@ const selectAllExperiencesService =  async (keyword = '', userId = '') => {
             SELECT
                 e.id,
                 e.title, 
-                e.place, 
+                e.location, 
                 e.description, 
                 e.image, 
                 e.date, 

@@ -6,7 +6,7 @@ import getPool from "../../database/getPool.js";
 import newUserSchema from "../../schemas/users/newUserSchema.js";
 
 // Define una función para validar datos con un esquema.
-const validateSchemaUtil = async (schema, data) => {
+export async function validateSchemaUtil (schema, data) {
   const { error } = schema.validate(data); // Valida los datos contra el esquema.
   if (error) {
     // Si hay un error de validación...
@@ -15,7 +15,7 @@ const validateSchemaUtil = async (schema, data) => {
 };
 
 // Define el controlador para registrar usuarios.
-const registerUser = async (req, res, next) => {
+export default async function registerUser (req, res, next) {
   let connection;
   try {
     // Extrae el nombre de usuario, correo y contraseña del cuerpo de la solicitud.
@@ -54,4 +54,4 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-export { registerUser };
+
