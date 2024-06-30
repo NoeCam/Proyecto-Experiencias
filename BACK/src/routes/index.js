@@ -8,12 +8,7 @@ import loginUserController from "../controllers/users/loginUserController.js";
 import entriesRouter from "./entriesRouter.js";
 import userRouter from "./userRouter.js";
 
-const router = express.Router();
-
-router.post("/register", registerUser);
-// Ruta para el login de usuario
-router.post('/login', loginUserController);  // Añadido el endpoint de login
-
+const router= express.Router();
 
 router.use(entriesRouter);
 router.use(userRouter);
