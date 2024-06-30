@@ -107,7 +107,6 @@ async function createTables() {
         "admin");
       `);
 
-
   } catch (error) {
     // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });

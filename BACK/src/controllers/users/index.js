@@ -1,3 +1,11 @@
 import registerUser from "./registerUser.js";
+import loginUserController from './loginUserController.js';
 
-export { registerUser };
+
+export { 
+    registerUser,
+    loginUserController,
+ };
+
+
+
