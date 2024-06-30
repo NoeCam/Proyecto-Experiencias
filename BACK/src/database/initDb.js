@@ -56,7 +56,7 @@ async function createTables() {
       CREATE TABLE experiences(
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         title VARCHAR(50) NOT NULL,
-        place VARCHAR(30) NOT NULL,
+        location VARCHAR(30) NOT NULL,
         description TEXT NOT NULL,
         image VARCHAR(100) NOT NULL,
         date DATE,
