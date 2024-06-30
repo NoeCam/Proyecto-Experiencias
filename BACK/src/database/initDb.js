@@ -63,6 +63,7 @@ async function createTables() {
         price VARCHAR(30),
         numMinPlaces INT,
         numTotalPlaces INT,
+        active BOOLEAN DEFAULT true,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
       )
@@ -85,7 +86,7 @@ async function createTables() {
       CREATE TABLE IF NOT EXISTS valorations (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         value TINYINT UNSIGNED NOT NULL,
-        userId INT UNIQUE NOT NULL,
+        userId INT NOT NULL,
         experienceId INT NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id),
@@ -93,7 +94,7 @@ async function createTables() {
       )
       `);
 
-    console.log("Tablas creadas");
+    // console.log("Tablas creadas");
 
     await pool.query(`
       INSERT INTO users(email, password, firstName, lastName, active, role)
@@ -106,7 +107,7 @@ async function createTables() {
         "admin");
       `);
 
-    console.log("ADMIN ingresado correctamente");
+
   } catch (error) {
     // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });
