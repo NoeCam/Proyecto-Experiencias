@@ -39,14 +39,14 @@ const adminEntryController = async (req, res, next) => {
         );
 
         // Array donde pushearemos la imagen (si hay).
-        const photo = [];
+        let photo = [];
 
         // Si "req.files" existe quiere decir que hay algún archivo en la petición.
         if (req.files) {
             // Recorremos las fotos. Utilizamos el método "Object.values" para obtener un
             // array de fotos. Para evitar que el array de fotos tenga más de tres fotos aplicamos
             // el método slice.
-            for (const photo of Object.values(req.files).slice(0, 3)) {
+            for (photo of Object.values(req.files).slice(0, 3)) {
                 // Guardamos la foto en disco y obtenemos su nombre. Redimensionamos a un ancho
                 // de 500px.
                 const photoName = await savePhotoService(photo, 500);
