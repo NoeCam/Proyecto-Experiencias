@@ -30,6 +30,7 @@ export function entryActivationStateController (req, res) {
     }
 
     const query = 'UPDATE experiencias SET estado = ? WHERE id = ?';
+    const pool = getPool();
     pool.query(query, [state, id], (err, result) => {
         if (err) {
             console.error('Error actualizando la entrada:', err);
@@ -56,6 +57,7 @@ export function entryConfirmationStateController (req, res) {
     }
 
     const query = 'UPDATE experiencias SET comfirmacion = ? WHERE id = ?';
+    const pool = getPool();
     pool.query(query, [state, id], (err, result) => {
         if (err) {
             console.error('Error actualizando la entrada:', err);

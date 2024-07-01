@@ -8,6 +8,8 @@ import verifyAdmin from '../middleware/verifyAdminController.js';
 //*************** Funciones controladoras finales *************/
 import experiencesListController from '../controllers/entries/experiencesListController.js'
 
+import { handleReservationController } from '../controllers/entries/handleReservationController.js';
+
 const router = express.Router();
 
 // Ruta de ejemplo BORRAR
@@ -29,7 +31,8 @@ router.put('/experiencias/:experienceId/activate', verifyAdmin, experiencesListC
   //? Confirmar
 router.put('/experiencias/:experienceId/confirmExperience', verifyAdmin, experiencesListController);
 
-
+  //Endpoint para reservas y cancelar la reserva de una experiencia
+router.put('/experiencias/:experienceId/reservation', handleReservationController);
 
 
 export default router;

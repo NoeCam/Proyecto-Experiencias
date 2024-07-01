@@ -1,14 +1,4 @@
 import Joi from 'joi';
-import express from 'express';
-
-
-// Importamos los modelos.
-
-// Importamos los servicios.
-
-
-// Importamos los servicios.
-
 
 // Creamos el esquema.
 const experienciaSchema = Joi.object({
