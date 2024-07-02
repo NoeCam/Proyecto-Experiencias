@@ -24,10 +24,6 @@ router.get("/entries", (req, res) => {
 });
 
 // Endpoint para la creación de experiencia de Admin
-// router.post("/experiencias", adminEntryController, (req, res) => {
-//   const { error } = experienciaSchema.validate(req.body);
-//   return error;
-// });
 router.post("/experiencias", adminEntryController);
 
 // Obtención de la lista de experiencias
