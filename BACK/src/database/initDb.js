@@ -56,7 +56,7 @@ async function createTables() {
       CREATE TABLE experiences(
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         title VARCHAR(50) NOT NULL,
-        location VARCHAR(30) NOT NULL,
+        location VARCHAR(100) NOT NULL,
         description TEXT NOT NULL,
         image VARCHAR(100) NOT NULL,
         date DATE,
@@ -65,7 +65,9 @@ async function createTables() {
         numTotalPlaces INT,
         active BOOLEAN DEFAULT true,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
+        userId INT,
+        FOREIGN KEY (userId) REFERENCES users(id)
       )
       `);
 
@@ -97,16 +99,16 @@ async function createTables() {
     // console.log("Tablas creadas");
 
     await pool.query(`
-      INSERT INTO users(email, password, firstName, lastName, active, role)
+      INSERT INTO users(email, password, username, firstName, lastName, active, role)
       VALUES (
         "${ADMIN_EMAIL}",
         "${ADMIN_PASSWORD}",
+        "${ADMIN_FIRST_NAME}_${ADMIN_LAST_NAME}",
         "${ADMIN_FIRST_NAME}",
         "${ADMIN_LAST_NAME}",
         true,
         "admin");
       `);
-
   } catch (error) {
     // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });
