@@ -14,7 +14,7 @@ import experiencesListController from "../controllers/entries/experiencesListCon
 
 import { handleReservationController } from "../controllers/entries/handleReservationController.js";
 
-import visualizeExperienceModel from "../models/entries/visualizeExperienceModel.js";
+import getExperienceController from "../controllers/entries/getExperoenceController.js";
 
 const router = express.Router();
 
@@ -61,6 +61,6 @@ router.put(
 
 
 //Endpoint visualización de una experiencia.
-router.get('/experiencias/:experienceId', visualizeExperienceModel);
+router.get('/experiencias/:experienceId', getExperienceController);
 
 export default router;
