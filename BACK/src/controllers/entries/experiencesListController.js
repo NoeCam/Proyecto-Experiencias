@@ -1,11 +1,15 @@
-import selectAllExperiencesService from "../../services/entries/selectAllExperiencesService.js";
 import getPool from "../../database/getPool.js";
+import selectSearchExperiencesService from "../../services/entries/selectSearchExperiencesService.js";
 
 export default async function experiencesListController(req, res, next) {
   try {
-    //const { keyword } = req.query;
+    const { search, order, direction } = req.query;
 
-    const experiences = await selectAllExperiencesService();
+    let experiences = await selectSearchExperiencesService(
+      search,
+      order,
+      direction
+    );
 
     res.send({
       status: "ok",
