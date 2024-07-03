@@ -3,6 +3,7 @@ import registerUser from '../controllers/users/registerUser.js';
 import loginUserController from '../controllers/users/loginUserController.js';
 import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
 import editUserPassController from '../controllers/users/editUserPassController.js';
+import validateUserController from '../controllers/users/validateUserController.js';
 
 const router = express.Router();
 
