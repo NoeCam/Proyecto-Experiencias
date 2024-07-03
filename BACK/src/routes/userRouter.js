@@ -1,7 +1,7 @@
-import express from "express";
-import registerUser from "../controllers/users/registerUser.js";
-import loginUserController from "../controllers/users/loginUserController.js";
-import validateUserController from "../controllers/users/validaterUserController.js";
+import express from 'express';
+import registerUser from '../controllers/users/registerUser.js';
+import loginUserController from '../controllers/users/loginUserController.js';
+import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
 
 const router = express.Router();
 
@@ -17,6 +17,10 @@ router.post("/register", registerUser);
 //Validar a un usuario.
 router.get("/users/validate/:registrationCode", validateUserController);
 // Ruta para el login de usuario
-router.post("/login", loginUserController);
+
+router.post('/login', loginUserController);  // Añadido el endpoint de login
+
+// Define la ruta del endpoint de recuperación de contraseña
+router.post('/recover-password', sendRecoverPassController);
 
 export default router;
