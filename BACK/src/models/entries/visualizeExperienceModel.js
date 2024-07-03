@@ -2,9 +2,11 @@ import getPool from '../../database/getPool.js';
 
 // Función que realiza una consulta a la base de datos para obtener información de una
 // experiencia concreta.
-const visualizeExperienceModel = async (id) => {
-    const pool = await getPool();
 
+
+const visualizeExperienceModel = async (id) => {
+    console.log(id);
+    const pool = await getPool();
     // Obtenemos la información necesaria de la experiencia.
     const [experiences] = await pool.query(
         
