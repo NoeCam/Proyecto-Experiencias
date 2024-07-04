@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "abd05f5d-40b6-4241-849d-6880f278239e",
+		"name": "Experiencias_Diferentes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33879221"
+	},
+	"item": [
+		{
+			"name": "/experiencias",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/experiencias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/experiencias",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"antartic\",\r\n    \"description\": \"Have a fanny good day with friends in a Jet ski route\",\r\n    \"location\": \"Ría de Pontevedra\",\r\n    \"image\": \"jet ski\",\r\n    \"date\": \"2024-09-28\",\r\n    \"price\": \"27 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15,\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/experiencias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"noecamelia@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"Noelia_Camelia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camelia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/validate/:registrationCode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024/user/validate/:registrarionCode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"user",
+						"validate",
+						":registrarionCode"
+					],
+					"variable": [
+						{
+							"key": "registrarionCode",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "experiencias/:experienceId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024/experiencias/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchExperiences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024/experiencias?search=antartic&order=price&direction=DESC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "antartic"
+						},
+						{
+							"key": "order",
+							"value": "price"
+						},
+						{
+							"key": "direction",
+							"value": "DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
