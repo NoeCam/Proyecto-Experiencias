@@ -1,4 +1,4 @@
-import getPool from "../../database/getPool.js";
+import getPool from "../database/getPool";
 
 
 const updateActivationService = async (id, active) => {
