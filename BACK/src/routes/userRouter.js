@@ -26,7 +26,7 @@ router.post('/login', loginUserController);  // Añadido el endpoint de login
 router.post('/recover-password', sendRecoverPassController);
 
 // Editar la contraseña de un usuario con un código de recuperación.
-router.post('/users/password', editUserPassController);
+router.put('/users/password', editUserPassController);
 
 export default router;
 
