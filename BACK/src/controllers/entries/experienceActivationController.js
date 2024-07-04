@@ -5,7 +5,7 @@ import updateActivationService from "../../services/updateActivationService.js";
 const experienceActivationController = async (req, res, next) => {
     try {
 
-        const experienceId = req.params.experience.id || req.experience?.id;
+        const experienceId = req.params.id;
         const {active} = req.body;
 
         await updateActivationService(experienceId, active);
