@@ -1,7 +1,6 @@
-import getPool from "../../database/getPool.js";
+import getPool from "../database/getPool.js";
 
-
-const updateConfirmationService = async (id, confirmed) => {
+const updateConfirmationService = async (experienceId, confirmed) => {
     const pool = await getPool();
 
     await pool.query(
@@ -10,7 +9,7 @@ const updateConfirmationService = async (id, confirmed) => {
             SET confirmed = ?
             WHERE id = ?
         `,
-        [id, confirmed]
+        [experienceId, confirmed]
     );
 }
 

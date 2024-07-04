@@ -8,7 +8,7 @@ const experienceConfirmationController = async (req, res, next) => {
         const experienceId = req.params.experienceId || req.experience?.id;
         const {confirmed} = req.body;
 
-        await updateConfirmationService(confirmed);
+        await updateConfirmationService(experienceId, confirmed);
 
         res.send({
             status: "ok",
