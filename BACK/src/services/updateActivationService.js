@@ -1,7 +1,8 @@
 import getPool from "../database/getPool.js";
 
-const updateActivationService = async (id, active) => {
-  const pool = await getPool();
+
+const updateActivationService = async (experienceId, active) => {
+    const pool = await getPool();
 
   await pool.query(
     `
@@ -9,7 +10,7 @@ const updateActivationService = async (id, active) => {
             SET active = ?
             WHERE id = ?
         `,
-    [active, id]
+    [experienceId, active]
   );
 };
 
