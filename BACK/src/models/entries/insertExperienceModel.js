@@ -11,7 +11,6 @@ const insertExperienceModel = async (
   price,
   numMinPlaces,
   numTotalPlaces,
-  active,
   userId
 ) => {
   const pool = await getPool();
@@ -26,10 +25,9 @@ const insertExperienceModel = async (
       date, 
       price, 
       numMinPlaces, 
-      numTotalPlaces, 
-      active, 
+      numTotalPlaces,
       userId) 
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       title,
       location,
@@ -39,13 +37,22 @@ const insertExperienceModel = async (
       price,
       numMinPlaces,
       numTotalPlaces,
-      active,
       userId,
     ]
   );
 
+  let experienceIdResult = await pool.query(
+    `
+      SELECT e.id
+      FROM experiences e
+      ORDER BY e.id DESC
+      LIMIT 1;
+    `
+  );
+  let experienceId = experienceIdResult[0][0].id;
+
   // Retornamos el id de la experiencia.
-  return 0;
+  return experienceId;
 };
 
 export default insertExperienceModel;
