@@ -1,7 +1,7 @@
 import getPool from "../../database/getPool.js";
 
 
-const updateActivationService = async (id, confirmed) => {
+const updateConfirmationService = async (id, confirmed) => {
     const pool = await getPool();
 
     await pool.query(
