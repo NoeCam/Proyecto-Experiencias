@@ -11,6 +11,10 @@ const updateConfirmationService = async (experienceId, confirmed) => {
         `,
         [experienceId, confirmed]
     );
+    const params = [confirmed, experienceId];
+    
+    const [result] = await db.execute(query, params);
+    return result;
 }
 
-export default updateConfirmationService;
+export default updateActivationService;

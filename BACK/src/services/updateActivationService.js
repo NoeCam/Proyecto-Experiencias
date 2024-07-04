@@ -12,6 +12,9 @@ const updateActivationService = async (experienceId, active) => {
         `,
         [experienceId, active]
     );
-}
+    const params = [active, experienceId];
+    
+    const [result] = await db.execute(query, params);
+    return result;
 
 export default updateActivationService;
