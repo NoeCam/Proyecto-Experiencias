@@ -1,57 +1,39 @@
-// Importa bcrypt para el hash de contraseñas.
-import bcrypt from "bcrypt";
-// Importa la conexión a la base de datos.
-import getPool from "../../database/getPool.js";
-// Importa el esquema de validación.
+//Importamos las dependencias.
+
+import randomstring from "randomstring";
+
+// Importamos los modelos.
+import insertUserModel from "../../models/users/insertUserModel.js";
+
+// Importamos los servicios.
+import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
+
+// Importamos el esquema.
 import newUserSchema from "../../schemas/users/newUserSchema.js";
 
-// Define una función para validar datos con un esquema.
-export async function validateSchemaUtil (schema, data) {
-  const { error } = schema.validate(data); // Valida los datos contra el esquema.
-  if (error) {
-    // Si hay un error de validación...
-    throw new Error(`Validation error: ${error.details[0].message}`); // Lanza un error con el mensaje de validación.
-  }
-};
-
-// Define el controlador para registrar usuarios.
-export default async function registerUser (req, res, next) {
-  let connection;
+// Función controladora final que crea un nuevo usuario.
+const registerUser = async (req, res, next) => {
   try {
-    // Extrae el nombre de usuario, correo y contraseña del cuerpo de la solicitud.
-    const { username, firstname, lastname, email, password } = req.body;
+    // Obtenemos los datos necesarios del body.
+    const { username, email, password } = req.body;
 
-    // Valida el cuerpo de la solicitud contra el esquema de nuevo usuario.
+    // Validamos el body con Joi.
     await validateSchemaUtil(newUserSchema, req.body);
 
-    // Hashea la contraseña con bcrypt.
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Creamos el código de registro.
+    const registrationCode = randomstring.generate(30);
 
-    // Obtén el pool de conexiones.
-    const pool = await getPool();
+    // Insertamos el usuario.
+    await insertUserModel(username, email, password, registrationCode);
 
-    // Obtén una conexión del pool.
-    connection = await pool.getConnection();
-
-    // Inserta el nuevo usuario en la base de datos.
-    await connection.execute(
-      "INSERT INTO users (username, firstname,lastname, email, password) VALUES (?, ?, ?, ?, ?)",
-      [username, firstname, lastname, email, hashedPassword]
-    );
-
-    // Envía una respuesta de éxito.
     res.send({
       status: "ok",
       message:
-        "Usuario creado con éxito. Por favor, verifica tu usuario mediante el email que has recibido.",
+        "Usuario creado. Por favor, verifica tu usuario mediante el email que has recibido en tu email",
     });
   } catch (err) {
-    // Si ocurre un error...
-    next(err); // Pasa el error al middleware de manejo de errores.
-  } finally {
-    // Asegúrate de liberar la conexión si existe.
-    if (connection) connection.release();
+    next(err);
   }
 };
 
-
+export default registerUser;

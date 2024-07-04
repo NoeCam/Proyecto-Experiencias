@@ -1,13 +1,22 @@
-import Joi from "joi";
+// Importamos joi.
+import joi from "joi";
 
-//Define el esquema del validación para un nuevo usuario.
+// Importamos los mensajes de error personalizados.
+import joiErrorMessages from "../joiErrorMessages.js";
 
-const newUserSchema = Joi.object({
-  username: Joi.string().required(),
-  firstname: Joi.string().required(),
-  lastname: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
+// Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
+const newUserSchema = joi.object({
+  username: joi.string().required(),
+  firstname: joi.string().required(),
+  lastname: joi.string().required(),
+  password: joi
+    .string()
+    .pattern(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~=`{}:";'<>¿?,.]{8,}$/
+    )
+    .required()
+    .messages(joiErrorMessages),
+  email: joi.string().email().required().messages(joiErrorMessages),
 });
 
 export default newUserSchema;

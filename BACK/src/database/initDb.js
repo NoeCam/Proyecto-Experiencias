@@ -64,9 +64,9 @@ async function createTables() {
         numMinPlaces INT,
         numTotalPlaces INT,
         active BOOLEAN DEFAULT true,
+        userId INT,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-        userId INT,
         FOREIGN KEY (userId) REFERENCES users(id)
       )
       `);
