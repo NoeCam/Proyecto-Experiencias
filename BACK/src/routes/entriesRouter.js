@@ -12,7 +12,7 @@ import verifyAdmin from "../middleware/verifyAdminController.js";
 //*************** Funciones controladoras finales *************/
 import experiencesListController from "../controllers/entries/experiencesListController.js";
 
-import { handleReservationController } from "../controllers/entries/handleReservationController.js";
+import  handleReservationController from "../controllers/entries/handleReservationController.js";
 
 import getExperienceController from "../controllers/entries/getExperoenceController.js";
 import experienceActivationController from "../controllers/entries/experienceActivationController.js";
