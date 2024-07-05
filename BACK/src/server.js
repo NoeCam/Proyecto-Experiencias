@@ -25,7 +25,7 @@ server.use((error, req, res, next) => {
 server.use((req, res) => {
   res.status(404).send({
     status: "error",
-    message: "Not foumd",
+    message: "Not found",
   });
 });
 
