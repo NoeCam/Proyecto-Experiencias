@@ -1,31 +1,56 @@
-//Importamos las dependencias.
+// Importa bcrypt para el hash de contraseñas.
+import bcrypt from "bcrypt";
 
 import randomstring from "randomstring";
 
-// Importamos los modelos.
+// Importa la conexión a la base de datos.
+import getPool from "../../database/getPool.js";
+
+// Importa el esquema de validación.
+import newUserSchema from "../../schemas/users/newUserSchema.js";
 import insertUserModel from "../../models/users/insertUserModel.js";
 
-// Importamos los servicios.
-import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
+// Define una función para validar datos con un esquema.
+export async function validateSchemaUtil(schema, data) {
+  const { error } = schema.validate(data); // Valida los datos contra el esquema.
+  if (error) {
+    // Si hay un error de validación...
+    throw new Error(`Validation error: ${error.details[0].message}`); // Lanza un error con el mensaje de validación.
+  }
+}
 
-// Importamos el esquema.
-import newUserSchema from "../../schemas/users/newUserSchema.js";
-
-// Función controladora final que crea un nuevo usuario.
-const registerUser = async (req, res, next) => {
+// Define el controlador para registrar usuarios.
+export default async function registerUser(req, res, next) {
+  let connection;
   try {
-    // Obtenemos los datos necesarios del body.
-    const { username, email, password } = req.body;
+    // Extrae el nombre de usuario, correo y contraseña del cuerpo de la solicitud.
+    const { email, password, username, firstname, lastname } = req.body;
 
     // Validamos el body con Joi.
     await validateSchemaUtil(newUserSchema, req.body);
+    
+     // Hashea la contraseña con bcrypt.
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+     // Obtén el pool de conexiones.
+    const pool = await getPool();
 
+    // Obtén una conexión del pool.
+    connection = await pool.getConnection();
+    
     // Creamos el código de registro.
     const registrationCode = randomstring.generate(30);
 
-    // Insertamos el usuario.
-    await insertUserModel(username, email, password, registrationCode);
-
+    await insertUserModel(
+      email,
+      password,
+      username,
+      firstname,
+      lastname,
+      registrationCode
+    );
+    
+    //Envia una respuesta de éxito.
     res.send({
       status: "ok",
       message:
@@ -33,7 +58,11 @@ const registerUser = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-  }
+  }finally {
+    if (connection) connection.relase();
+}
+
 };
 
 export default registerUser;
+

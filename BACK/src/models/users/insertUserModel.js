@@ -3,17 +3,18 @@ import bcrypt from "bcrypt";
 
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../database/getPool.js";
+import { PORT } from "../../../env.js";
 
 // Importamos los servicios.
 import sendMailUtil from "../../utils/sendMailUtil.js";
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 const insertUserModel = async (
+  email,
+  password,
   username,
   firstname,
   lastname,
-  email,
-  password,
   registrationCode
 ) => {
   const pool = await getPool();
@@ -45,7 +46,7 @@ const insertUserModel = async (
 
             Gracias por registrarte en Experiencias Diferentes. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="http://localhost:3020/users/validate/${registrationCode}">Activar mi cuenta</a>
+            <a href="http://localhost:${PORT}/users/validate/${registrationCode}">Activar mi cuenta</a>
         `;
 
   // Enviamos el email de verificación al usuario.
@@ -57,7 +58,7 @@ const insertUserModel = async (
   // Insertamos el usuario.
   await pool.query(
     `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
-    [email, hashedPass, firstname, lastname, registrationCode]
+    [email, hashedPass, username, firstname, lastname, registrationCode]
   );
 };
 

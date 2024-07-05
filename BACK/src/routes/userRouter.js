@@ -16,11 +16,11 @@ router.get("/", (req, res) => {
 });
 //Crear un usuario pendiente de activar.
 router.post("/register", registerUser);
+
 //Validar a un usuario.
-router.get("/users/validate/:registrationCode", validateUserController);
+router.put("/users/validate/:registrationCode", validateUserController);
 
 // Ruta para el login de usuario
-
 router.post("/login", loginUserController); // Añadido el endpoint de login
 
 // Define la ruta del endpoint de recuperación de contraseña

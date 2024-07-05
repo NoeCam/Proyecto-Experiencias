@@ -1,5 +1,4 @@
 // Importamos las dependencias.
-
 import nodemailer from "nodemailer";
 
 // Importamos los errores.
