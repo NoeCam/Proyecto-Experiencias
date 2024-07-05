@@ -7,6 +7,210 @@
 	},
 	"item": [
 		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"HaB*12345\",\r\n    \"username\": \"Noelia_Camelia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camelia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/validate/:registrationCode",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3024/user/validate/:registrarionCode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"user",
+						"validate",
+						":registrarionCode"
+					],
+					"variable": [
+						{
+							"key": "registrarionCode",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/recover-password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/recover-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"recover-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"recoverPassCode\": \"lDQOzPOp2W\",\r\n    \"newPass\": \"La*123789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/users/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"users",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/experiencias",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"jet\",\r\n    \"description\": \"Have a fun good day with friends in a Jet ski route\",\r\n    \"location\": \"Ría de Pontevedra\",\r\n    \"image\": \"jet ski\",\r\n    \"date\": \"2024-11-28\",\r\n    \"price\": \"23 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15,\r\n    \"userId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/experiencias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "/experiencias",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -38,139 +242,12 @@
 			"response": []
 		},
 		{
-			"name": "/experiencias",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"antartic\",\r\n    \"description\": \"Have a fanny good day with friends in a Jet ski route\",\r\n    \"location\": \"Ría de Pontevedra\",\r\n    \"image\": \"jet ski\",\r\n    \"date\": \"2024-09-28\",\r\n    \"price\": \"27 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15,\r\n    \"userId\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3024/experiencias",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024",
-					"path": [
-						"experiencias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"noecamelia@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3024/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024",
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"Noelia_Camelia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camelia\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3024/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024",
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3024",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024"
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user/validate/:registrationCode",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3024/user/validate/:registrarionCode",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024",
-					"path": [
-						"user",
-						"validate",
-						":registrarionCode"
-					],
-					"variable": [
-						{
-							"key": "registrarionCode",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "experiencias/:experienceId",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3024/experiencias/1",
+					"raw": "http://localhost:3024/experiencias/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -178,7 +255,7 @@
 					"port": "3024",
 					"path": [
 						"experiencias",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -190,7 +267,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3024/experiencias?search=antartic&order=price&direction=DESC",
+					"raw": "http://localhost:3024/experiencias?search=jet&order=price&direction=ASC",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -202,7 +279,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "antartic"
+							"value": "jet"
 						},
 						{
 							"key": "order",
@@ -210,8 +287,44 @@
 						},
 						{
 							"key": "direction",
-							"value": "DESC"
+							"value": "ASC"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "experienceState",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"actived\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3024/experiencias/2/experienceState",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3024",
+					"path": [
+						"experiencias",
+						"2",
+						"experienceState"
 					]
 				}
 			},

@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../database/getPool.js";
-
 import { PORT } from "../../../env.js";
 
 // Importamos los servicios.

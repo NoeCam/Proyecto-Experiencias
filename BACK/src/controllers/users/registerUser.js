@@ -5,6 +5,7 @@ import randomstring from "randomstring";
 
 // Importa la conexión a la base de datos.
 import getPool from "../../database/getPool.js";
+
 // Importa el esquema de validación.
 import newUserSchema from "../../schemas/users/newUserSchema.js";
 import insertUserModel from "../../models/users/insertUserModel.js";
@@ -25,26 +26,20 @@ export default async function registerUser(req, res, next) {
     // Extrae el nombre de usuario, correo y contraseña del cuerpo de la solicitud.
     const { email, password, username, firstname, lastname } = req.body;
 
-    // Valida el cuerpo de la solicitud contra el esquema de nuevo usuario.
+    // Validamos el body con Joi.
     await validateSchemaUtil(newUserSchema, req.body);
-
-    // Hashea la contraseña con bcrypt.
+    
+     // Hashea la contraseña con bcrypt.
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Obtén el pool de conexiones.
+    
+     // Obtén el pool de conexiones.
     const pool = await getPool();
 
     // Obtén una conexión del pool.
     connection = await pool.getConnection();
-
+    
     // Creamos el código de registro.
     const registrationCode = randomstring.generate(30);
-
-    // Inserta el nuevo usuario en la base de datos.
-    // await connection.execute(
-    //  "INSERT INTO users (email, password, username, firstname,lastname,  registrationCode) VALUES (?, ?, ?, ?, ?, ?)",
-    //  [email, hashedPassword, username, firstname, lastname, registrationCode]
-    //);
 
     await insertUserModel(
       email,
@@ -54,18 +49,20 @@ export default async function registerUser(req, res, next) {
       lastname,
       registrationCode
     );
-
-    // Envía una respuesta de éxito.
+    
+    //Envia una respuesta de éxito.
     res.send({
       status: "ok",
       message:
-        "Usuario creado con éxito. Por favor, verifica tu usuario mediante el email que has recibido.",
+        "Usuario creado. Por favor, verifica tu usuario mediante el email que has recibido en tu email",
     });
   } catch (err) {
-    // Si ocurre un error...
-    next(err); // Pasa el error al middleware de manejo de errores.
-  } finally {
-    // Asegúrate de liberar la conexión si existe.
-    if (connection) connection.release();
-  }
+    next(err);
+  }finally {
+    if (connection) connection.relase();
 }
+
+};
+
+export default registerUser;
+

@@ -15,6 +15,8 @@ import experiencesListController from "../controllers/entries/experiencesListCon
 import { handleReservationController } from "../controllers/entries/handleReservationController.js";
 
 import getExperienceController from "../controllers/entries/getExperoenceController.js";
+import experienceActivationController from "../controllers/entries/experienceActivationController.js";
+import experienceConfirmationController from "../controllers/entries/experienceConfirmationController.js";
 
 const router = express.Router();
 
@@ -29,25 +31,13 @@ router.post("/experiencias", adminEntryController);
 // Obtención de la lista de experiencias
 router.get("/experiencias", experiencesListController);
 
-// Endpoints para para desactivar, activar y confirmar la experiencia
-//? Desactivar
+// Endpoints para para desactivar, reactivar y confirmar la experiencia
 router.put(
-  "/experiencias/:experienceId/deactivate",
+  "/experiencias/:experienceId/experienceState",
   verifyAdmin,
-  experiencesListController
+  experienceActivationController, experienceConfirmationController
 );
-//? Activar
-router.put(
-  "/experiencias/:experienceId/activate",
-  verifyAdmin,
-  experiencesListController
-);
-//? Confirmar
-router.put(
-  "/experiencias/:experienceId/confirmExperience",
-  verifyAdmin,
-  experiencesListController
-);
+
 
 //Endpoint para reservas y cancelar la reserva de una experiencia
 router.put(
