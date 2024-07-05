@@ -76,6 +76,7 @@ async function createTables() {
        CREATE TABLE IF NOT EXISTS reservations (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         numberOfReserve INT,
+        state BOOLEAN DEFAULT FALSE,
         userId INT NOT NULL,
         experienceId INT NOT NULL,
         FOREIGN KEY (userId) REFERENCES users(id),
