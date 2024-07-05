@@ -28,41 +28,37 @@ export default async function registerUser(req, res, next) {
 
     // Validamos el body con Joi.
     await validateSchemaUtil(newUserSchema, req.body);
-    
-     // Hashea la contraseña con bcrypt.
+
+    // Hashea la contraseña con bcrypt.
     const hashedPassword = await bcrypt.hash(password, 10);
-    
-     // Obtén el pool de conexiones.
+
+    // Obtén el pool de conexiones.
     const pool = await getPool();
 
     // Obtén una conexión del pool.
     connection = await pool.getConnection();
-    
+
     // Creamos el código de registro.
     const registrationCode = randomstring.generate(30);
 
     await insertUserModel(
       email,
-      password,
+      hashedPassword,
       username,
       firstname,
       lastname,
       registrationCode
     );
-    
+
     //Envia una respuesta de éxito.
     res.send({
       status: "ok",
       message:
-        "Usuario creado. Por favor, verifica tu usuario mediante el email que has recibido en tu email",
+        "Usuario creado con éxito. Por favor, verifica tu usuario mediante el email que has recibido.",
     });
   } catch (err) {
     next(err);
-  }finally {
-    if (connection) connection.relase();
+  } finally {
+    if (connection) connection.release();
+  }
 }
-
-};
-
-export default registerUser;
-

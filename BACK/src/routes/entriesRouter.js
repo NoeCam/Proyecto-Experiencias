@@ -2,18 +2,12 @@
 import express from "express";
 
 //*************** Funciones controladoras intermedias *********/
-// import {
-//   adminEntryController,
-//   experienciaSchema,
-// } from "../controllers/entries/adminEntryController.js";
 import adminEntryController from "../controllers/entries/adminEntryController.js";
 import verifyAdmin from "../middleware/verifyAdminController.js";
 
 //*************** Funciones controladoras finales *************/
 import experiencesListController from "../controllers/entries/experiencesListController.js";
-
-import  handleReservationController from "../controllers/entries/handleReservationController.js";
-
+import handleReservationController from "../controllers/entries/handleReservationController.js";
 import getExperienceController from "../controllers/entries/getExperoenceController.js";
 import experienceActivationController from "../controllers/entries/experienceActivationController.js";
 import experienceConfirmationController from "../controllers/entries/experienceConfirmationController.js";
@@ -35,9 +29,9 @@ router.get("/experiencias", experiencesListController);
 router.put(
   "/experiencias/:experienceId/experienceState",
   verifyAdmin,
-  experienceActivationController, experienceConfirmationController
+  experienceActivationController,
+  experienceConfirmationController
 );
-
 
 //Endpoint para reservas y cancelar la reserva de una experiencia
 router.put(
@@ -45,8 +39,7 @@ router.put(
   handleReservationController
 );
 
-
 //Endpoint visualización de una experiencia.
-router.get('/experiencias/:experienceId', getExperienceController);
+router.get("/experiencias/:experienceId", getExperienceController);
 
 export default router;

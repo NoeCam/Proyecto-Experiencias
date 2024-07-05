@@ -15,7 +15,7 @@ const updateUserRegCodeModel = async (registrationCode) => {
   );
 
   // Si no existe ningún usuario con ese código de registro lanzamos un error.
-  if (!users.lenght)
+  if (!users.length)
     throw pendingActivationError("Usuario pendiente de activar", 403);
 
   // Actualizamos el usuario.
