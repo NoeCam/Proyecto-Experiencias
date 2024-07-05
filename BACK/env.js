@@ -1,31 +1,39 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
- dotenv.config();
+dotenv.config();
 
- const {
-     MYSQL_HOST,
-     MYSQL_USER,
-     MYSQL_PASS,
-     MYSQL_DB,
-     PORT,
-     SECRET,
-     UPLOADS_DIR,
-     SMTP_HOST,
-     SMTP_PORT,
-     SMTP_USER,
-     SMTP_PASS,
- } = process.env;
+const {
+  MYSQL_HOST,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+  PORT,
+  SECRET,
+  UPLOADS_DIR,
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_USER,
+  SMTP_PASS,
+  ADMIN_EMAIL,
+  ADMIN_PASSWORD,
+  ADMIN_FIRST_NAME,
+  ADMIN_LAST_NAME,
+} = process.env;
 
- export {
-     MYSQL_HOST,
-     MYSQL_USER,
-     MYSQL_PASS,
-     MYSQL_DB,
-     PORT,
-     SECRET,
-     UPLOADS_DIR,
-     SMTP_HOST,
-     SMTP_PORT,
-     SMTP_USER,
-     SMTP_PASS,
- };
+export {
+  MYSQL_HOST,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+  PORT,
+  SECRET,
+  UPLOADS_DIR,
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_USER,
+  SMTP_PASS,
+  ADMIN_EMAIL,
+  ADMIN_PASSWORD,
+  ADMIN_FIRST_NAME,
+  ADMIN_LAST_NAME,
+};
