@@ -1,12 +1,12 @@
 import getPool from "./getPool.js";
 
-const {
+import {
   MYSQL_DATABASE,
   ADMIN_EMAIL,
   ADMIN_PASSWORD,
   ADMIN_FIRST_NAME,
   ADMIN_LAST_NAME,
-} = process.env;
+} from "../../env.js";
 
 async function createDB() {
   try {
@@ -14,9 +14,7 @@ async function createDB() {
 
     await pool.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
 
-    // console.log("Base de datos creada");
   } catch (error) {
-    // console.log(error.message);
     throw new Error("Error al crear la BBDD", { cause: error });
   }
 }
@@ -27,12 +25,10 @@ async function createTables() {
 
     await pool.query(`USE ${MYSQL_DATABASE}`);
 
-    // console.log("Borrando tablas...");
     await pool.query(`
       DROP TABLE IF EXISTS users, experiences, reservations, valorations;
       `);
 
-    // console.log("Creando tabla de usuarios...");
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -51,7 +47,6 @@ async function createTables() {
         )
       `);
 
-    // console.log("Creando tabla de experiencias...");
     await pool.query(`
       CREATE TABLE experiences(
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -71,7 +66,6 @@ async function createTables() {
       )
       `);
 
-    // console.log("Creando tabla de reservaciones...");
     await pool.query(`
        CREATE TABLE IF NOT EXISTS reservations (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -84,7 +78,6 @@ async function createTables() {
       )
         `);
 
-    // console.log("Creando tabla de valoraciones...");
     await pool.query(`
       CREATE TABLE IF NOT EXISTS valorations (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -96,8 +89,6 @@ async function createTables() {
         FOREIGN KEY (experienceId) REFERENCES experiences(id)
       )
       `);
-
-    // console.log("Tablas creadas");
 
     await pool.query(`
       INSERT INTO users(email, password, username, firstName, lastName, active, role)
@@ -111,7 +102,6 @@ async function createTables() {
         "admin");
       `);
   } catch (error) {
-    // console.log(error);
     throw new Error("Error al crear las tablas", { cause: error });
   }
 }
@@ -123,7 +113,6 @@ async function initDB() {
 
     process.exit(0);
   } catch (error) {
-    // console.log(error);
     process.exit(1);
   }
 }
