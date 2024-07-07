@@ -7,29 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "/",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3024",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3024"
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "register",
+			"name": "user/register",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"HaB*12345\",\r\n    \"username\": \"Noelia_Camelia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camelia\"\r\n}",
+					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"Agf.1234567\",\r\n    \"username\": \"Noelia_Camlia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camlia\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,13 +21,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/register",
+					"raw": "http://localhost:3010/users/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
+						"users",
 						"register"
 					]
 				}
@@ -56,29 +41,23 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3024/user/validate/:registrarionCode",
+					"raw": "http://localhost:3010/users/validate/YE4saqoNuQMntukkzCkW5dWHe07yaV",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
-						"user",
+						"users",
 						"validate",
-						":registrarionCode"
-					],
-					"variable": [
-						{
-							"key": "registrarionCode",
-							"value": ""
-						}
+						"YE4saqoNuQMntukkzCkW5dWHe07yaV"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "login",
+			"name": "user/login",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -91,7 +70,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"Agf.1234567\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -99,13 +78,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/login",
+					"raw": "http://localhost:3010/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
+						"users",
 						"login"
 					]
 				}
@@ -113,7 +93,7 @@
 			"response": []
 		},
 		{
-			"name": "/recover-password",
+			"name": "user/recover-password",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -140,13 +120,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/recover-password",
+					"raw": "http://localhost:3024/user/recover-password",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3024",
 					"path": [
+						"user",
 						"recover-password"
 					]
 				}
@@ -154,7 +135,7 @@
 			"response": []
 		},
 		{
-			"name": "/users/password",
+			"name": "users/password",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -186,10 +167,16 @@
 			"name": "/experiencias",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDMxNDEyOSwiZXhwIjoxNzIwOTE4OTI5fQ.ioFBs1gR6yP5iIS4cv7_TBg3_YA-uF8E4rHdeiW7lkA",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"jet\",\r\n    \"description\": \"Have a fun good day with friends in a Jet ski route\",\r\n    \"location\": \"Ría de Pontevedra\",\r\n    \"image\": \"jet ski\",\r\n    \"date\": \"2024-11-28\",\r\n    \"price\": \"23 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15,\r\n    \"userId\": 2\r\n}",
+					"raw": "{\r\n    \"title\": \"Antartic 3\",\r\n    \"description\": \"Have a fun good day with friends in Antartic\",\r\n    \"location\": \"Antartic\",\r\n    \"image\": \"Pinguins\",\r\n    \"date\": \"2024-11-30\",\r\n    \"price\": \"45 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -197,12 +184,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/experiencias",
+					"raw": "http://localhost:3010/experiencias",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
 						"experiencias"
 					]
@@ -217,7 +204,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDM0NzYzOSwiZXhwIjoxNzIwOTUyNDM5fQ.R1UsLo5h0HBjVP6d48PSAyDbgiBBFEzx2OASBmrkweo",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -228,12 +221,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/experiencias",
+					"raw": "http://localhost:3010/experiencias",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
 						"experiencias"
 					]
@@ -247,15 +240,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3024/experiencias/2",
+					"raw": "http://localhost:3010/experiencias/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
 						"experiencias",
-						"2"
+						"20"
 					]
 				}
 			},
@@ -265,21 +258,27 @@
 			"name": "searchExperiences",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDI5ODg0OCwiZXhwIjoxNzIwOTAzNjQ4fQ.pdw8Gts9kBFS__IFHxTmlB70UlJg5-FStb_LMPGO9bY",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:3024/experiencias?search=jet&order=price&direction=ASC",
+					"raw": "http://localhost:3010/experiencias?search=artic&order=price&direction=ASC",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
 						"experiencias"
 					],
 					"query": [
 						{
 							"key": "search",
-							"value": "jet"
+							"value": "artic"
 						},
 						{
 							"key": "order",
@@ -301,13 +300,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDI5ODg0OCwiZXhwIjoxNzIwOTAzNjQ4fQ.pdw8Gts9kBFS__IFHxTmlB70UlJg5-FStb_LMPGO9bY",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"actived\": false\r\n}",
+					"raw": "{\r\n    \"state\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -315,12 +314,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3024/experiencias/2/experienceState",
+					"raw": "http://localhost:3010/experiencias/2/experienceState",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3024",
+					"port": "3010",
 					"path": [
 						"experiencias",
 						"2",

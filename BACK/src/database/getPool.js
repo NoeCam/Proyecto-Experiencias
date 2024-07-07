@@ -1,6 +1,11 @@
 import mysql from "mysql2/promise";
 
-import { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } from "../../env.js";
+import {
+  MYSQL_HOST,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+} from "../../env.js";
 
 let pool;
 const getPool = async () => {

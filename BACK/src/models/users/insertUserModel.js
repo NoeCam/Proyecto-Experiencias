@@ -7,6 +7,10 @@ import { PORT } from "../../../env.js";
 
 // Importamos los servicios.
 import sendMailUtil from "../../utils/sendMailUtil.js";
+import {
+  emailAlreadyRegisteredError,
+  userAlreadyRegisteredError,
+} from "../../services/errorService.js";
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 const insertUserModel = async (
