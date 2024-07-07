@@ -1,5 +1,6 @@
 import Joi from "joi";
 import insertExperienceModel from "../../models/entries/insertExperienceModel.js";
+import verifyAdmin from "../../middleware/verifyAdminController.js";
 
 // Creamos el esquema.
 const experienciaSchema = Joi.object({
@@ -25,15 +26,20 @@ const adminEntryController = async (req, res, next) => {
       price,
       numMinPlaces,
       numTotalPlaces,
+      userId,
     } = req.body;
 
-    const userId = req.user.id;
+    // Verificar que el usuario sea admin
+    const isAdmin = await verifyAdmin(userId);
+    if (!isAdmin) {
+      return res.status(403).send({
+        status: "error",
+        message: "No tienes permisos para realizar esta acción"
+      });
+    }
 
-    //console.log(Object.assign(req.body, req.files));
-    // Validamos el body con Joi. Fusionamos en un solo objeto las propiedades de body y de files.
-    try {
-      const joiValidation = await experienciaSchema.validateAsync(req.body);
-    } catch (err) {}
+    // Validamos el body con Joi.
+    await experienciaSchema.validateAsync(req.body);
 
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const experienceId = await insertExperienceModel(
@@ -48,33 +54,11 @@ const adminEntryController = async (req, res, next) => {
       userId
     );
 
-    // Array donde pushearemos la imagen (si hay).
-    let photo = [];
-
-    // Si "req.files" existe quiere decir que hay algún archivo en la petición.
-    if (req.files) {
-      // Recorremos las fotos. Utilizamos el método "Object.values" para obtener un
-      // array de fotos. Para evitar que el array de fotos tenga más de tres fotos aplicamos
-      // el método slice.
-      for (photo of Object.values(req.files).slice(0, 3)) {
-        // Guardamos la foto en disco y obtenemos su nombre. Redimensionamos a un ancho
-        // de 500px.
-        const photoName = await savePhotoService(photo, 500);
-
-        // Insertamos la foto en la tabla de fotos.
-        const photoId = await insertPhotoModel(photoName, experienceId);
-
-        // Pusheamos la foto al array de fotos.
-        photo.push({
-          id: photoId,
-          name: photoName,
-        });
-      }
-    }
     res.send({
       status: "ok",
       data: {
         experience: {
+          id: experienceId,
           title,
           description,
           location,
@@ -83,8 +67,7 @@ const adminEntryController = async (req, res, next) => {
           price,
           numMinPlaces,
           numTotalPlaces,
-          userId: req.user.id,
-          //photos,
+          userId,
           createdAt: new Date(),
         },
       },
@@ -94,5 +77,4 @@ const adminEntryController = async (req, res, next) => {
   }
 };
 
-// export { adminEntryController, experienciaSchema };
 export default adminEntryController;
