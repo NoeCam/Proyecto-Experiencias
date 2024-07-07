@@ -5,7 +5,6 @@ import getPool from '../../database/getPool.js';
 
 
 const visualizeExperienceModel = async (id) => {
-    console.log(id);
     const pool = await getPool();
     // Obtenemos la información necesaria de la experiencia.
     const [experiences] = await pool.query(
@@ -29,19 +28,7 @@ const visualizeExperienceModel = async (id) => {
         [id]
     );
 
-// Obtenemos el array de fotos de la experiencia
-// const [image] = await pool.query(
-//     `SELECT id, title, image FROM experiences WHERE experienceId = ?`,
-//     [id]
-// );
-
-// // Agregamos el array con la foto de la experiencia
-// experiences[0].image = image;
-
-
 return experiences;
 };
 
 export default visualizeExperienceModel;
-
- 

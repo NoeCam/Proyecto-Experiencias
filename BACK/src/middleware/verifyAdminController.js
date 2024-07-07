@@ -35,14 +35,11 @@ const verifyAdmin = async (id) => {
     const { error, value } = userSchema.validate(userData);
 
     if (error) {
-      console.error('Error de validación:', error.details);
       return null;
     } else {
-      console.log('Datos válidos:', value);
       return value;
     }
   } catch (error) {
-    console.error('Error al verificar el admin:', error);
     return next(error);
   }
 };
