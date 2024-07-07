@@ -1,15 +1,14 @@
 import express from "express";
-import registerUser from "../controllers/users/registerUser.js";
-import loginUserController from "../controllers/users/loginUserController.js";
-import sendRecoverPassController from "../controllers/users/sendRecoverPassController.js";
-import editUserPassController from "../controllers/users/editUserPassController.js";
-import validateUserController from "../controllers/users/validateUserController.js";
+
+import {
+  registerUser,
+  loginUserController,
+  sendRecoverPassController,
+  editUserPassController,
+  validateUserController,
+} from "../controllers/users/index.js";
 
 const router = express.Router();
-
-router.get("/users", (req, res) => {
-  res.send("Soy rutas de usuarios");
-});
 
 //Crear un usuario pendiente de activar.
 router.post("/users/register", registerUser);

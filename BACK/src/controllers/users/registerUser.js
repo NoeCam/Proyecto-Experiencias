@@ -1,6 +1,3 @@
-// Importa bcrypt para el hash de contraseñas.
-import bcrypt from "bcrypt";
-
 import randomstring from "randomstring";
 
 // Importa la conexión a la base de datos.
@@ -29,9 +26,6 @@ export default async function registerUser(req, res, next) {
     // Validamos el body con Joi.
     await validateSchemaUtil(newUserSchema, req.body);
 
-    // Hashea la contraseña con bcrypt.
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Obtén el pool de conexiones.
     const pool = await getPool();
 
@@ -43,7 +37,7 @@ export default async function registerUser(req, res, next) {
 
     await insertUserModel(
       email,
-      hashedPassword,
+      password,
       username,
       firstname,
       lastname,

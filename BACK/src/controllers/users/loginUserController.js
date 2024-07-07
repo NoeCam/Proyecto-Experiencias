@@ -26,7 +26,7 @@ const loginUserController = async (req, res, next) => {
     await validateSchemaUtil(loginUserSchema, req.body);
 
     // Seleccionamos los datos del usuario que necesitamos utilizando el email.
-    const user = await selectUserByEmailModel(email, password);
+    const user = await selectUserByEmailModel(email);
 
     // Variable que almacenará un valor booleano indicando si la contraseña es correcto o no.
     let validPass;
