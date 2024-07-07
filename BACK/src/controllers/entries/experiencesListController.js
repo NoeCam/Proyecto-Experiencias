@@ -1,4 +1,3 @@
-import getPool from "../../database/getPool.js";
 import selectSearchExperiencesService from "../../services/entries/selectSearchExperiencesService.js";
 
 export default async function experiencesListController(req, res, next) {

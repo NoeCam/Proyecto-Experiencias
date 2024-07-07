@@ -26,7 +26,6 @@ const authUserController = async (req, res, next) => {
     try {
       tokenInfo = jwt.verify(authorization, process.env.SECRET);
     } catch (err) {
-      console.log(err);
       invalidCredentialsError();
     }
 
