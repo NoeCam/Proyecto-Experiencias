@@ -13,7 +13,6 @@ async function createDB() {
     let pool = await getPool();
 
     await pool.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
-
   } catch (error) {
     throw new Error("Error al crear la BBDD", { cause: error });
   }
@@ -60,6 +59,7 @@ async function createTables() {
         numTotalPlaces INT,
         active BOOLEAN DEFAULT true,
         userId INT,
+        confirmedByAdmin BOOLEAN DEFAULT false,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (userId) REFERENCES users(id)

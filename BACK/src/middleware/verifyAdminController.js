@@ -4,10 +4,10 @@ import Joi from "joi"; // Debe ser "joi" en minúsculas
 // Define el esquema de validación
 const userSchema = Joi.object({
   id: Joi.number().integer().required(),
-  username: Joi.string().alphanum().min(3).max(30).required(),
+  username: Joi.string().min(3).max(30).required(),
   email: Joi.string().email().required(),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-  role: Joi.string().valid('admin').required()
+  password: Joi.string().required(),
+  role: Joi.string().valid("admin").required(),
 });
 
 const pool = await getPool();
@@ -31,8 +31,7 @@ const verifyAdmin = async (id) => {
     );
 
     // Validar los datos del usuario
-    
-    const { error, value } = userSchema.validate(userData);
+    const { error, value } = userSchema.validate(userData[0]);
 
     if (error) {
       return null;
@@ -40,7 +39,7 @@ const verifyAdmin = async (id) => {
       return value;
     }
   } catch (error) {
-    return next(error);
+    return null;
   }
 };
 

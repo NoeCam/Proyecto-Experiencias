@@ -19,7 +19,6 @@ const selectSearchExperiencesService = async (
   const pool = await getPool();
   if (search) {
     if (userId) {
-      console.log("search and user");
       [experiences] = await pool.query(
         `
         SELECT
@@ -73,7 +72,6 @@ const selectSearchExperiencesService = async (
         [userId, userId, `%${search}%`, `%${search}%`]
       );
     } else {
-      console.log("search and not user");
       [experiences] = await pool.query(
         `
           SELECT
@@ -111,7 +109,6 @@ const selectSearchExperiencesService = async (
     }
   } else {
     if (userId) {
-      console.log("not search and user");
       [experiences] = await pool.query(
         `
         SELECT
@@ -164,7 +161,6 @@ const selectSearchExperiencesService = async (
         [userId, userId]
       );
     } else {
-      console.log("not search and not user");
       [experiences] = await pool.query(
         `
         SELECT
