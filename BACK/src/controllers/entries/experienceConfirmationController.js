@@ -1,23 +1,19 @@
-import updateConfirmationService from "../../services/updateActivationService.js";
-
-
+import updateConfirmationService from "../../services/updateConfirmationService.js";
 
 const experienceConfirmationController = async (req, res, next) => {
-    try {
+  try {
+    const experienceId = req.params.id;
+    const { active } = req.body;
 
-        const experienceId = req.params.id
-        const {confirmed} = req.body;
+    await updateConfirmationService(experienceId, active);
 
-        await updateConfirmationService(experienceId, confirmed);
-
-        res.send({
-            status: "ok",
-            message: "Estado de confirmación modificado correctamente"
-        });
-        
-    } catch (error) {
-        next(error);
-    }
-}
+    res.send({
+      status: "ok",
+      message: "Estado de confirmación modificado correctamente",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export default experienceConfirmationController;

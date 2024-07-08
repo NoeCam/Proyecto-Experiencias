@@ -29,7 +29,7 @@ router.get("/experiencias", getUserController, experiencesListController);
 // Endpoints para para desactivar, reactivar y confirmar la experiencia
 router.put(
   "/experiencias/:experienceId/experienceState",
-  verifyAdmin,
+  authUserController,
   experienceActivationController,
   experienceConfirmationController
 );

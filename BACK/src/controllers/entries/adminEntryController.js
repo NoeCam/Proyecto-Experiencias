@@ -9,7 +9,7 @@ const experienciaSchema = Joi.object({
   location: Joi.string().max(30).required(),
   image: Joi.required(),
   date: Joi.date().required(),
-  price: Joi.number().positive().required(),
+  price: Joi.string().required(),
   numMinPlaces: Joi.number().integer().positive().required(),
   numTotalPlaces: Joi.number().integer().positive().required(),
 });
@@ -26,15 +26,15 @@ const adminEntryController = async (req, res, next) => {
       price,
       numMinPlaces,
       numTotalPlaces,
-      userId,
     } = req.body;
 
+    const userId = req.user?.id;
     // Verificar que el usuario sea admin
     const isAdmin = await verifyAdmin(userId);
     if (!isAdmin) {
       return res.status(403).send({
         status: "error",
-        message: "No tienes permisos para realizar esta acción"
+        message: "No tienes permisos para realizar esta acción",
       });
     }
 

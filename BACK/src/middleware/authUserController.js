@@ -15,11 +15,9 @@ const authUserController = async (req, res, next) => {
     // Aunque la propiedad "Authorization" se escriba con "A" mayúscula, en node la recibimos
     // con la "a" minúscula.
     const { authorization } = req.headers;
-
     if (!authorization) {
       notAuthenticatedError();
     }
-
     // Variable que almacenará la info del token.
     let tokenInfo;
 
@@ -28,7 +26,6 @@ const authUserController = async (req, res, next) => {
     } catch (err) {
       invalidCredentialsError();
     }
-
     // Si hemos llegado hasta aquí quiere decir que el token ya se ha desencriptado..
     // Creamos la propiedad "user" en el objeto "request" (es una propiedad inventada).
     req.user = tokenInfo;

@@ -1,19 +1,16 @@
 import getPool from "../database/getPool.js";
 
-const updateActivationService = async (id, confirmed) => {
+const updateActivationService = async (id, confirmedByAdmin) => {
   const pool = await getPool();
 
   await pool.query(
     `
             UPDATE experiences
-            SET confirmed = ?
+            SET confirmedByAdmin = ?
             WHERE id = ?
         `,
-    [id, confirmed]
+    [id, confirmedByAdmin]
   );
 };
 
 export default updateActivationService;
-
-
-
