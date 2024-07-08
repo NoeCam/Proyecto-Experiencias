@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"Agf.1234567\",\r\n    \"username\": \"Noelia_Camlia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camlia\"\r\n}",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"Agf.1234567\",\r\n    \"username\": \"Noelia_Camelia\",\r\n    \"firstname\": \"Noelia\",\r\n    \"lastname\": \"Camelia\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3010/users/validate/YE4saqoNuQMntukkzCkW5dWHe07yaV",
+					"raw": "http://localhost:3010/users/validate/yuEx0rqVKQd5T51Uoj8F8BPojpjWWc",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -50,7 +50,7 @@
 					"path": [
 						"users",
 						"validate",
-						"YE4saqoNuQMntukkzCkW5dWHe07yaV"
+						"yuEx0rqVKQd5T51Uoj8F8BPojpjWWc"
 					]
 				}
 			},
@@ -70,7 +70,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"Agf.1234567\"\r\n}",
+					"raw": "{\r\n    \"email\": \"noeliacamelia@gmail.com\",\r\n    \"password\": \"Agf.1234567\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,13 +170,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDMxNDEyOSwiZXhwIjoxNzIwOTE4OTI5fQ.ioFBs1gR6yP5iIS4cv7_TBg3_YA-uF8E4rHdeiW7lkA",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDQ1MjM5MSwiZXhwIjoxNzIxMDU3MTkxfQ.d17xiKlb1zFsxChPwdCm82PuDJLx56hvXcLUc7YBQ9Q",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Antartic 3\",\r\n    \"description\": \"Have a fun good day with friends in Antartic\",\r\n    \"location\": \"Antartic\",\r\n    \"image\": \"Pinguins\",\r\n    \"date\": \"2024-11-30\",\r\n    \"price\": \"45 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15\r\n}",
+					"raw": "{\r\n    \"title\": \"Antartic10\",\r\n    \"description\": \"Have a fun good day with friends in Antartic\",\r\n    \"location\": \"Antartic\",\r\n    \"image\": \"Pinguins\",\r\n    \"date\": \"2024-11-30\",\r\n    \"price\": \"35 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -240,7 +240,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3010/experiencias/20",
+					"raw": "http://localhost:3010/experiencias/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -248,7 +248,7 @@
 					"port": "3010",
 					"path": [
 						"experiencias",
-						"20"
+						"2"
 					]
 				}
 			},
@@ -261,12 +261,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDI5ODg0OCwiZXhwIjoxNzIwOTAzNjQ4fQ.pdw8Gts9kBFS__IFHxTmlB70UlJg5-FStb_LMPGO9bY",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDQzMjIwNiwiZXhwIjoxNzIxMDM3MDA2fQ.wnI-L1yF8EbSFxP7cM5u7BX89ouvnkQ6gatwnJ1m-Kw",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3010/experiencias?search=artic&order=price&direction=ASC",
+					"raw": "http://localhost:3010/experiencias?search=antartic&order=price&direction=DESC",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -278,7 +278,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "artic"
+							"value": "antartic"
 						},
 						{
 							"key": "order",
@@ -286,7 +286,7 @@
 						},
 						{
 							"key": "direction",
-							"value": "ASC"
+							"value": "DESC"
 						}
 					]
 				}
@@ -300,13 +300,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDI5ODg0OCwiZXhwIjoxNzIwOTAzNjQ4fQ.pdw8Gts9kBFS__IFHxTmlB70UlJg5-FStb_LMPGO9bY",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDQ1MjM5MSwiZXhwIjoxNzIxMDU3MTkxfQ.d17xiKlb1zFsxChPwdCm82PuDJLx56hvXcLUc7YBQ9Q",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"state\": false\r\n}",
+					"raw": "{\r\n    \"active\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -314,7 +314,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3010/experiencias/2/experienceState",
+					"raw": "http://localhost:3010/experiencias/1/experienceState",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -322,7 +322,7 @@
 					"port": "3010",
 					"path": [
 						"experiencias",
-						"2",
+						"1",
 						"experienceState"
 					]
 				}
