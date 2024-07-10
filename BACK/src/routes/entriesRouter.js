@@ -1,7 +1,6 @@
-//*************** Dependencias ********************************/
 import express from "express";
 
-//*************** Funciones controladoras intermedias *********/
+// Importar funciones controladoras intermedias
 import {
   verifyAdmin,
   authUserController,
@@ -9,24 +8,25 @@ import {
   getUserController,
 } from "../middleware/index.js";
 
-//*************** Funciones controladoras finales *************/
+// Importar funciones controladoras finales desde el índice de entradas
 import {
   adminEntryController,
   experienceConfirmationController,
   experiencesListController,
   getExperienceController,
   handleReservationController,
+  duplicateExperienceController,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
 
-// Endpoint para la creación de experiencia de Admin
+// Endpoint para la creación de experiencia por parte de un administrador
 router.post("/experiencias", authUserController, adminEntryController);
 
 // Obtención de la lista de experiencias
 router.get("/experiencias", getUserController, experiencesListController);
 
-// Endpoints para para desactivar, reactivar y confirmar la experiencia
+// Endpoints para desactivar, reactivar y confirmar la experiencia
 router.put(
   "/experiencias/:experienceId/experienceState",
   authUserController,
@@ -34,13 +34,20 @@ router.put(
   experienceConfirmationController
 );
 
-//Endpoint para reservas y cancelar la reserva de una experiencia
+// Endpoint para reservar y cancelar la reserva de una experiencia
 router.put(
   "/experiencias/:experienceId/reservation",
   handleReservationController
 );
 
-//Endpoint visualización de una experiencia.
+// Endpoint para visualizar una experiencia específica
 router.get("/experiencias/:experienceId", getExperienceController);
+
+// Endpoint para duplicar una experiencia (solo para administradores)
+router.post(
+  "/experiencias/:id/duplicate",
+  authUserController,
+  duplicateExperienceController
+);
 
 export default router;
