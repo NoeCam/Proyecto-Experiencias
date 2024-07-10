@@ -16,6 +16,7 @@ import {
   experiencesListController,
   getExperienceController,
   handleReservationController,
+  editExperienceController,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -42,5 +43,10 @@ router.put(
 
 //Endpoint visualización de una experiencia.
 router.get("/experiencias/:experienceId", getExperienceController);
+
+
+//Endpoint modificar experiencia (admin)
+router.put("/experiencias/:experienceId/edit", authUserController, editExperienceController);
+
 
 export default router;

@@ -3,6 +3,7 @@ import experienceConfirmationController from "./experienceConfirmationController
 import experiencesListController from "./experiencesListController.js";
 import getExperienceController from "./getExperienceController.js";
 import handleReservationController from "./handleReservationController.js";
+import editExperienceController from "./editExperienceController.js";
 
 export {
   adminEntryController,
@@ -10,4 +11,5 @@ export {
   experiencesListController,
   getExperienceController,
   handleReservationController,
+  editExperienceController,
 };
