@@ -2,13 +2,13 @@ import visualizeExperienceModel from "../../models/entries/visualizeExperienceMo
 
 const getExperienceController = async (req, res, next) => {
   try {
-    const entryId  = req.params.experienceId;
-    const entry = await visualizeExperienceModel(entryId);
+    const experienceId = req.params.experienceId;
+    const experience = await visualizeExperienceModel(experienceId);
 
     res.send({
       status: "ok",
       data: {
-        entry,
+        experience,
       },
     });
   } catch (err) {

@@ -17,7 +17,7 @@ import {
   handleReservationController,
   editExperienceController,
   duplicateExperienceController,
-  getReservedExperiencesById
+  getReservedExperiencesById,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -42,11 +42,22 @@ router.put(
   handleReservationController
 );
 
+// Endpoint para listar las experiencias reservadas
+router.get(
+  "/experiencias/reservedExperiences",
+  authUserController,
+  getReservedExperiencesById
+);
+
 // Endpoint para visualizar una experiencia específica
 router.get("/experiencias/:experienceId", getExperienceController);
 
 //Endpoint modificar experiencia (admin)
-router.put("/experiencias/:experienceId/edit", authUserController, editExperienceController);
+router.put(
+  "/experiencias/:experienceId/edit",
+  authUserController,
+  editExperienceController
+);
 
 // Endpoint para duplicar una experiencia (solo para administradores)
 router.post(
@@ -54,8 +65,5 @@ router.post(
   authUserController,
   duplicateExperienceController
 );
-
-// Endpoint para listar las experiencias reservadas
-router.get("/experiencias/reservedExperiences", getReservedExperiencesById);
 
 export default router;
