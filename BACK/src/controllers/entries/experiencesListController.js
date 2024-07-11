@@ -5,7 +5,6 @@ export default async function experiencesListController(req, res, next) {
     const { search, order, direction } = req.query;
 
     const userId = req.user?.id;
-
     let experiences = await selectSearchExperiencesService(
       search,
       order,
@@ -22,4 +21,3 @@ export default async function experiencesListController(req, res, next) {
     next(error);
   }
 }
-

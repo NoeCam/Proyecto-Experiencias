@@ -2,27 +2,30 @@
 import getPool from "../../database/getPool.js";
 
 // Función que realiza una consulta a la base de datos para obtener información de las entradas reservadas por un usuario.
-const selectExperienceByReservationService = async ( userId = '') => {
-    const pool = await getPool()
+const selectExperienceByReservationService = async (userId) => {
+  const pool = await getPool();
 
+  // Obtenemos la información necesaria de la entrada.
+  let [reservedExperiences] = await pool.query(
+    `
+    SELECT
+      e.id,
+      e.title,
+      e.location,
+      e.description,
+      e.image,
+      e.date,
+      e.price,
+      e.active,
+      r.numberOfReserve
+    FROM reservations r
+    INNER JOIN  experiences e ON r.experienceId = e.id
+    WHERE r.userId = ? ;
+    `,
+    [userId]
+  );
 
-    // Obtenemos la información necesaria de la entrada.
-    const [reservedExperiences] = await pool.query(
-                `
-                SELECT E.*,
-                R.numberOfReserve
-                FROM reservations R
-                INNER JOIN  experiences E ON R.experienceId = E.id
-                WHERE R.userId = ? ;
-                `
-            ,
-        [userId]
-
-    );
-
-    return reservedExperiences;
-
+  return reservedExperiences;
 };
-    
 
 export default selectExperienceByReservationService;
