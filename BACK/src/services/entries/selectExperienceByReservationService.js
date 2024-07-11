@@ -17,7 +17,9 @@ const selectExperienceByReservationService = async (userId) => {
       e.date,
       e.price,
       e.active,
-      r.numberOfReserve
+      r.numberOfReserve,
+      r.userId,
+      r.experienceId
     FROM reservations r
     INNER JOIN  experiences e ON r.experienceId = e.id
     WHERE r.userId = ? ;

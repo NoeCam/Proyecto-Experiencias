@@ -74,3 +74,18 @@ export const userAlreadyRegisteredError = () => {
     };
 };
 
+export const cannotVoteWithoutParticipationError = () => {
+    throw {
+        httpStatus: 403, // Forbidden
+        code: 'CANNOT_VOTE_OWN_ENTRY',
+        message: 'No puedes votar una experiencia que no has disfrutado',
+    };
+};
+
+export const voteAlreadyExistsError = () => {
+    throw {
+        httpStatus: 409, // Conflict
+        code: 'VOTE_ALREADY_EXISTS',
+        message: 'No se puede votar más de una vez la misma experiencia',
+    };
+};
