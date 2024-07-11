@@ -107,13 +107,17 @@ async function createTables() {
 }
 
 async function initDB() {
+
   try {
+
     await createDB();
     await createTables();
 
     process.exit(0);
   } catch (error) {
     process.exit(1);
+    
+
   }
 }
 

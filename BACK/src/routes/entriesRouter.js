@@ -17,6 +17,7 @@ import {
   handleReservationController,
   editExperienceController,
   duplicateExperienceController,
+  getReservedExperiencesById
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -53,5 +54,8 @@ router.post(
   authUserController,
   duplicateExperienceController
 );
+
+// Endpoint para listar las experiencias reservadas
+router.get("/experiencias/reservedExperiences", getReservedExperiencesById);
 
 export default router;
