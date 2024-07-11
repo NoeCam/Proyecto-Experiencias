@@ -2,7 +2,6 @@ import express from "express";
 
 // Importar funciones controladoras intermedias
 import {
-  verifyAdmin,
   authUserController,
   experienceActivationController,
   getUserController,
@@ -18,6 +17,7 @@ import {
   editExperienceController,
   duplicateExperienceController,
   getReservedExperiencesById,
+  voteExperienceController,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -65,5 +65,13 @@ router.post(
   authUserController,
   duplicateExperienceController
 );
+
+// Votar una experiencia.
+router.post(
+  "/experiencias/:experienceId/votes",
+  authUserController,
+  voteExperienceController
+);
+
 
 export default router;
