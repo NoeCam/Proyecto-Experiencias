@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../database/getPool.js";
-import { PORT } from "../../../env.js";
+import { PORT_FRONT } from "../../../env.js";
 
 // Importamos los servicios.
 import sendMailUtil from "../../utils/sendMailUtil.js";
@@ -50,7 +50,7 @@ const insertUserModel = async (
 
             Gracias por registrarte en Experiencias Diferentes. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="http://localhost:${PORT}/users/validate/${registrationCode}">Activar mi cuenta</a>
+            <a href="http://localhost:${PORT_FRONT}/users/validate/${registrationCode}">Activar mi cuenta</a>
         `;
 
   // Enviamos el email de verificación al usuario.

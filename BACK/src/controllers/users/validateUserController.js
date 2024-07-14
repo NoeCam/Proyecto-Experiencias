@@ -12,10 +12,14 @@ const validateUserController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      message: "Usuario activado",
+      message: "Activated user",
     });
   } catch (err) {
-    next(err);
+    res.send({
+      status: "error",
+      message:
+        "Error activating the user, verify that it is not already activated",
+    });
   }
 };
 
