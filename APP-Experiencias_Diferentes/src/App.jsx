@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
+import ValidateUser from "./pages/ValidateUser";
 import Login from "./pages/Login";
 import RecoverPassword from "./pages/RecoverPassword";
 import NewPassword from "./pages/NewPassword";
@@ -12,6 +13,10 @@ function App() {
     <>
       <Routes>
         <Route path="/users/register" element={<Register />} />
+        <Route
+          path="/users/validate/:registrationCode"
+          element={<ValidateUser />}
+        />
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/recover-password" element={<RecoverPassword />} />
         <Route path="/users/password" element={<NewPassword />} />
