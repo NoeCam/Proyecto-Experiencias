@@ -7,6 +7,7 @@ import NewPassword from "./pages/NewPassword";
 import CreateExperience from "./pages/CreateExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
