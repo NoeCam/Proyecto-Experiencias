@@ -11,7 +11,6 @@ const UserValidation = () => {
     const validateUser = async () => {
       try {
         const response = await validateUserService({ registrationCode });
-        console.log(response);
         setResponse(response);
       } catch (error) {
         setError(error.message);

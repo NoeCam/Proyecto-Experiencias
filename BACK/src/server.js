@@ -13,6 +13,12 @@ server.use(fileUpload());
 
 server.use(express.static(PUBLIC_FOLDER));
 
+
+server.use((req, res, next)=>{
+  console.log(req.body)
+  next()
+})
+
 server.use(routes);
 
 server.use((error, req, res, next) => {
