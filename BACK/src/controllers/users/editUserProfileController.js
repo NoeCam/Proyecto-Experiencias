@@ -13,7 +13,7 @@ const editUserProfileController = async (req, res, next) => {
     if (!req.user?.id) {
       return res.status(401).send({
         status: "error",
-        message: "Usuario no autenticado",
+        message: "Unauthenticated user",
       });
     }
 
@@ -26,7 +26,7 @@ const editUserProfileController = async (req, res, next) => {
     if (!user) {
       return res.status(404).send({
         status: "error",
-        message: "Usuario no encontrado",
+        message: "User not found",
       });
     }
 
@@ -35,7 +35,7 @@ const editUserProfileController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      message: "Usuario actualizado",
+      message: "Updated user",
       data: {
         user: updatedUser,
       },

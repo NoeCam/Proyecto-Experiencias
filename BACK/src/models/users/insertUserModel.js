@@ -46,11 +46,11 @@ const insertUserModel = async (
 
   // Creamos el contenido del email
   const emailBody = `
-            ¡Bienvenid@ ${username}!
+            ¡Welcome ${username}!
 
-            Gracias por registrarte en Experiencias Diferentes. Para activar tu cuenta, haz clic en el siguiente enlace:
+            Thank you for registering at Different Experiences. To activate your account, click the following link:
 
-            <a href="http://localhost:${PORT_FRONT}/users/validate/${registrationCode}">Activar mi cuenta</a>
+            <a href="http://localhost:${PORT_FRONT}/users/validate/${registrationCode}">Activate my account</a>
         `;
 
   // Enviamos el email de verificación al usuario.
