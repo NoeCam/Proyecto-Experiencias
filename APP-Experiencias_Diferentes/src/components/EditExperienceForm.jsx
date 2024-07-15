@@ -1,8 +1,9 @@
-import { useState } from "react";
-import createExperienceService from "../services/createExperienceService";
+import { useState, useEffect } from "react";
+import updateExperienceService from "../services/updateExperienceService";
+import getExperienceService from "../services/getExperienceService"; // Suponiendo que tienes un servicio para obtener los detalles de una experiencia
 
-// Estado para los datos del formulario
-const CreateExperienceForm = () => {
+const EditExperienceForm = ({ experienceId }) => {
+    // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -13,11 +14,26 @@ const CreateExperienceForm = () => {
     numMinPlaces: '',
     numTotalPlaces: ''
   });
-
-  // Estado para los errores
+   // Estado para los errores
   const [error, setError] = useState('');
   // Estado para la respuesta de la API
   const [resp, setResp] = useState('');
+
+  // Efecto para obtener los detalles de la experiencia cuando el componente se monta
+  useEffect(() => {
+    const fetchExperience = async () => {
+      try {
+        // Llamar al servicio para obtener los detalles de la experiencia
+        const experience = await getExperienceService(experienceId);
+        // Establecer los datos de la experiencia en el estado del formulario
+        setFormData(experience.data);
+      } catch (error) {
+        // Establecer el error en el estado
+        setError(error.message);
+      }
+    };
+    fetchExperience();
+  }, [experienceId]);
 
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
@@ -29,12 +45,11 @@ const CreateExperienceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Llamar al servicio para crear una experiencia
-      const response = await createExperienceService(formData);
-       // Establecer la respuesta en el estado
+        // Llamar al servicio para actualizar la experiencia
+      const response = await updateExperienceService({ experienceId, ...formData });
       setResp(response);
+      // Establecer la respuesta en el estado
     } catch (error) {
-      // Establecer el error en el estado
       setError(error.message);
     }
   };
@@ -71,9 +86,9 @@ const CreateExperienceForm = () => {
         />
       </div>
       <div>
-        <label>Image:</label>
+        <label>Image URL:</label>
         <input
-          type="file"
+          type="text"
           name="image"
           value={formData.image}
           onChange={handleChange}
@@ -93,7 +108,7 @@ const CreateExperienceForm = () => {
       <div>
         <label>Price:</label>
         <input
-          type="text"
+          type="number"
           name="price"
           value={formData.price}
           onChange={handleChange}
@@ -121,7 +136,7 @@ const CreateExperienceForm = () => {
         />
       </div>
       <div>
-        <input type="submit" value="Create Experience" />
+        <input type="submit" value="Update Experience" />
       </div>
       <div>
         {error ? <p>{error}</p> : ''}
@@ -133,4 +148,4 @@ const CreateExperienceForm = () => {
   );
 };
 
-export default CreateExperienceForm;
+export default EditExperienceForm;
