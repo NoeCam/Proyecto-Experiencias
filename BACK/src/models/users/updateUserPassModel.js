@@ -11,7 +11,7 @@ import selectUserByEmailModel from './selectUserByEmailModel.js';
 import { recoveryCodeError } from '../../services/errorService.js';
 
 // Función que realiza una consulta a la base de datos para actualizar la contraseña de un usuario.
-const updateUserPassModel = async (email, recoverPassCode, newPass) => {
+const updateUserPassModel = async (email, recoverPassCode, newPassword) => {
     const pool = await getPool();
 
     // Obtenemos al usuario en base al email recibido.
@@ -23,7 +23,7 @@ const updateUserPassModel = async (email, recoverPassCode, newPass) => {
     }
 
     // Encriptamos la nueva contraseña.
-    const hashedPass = await bcrypt.hash(newPass, 10);
+    const hashedPass = await bcrypt.hash(newPassword, 10);
 
     // Actualizamos el usuario.
     await pool.query(

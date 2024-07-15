@@ -1,5 +1,12 @@
+import ChangeRecoverPassword from "../components/ChangeRecoverPassword.jsx";
+
 const NewPassword = () => {
-  return <div>NewPassword</div>;
+  return (
+  <>
+  <h1>New Password</h1>
+  <ChangeRecoverPassword />
+  </>
+  );
 };
 
 export default NewPassword;
