@@ -1,4 +1,5 @@
-const createExperienceService = async ({
+const updateExperienceService = async ({
+    experienceId,
     title,
     description,
     location,
@@ -9,11 +10,11 @@ const createExperienceService = async ({
     numTotalPlaces
   }) => {
     // Construir la URL del endpoint de la API
-    const url = `${import.meta.env.VITE_API_URL}/experiences`;
+    const url = `${import.meta.env.VITE_API_URL}/experiences/${experienceId}`;
   
-    // Realizar una solicitud POST para crear una nueva experiencia
+    // Realizar una solicitud PUT para actualizar la experiencia
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -39,4 +40,4 @@ const createExperienceService = async ({
     return json;
   };
   
-  export default createExperienceService;
+  export default updateExperienceService;

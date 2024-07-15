@@ -6,6 +6,7 @@ import RecoverPassword from "./pages/RecoverPassword";
 import NewPassword from "./pages/NewPassword";
 import Experience from "./pages/Experience";
 import CreateExperience from "./pages/CreateExperience";
+import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,8 +31,9 @@ function App() {
           path="/experiencias/:experienceId/experienceState"
           element={<ExperienceState />}
         />
-        <Route path="/experiencias/create" element={<CreateExperience />} />
         <Route path="/experiencias" element={<Experience />} />
+        <Route path="/experiencias/create" element={<CreateExperience />} />
+        <Route path="/experiencias/:experienceId/edit" element={<EditExperience />} />
       </Routes>
     </>
   );
