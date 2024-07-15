@@ -4,6 +4,7 @@ import ValidateUser from "./pages/ValidateUser";
 import Login from "./pages/Login";
 import RecoverPassword from "./pages/RecoverPassword";
 import NewPassword from "./pages/NewPassword";
+import Experience from "./pages/Experience";
 import CreateExperience from "./pages/CreateExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
@@ -30,6 +31,7 @@ function App() {
           element={<ExperienceState />}
         />
         <Route path="/experiencias/create" element={<CreateExperience />} />
+        <Route path="/experiencias" element={<Experience />} />
       </Routes>
     </>
   );
