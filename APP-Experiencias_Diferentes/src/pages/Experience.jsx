@@ -1,8 +1,11 @@
+import HomeExperiences from "../components/HomeExperiences";
+
 const Experience = () => {
   return (
-    <div>
-      <h1>Experience</h1>
-    </div>
+    <>
+      <h1>Experiencias Diferentes</h1>
+      <HomeExperiences />
+    </>
   );
 };
 

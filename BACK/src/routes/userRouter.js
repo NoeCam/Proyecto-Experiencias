@@ -7,6 +7,7 @@ import {
   editUserPassController,
   validateUserController,
   editUserProfileController,
+  getUserProfileController,
 } from "../controllers/users/index.js";
 
 import authUserController from "../middleware/authUserController.js";
@@ -30,5 +31,8 @@ router.put("/users/password", editUserPassController);
 
 //Define la ruta para actualizar el perfirl de usuario.
 router.put("/users/profile", authUserController, editUserProfileController);
+
+//Muestra el perfil de usuario.
+router.get("/users/profile", authUserController, getUserProfileController);
 
 export default router;
