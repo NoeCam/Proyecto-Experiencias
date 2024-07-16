@@ -1,8 +1,8 @@
 const updateExperienceService = async ({
     experienceId,
     title,
-    description,
     location,
+    description,
     image,
     date,
     price,
@@ -12,16 +12,20 @@ const updateExperienceService = async ({
     // Construir la URL del endpoint de la API
     const url = `${import.meta.env.VITE_API_URL}/experiences/${experienceId}`;
   
+    //! Obtener el token de autenticación desde el almacenamiento local
+    const token = localStorage.getItem('token');
+
     // Realizar una solicitud PUT para actualizar la experiencia
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token
       },
       body: JSON.stringify({
         title,
-        description,
         location,
+        description,
         image,
         date,
         price,

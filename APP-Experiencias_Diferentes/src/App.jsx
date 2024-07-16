@@ -31,9 +31,9 @@ function App() {
           path="/experiencias/:experienceId/experienceState"
           element={<ExperienceState />}
         />
-        <Route path="/experiencias" element={<Experience />} />
         <Route path="/experiencias/create" element={<CreateExperience />} />
         <Route path="/experiencias/:experienceId/edit" element={<EditExperience />} />
+        <Route path="/experiencias" element={<Experience />} />
       </Routes>
     </>
   );

@@ -20,6 +20,9 @@ const loginService = async ({
     // Lanzar un error si la respuesta no es exitosa
     if (!response.ok) throw new Error(json.message);
 
+    //! Almacenar el token en el almacenamiento local
+    localStorage.setItem('token', json.token);
+
     // Retornar la respuesta JSON
     return json;
 };

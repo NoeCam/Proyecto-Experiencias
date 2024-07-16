@@ -5,8 +5,8 @@ import createExperienceService from "../services/createExperienceService";
 const CreateExperienceForm = () => {
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
     location: '',
+    description: '',
     image: '',
     date: '',
     price: '',
@@ -52,20 +52,20 @@ const CreateExperienceForm = () => {
         />
       </div>
       <div>
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
         <label>Location:</label>
         <input
           type="text"
           name="location"
           value={formData.location}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea
+          name="description"
+          value={formData.description}
           onChange={handleChange}
           required
         />

@@ -1,7 +1,7 @@
 const createExperienceService = async ({
     title,
-    description,
     location,
+    description,
     image,
     date,
     price,
@@ -9,18 +9,22 @@ const createExperienceService = async ({
     numTotalPlaces
   }) => {
     // Construir la URL del endpoint de la API
-    const url = `${import.meta.env.VITE_API_URL}/experiences`;
+    const url = `${import.meta.env.VITE_API_URL}/experiencias`;
+
+      //! Obtener el token de autenticación desde el almacenamiento local
+    const token = localStorage.getItem('token');
   
     // Realizar una solicitud POST para crear una nueva experiencia
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token // Incluir el token en el encabezado Authorization
       },
       body: JSON.stringify({
         title,
-        description,
         location,
+        description,
         image,
         date,
         price,
