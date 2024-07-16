@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import createExperienceService from "../services/createExperienceService";
 
 // Estado para los datos del formulario
 const CreateExperienceForm = () => {
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
     location: '',
+    description: '',
     image: '',
     date: '',
     price: '',
@@ -19,6 +19,18 @@ const CreateExperienceForm = () => {
   // Estado para la respuesta de la API
   const [resp, setResp] = useState('');
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // Verificar si el usuario es administrador
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+      setIsAdmin(true);
+    } else {
+      setError('You do not have permission to create an experience.');
+    }
+  }, []);
+
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +40,10 @@ const CreateExperienceForm = () => {
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isAdmin) {
+      setError('You do not have permission to create an experience.');
+      return;
+    }
     try {
       // Llamar al servicio para crear una experiencia
       const response = await createExperienceService(formData);
@@ -38,6 +54,9 @@ const CreateExperienceForm = () => {
       setError(error.message);
     }
   };
+  if (!isAdmin) {
+    return <p>{error}</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -52,20 +71,20 @@ const CreateExperienceForm = () => {
         />
       </div>
       <div>
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
         <label>Location:</label>
         <input
           type="text"
           name="location"
           value={formData.location}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea
+          name="description"
+          value={formData.description}
           onChange={handleChange}
           required
         />
