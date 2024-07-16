@@ -1,68 +1,73 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import loginService from "../services/loginService.js";
-
+import { AuthContext } from "../contexts/AuthContextProvider.jsx";
 
 function FormLogin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [resp, setResp] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [resp, setResp] = useState("");
+  const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
 
-    const navigate = useNavigate();
+  //manejo del formulario
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-    //manejo del formulario
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
+    try {
+      //llamar al servicio de login
+      const response = await loginService({
+        email,
+        password,
+      });
 
-        try {
-            //llamar al servicio de login
-            const response = await loginService({
-                email,
-                password,
-            });
-            setResp(response);
-            navigate("/experiencias");
+      setToken(response);
+      setResp(response);
+      navigate("/experiencias");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-        } catch (error) {
-            setError(error.message);
-        }
+  return (
+    <form onSubmit={handleFormSubmit}>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter an email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
 
-    };
+      <div>
+        <label htmlFor="password">Pasword</label>
+        <input
+          type="password"
+          name="Password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
 
-    return (
-        <form onSubmit={handleFormSubmit}>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Introduce email"
-                    value={email}
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
+      <div>
+        <input type="submit" value="Log in" />
+      </div>
 
-            <div>
-                <label htmlFor="password">Contraseña</label>
-                <input
-                    type="password" 
-                    name="Password"
-                    value={password}
-                    required 
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-            </div>
+      <div>
+        <Link to="/users/recover-password">Recover Password</Link>
+      </div>
 
-            <div>
-                <input type="submit" value="Iniciar Sesión" />
-            </div>
-
-            <div>{error && <p>{error}</p>}</div>
-            <div>{resp.status === "ok" && <p>{resp.message}</p>}</div>
-        </form>);
+      <div>{error && <p>{error}</p>}</div>
+      <div>{resp.status === "ok" && <p>{resp.message}</p>}</div>
+    </form>
+  );
 }
 
 export default FormLogin;

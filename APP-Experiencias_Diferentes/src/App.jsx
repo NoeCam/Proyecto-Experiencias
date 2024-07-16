@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import ValidateUser from "./pages/ValidateUser";
 import Login from "./pages/Login";
 import RecoverPassword from "./pages/RecoverPassword";
+import ModifyPassword from "./pages/ModifyPassword";
 import NewPassword from "./pages/NewPassword";
 import Experience from "./pages/Experience";
 import CreateExperience from "./pages/CreateExperience";
@@ -22,6 +23,7 @@ function App() {
         />
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/recover-password" element={<RecoverPassword />} />
+        <Route path="/user/modify-password" element={<ModifyPassword />} />
         <Route path="/users/password" element={<NewPassword />} />
         <Route
           path="/experiencias/:experienceId"

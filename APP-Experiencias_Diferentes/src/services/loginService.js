@@ -1,31 +1,24 @@
-const loginService = async ({
-    email,
-    password,
-}) => {
-    // Construir la URL del endpoint de registro
-    const url = `${import.meta.env.VITE_API_URL}/users/login`;
-    
-    // Realizar la solicitud al backend
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({email, password }), // Incluir todos los campos en el cuerpo de la solicitud
-    });
+const loginService = async ({ email, password }) => {
+  // Construir la URL del endpoint de registro
+  const url = `${import.meta.env.VITE_API_URL}/users/login`;
 
-    // Parsear la respuesta JSON
-    const json = await response.json();
+  // Realizar la solicitud al backend
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }), // Incluir todos los campos en el cuerpo de la solicitud
+  });
 
-    // Lanzar un error si la respuesta no es exitosa
-    if (!response.ok) throw new Error(json.message);
+  // Parsear la respuesta JSON
+  const json = await response.json();
 
-    //! Almacenar el token el rol en el almacenamiento local
-    localStorage.setItem('token', json.token);
-    localStorage.setItem('role', json.role);
+  // Lanzar un error si la respuesta no es exitosa
+  if (!response.ok) throw new Error(json.message);
 
-    // Retornar la respuesta JSON
-    return json;
+  // Retornar la respuesta JSON
+  return json.token;
 };
 
 export default loginService;
