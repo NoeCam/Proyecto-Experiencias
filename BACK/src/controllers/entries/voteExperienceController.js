@@ -5,7 +5,7 @@ import insertExperienceVoteModel from "../../models/entries/insertExperienceVote
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 
 // Importamos el esquema.
-import voteExperienceSchema from "../../schemas/users/voteExperienceSchema.js";
+import voteExperienceSchema from "../../schemas/entries/voteExperienceSchema.js";
 
 // Importamos los errores.
 import { cannotVoteWithoutParticipationError } from "../../services/errorService.js";
@@ -16,30 +16,28 @@ const voteExperienceController = async (req, res, next) => {
   try {
     const experienceId = req.params.experienceId;
     const { value } = req.body;
-    
+
     // Validamos el body con Joi.
     await validateSchemaUtil(voteExperienceSchema, req.body);
     const userLogger = req.user.id;
     // Obtenemos los detalles de la experiencia.
-    const experience = await selectExperienceByReservationService(
-      userLogger
-    );
+    const experience = await selectExperienceByReservationService(userLogger);
 
-    const userRegisteredReservation= experience[0].userId;
+    const userRegisteredReservation = experience[0].userId;
 
     // Si no hemos participado en la experiencia, lanzamos un error.
 
-    if (userLogger!==userRegisteredReservation) {
+    if (userLogger !== userRegisteredReservation) {
       return cannotVoteWithoutParticipationError();
     }
-    
+
     // Insertamos el voto y obtenemos la nueva media.
     const votesAvg = await insertExperienceVoteModel(
       value,
       experienceId,
       req.user.id
     );
-    
+
     res.send({
       status: "ok",
       data: {

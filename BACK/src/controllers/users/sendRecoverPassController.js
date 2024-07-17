@@ -8,13 +8,18 @@ import updateRecoverPassModel from "../../models/users/updateRecoverPassModel.js
 // Importamos los errores.
 import { notFoundError } from "../../services/errorService.js";
 
+//Importamos el esquema de validación.
+import sendRecoverPassSchema from "../../schemas/users/sendRecoverPassSchema.js";
+import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
+
 // Función controladora final que valida a un usuario recién registrado.
 const sendRecoverPassController = async (req, res, next) => {
   try {
     // Obtenemos el email de la persona que quiere recuperar su contraseña.
     const { email } = req.body;
 
-    // Pendiente validación con Joi.
+    // Validamos el body con Joi.
+    await validateSchemaUtil(sendRecoverPassSchema, req.body);
 
     // Comprobamos si existe algún usuario con el email proporcionado.
     const user = await selectUserByEmailModel(email);
