@@ -1,12 +1,6 @@
 // Importamos los modelos.
 import selectUserByIdModel from "../../models/users/selectUserByIdModel.js";
 
-// Importamos los servicios.
-//import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
-
-// Importamos el esquema.
-import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
-
 const getUserProfileController = async (req, res, next) => {
   try {
     if (!req.user?.id) {
@@ -15,9 +9,6 @@ const getUserProfileController = async (req, res, next) => {
         message: "Unauthenticated user",
       });
     }
-
-    // Validamos el body con Joi.
-    //await validateSchemaUtil(editUserProfileSchema, req.body);
 
     // Obtenemos los datos del usuario para verificar si existe.
     const user = await selectUserByIdModel(req.user.id);
