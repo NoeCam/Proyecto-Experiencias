@@ -4,7 +4,7 @@ import getDataUserLoggedService from "../services/getDataUserLoggedService";
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("token") | null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const [userLogged, setUserLogged] = useState(null);
 
@@ -18,15 +18,12 @@ const AuthContextProvider = ({ children }) => {
     const getDataUserLogged = async () => {
       try {
         const data = await getDataUserLoggedService(token);
-
         setUserLogged(data);
       } catch (error) {
-        console.log(error);
         logout();
       }
     };
-
-    getDataUserLogged();
+    if (token) getDataUserLogged();
   }, [token]);
 
   const logout = () => {

@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
 const ViewUserProfile = () => {
-  const { userLogged, token, logout } = useContext(AuthContext);
+  const { userLogged, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

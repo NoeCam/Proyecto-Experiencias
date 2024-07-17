@@ -4,30 +4,30 @@ import createExperienceService from "../services/createExperienceService";
 // Estado para los datos del formulario
 const CreateExperienceForm = () => {
   const [formData, setFormData] = useState({
-    title: '',
-    location: '',
-    description: '',
-    image: '',
-    date: '',
-    price: '',
-    numMinPlaces: '',
-    numTotalPlaces: ''
+    title: "",
+    location: "",
+    description: "",
+    image: "",
+    date: "",
+    price: "",
+    numMinPlaces: "",
+    numTotalPlaces: "",
   });
 
   // Estado para los errores
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   // Estado para la respuesta de la API
-  const [resp, setResp] = useState('');
+  const [resp, setResp] = useState("");
 
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Verificar si el usuario es administrador
-    const role = localStorage.getItem('role');
-    if (role === 'admin') {
+    const role = localStorage.getItem("role");
+    if (role === "admin") {
       setIsAdmin(true);
     } else {
-      setError('You do not have permission to create an experience.');
+      setError("You do not have permission to create an experience.");
     }
   }, []);
 
@@ -41,13 +41,13 @@ const CreateExperienceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isAdmin) {
-      setError('You do not have permission to create an experience.');
+      setError("You do not have permission to create an experience.");
       return;
     }
     try {
       // Llamar al servicio para crear una experiencia
       const response = await createExperienceService(formData);
-       // Establecer la respuesta en el estado
+      // Establecer la respuesta en el estado
       setResp(response);
     } catch (error) {
       // Establecer el error en el estado
@@ -142,11 +142,15 @@ const CreateExperienceForm = () => {
       <div>
         <input type="submit" value="Create Experience" />
       </div>
+      <div>{error ? <p>{error}</p> : ""}</div>
       <div>
-        {error ? <p>{error}</p> : ''}
-      </div>
-      <div>
-        {resp.status === 'ok' ? <><p>{resp.message}</p></> : ''}
+        {resp.status === "ok" ? (
+          <>
+            <p>{resp.message}</p>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </form>
   );
