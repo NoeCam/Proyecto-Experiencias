@@ -22,6 +22,7 @@ const HomeExperiences = () => {
         {!userLogged ? (
           <nav>
             <Link to="/users/register">Sing in</Link>
+            <>&nbsp;|&nbsp;</>
             <Link to="/users/login">Login</Link>
           </nav>
         ) : (
@@ -51,6 +52,14 @@ const HomeExperiences = () => {
             <p>rating: {experience.rating}</p>
             <p>availablePlaces: {experience.availablePlaces}</p>
             <p>confirmed: {experience.confirmed}</p>
+            {userLogged ? (
+              <div>
+                <p>valoratedByMe: {experience.valoratedByMe}</p>
+                <p>reservedByMe: {experience.reservedByMe}</p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         ))}
     </>
