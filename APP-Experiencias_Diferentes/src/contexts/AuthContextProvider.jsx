@@ -17,7 +17,7 @@ const AuthContextProvider = ({ children }) => {
     //para traer los datos del usuario logueado
     const getDataUserLogged = async () => {
       try {
-        const data = await getDataUserLoggedService({ token });
+        const data = await getDataUserLoggedService(token);
 
         setUserLogged(data);
       } catch (error) {
