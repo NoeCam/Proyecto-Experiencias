@@ -48,7 +48,7 @@ export default async function registerUser(req, res, next) {
     res.send({
       status: "ok",
       message:
-        "User created successfully. Please verify your username using the email you received.",
+        "User created successfully. Please verify your user using the email you received.",
     });
   } catch (err) {
     next(err);
