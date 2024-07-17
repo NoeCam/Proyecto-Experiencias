@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContextProvider";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
+
+  const { userLogged } = useContext(AuthContext);
   const [experiences, setExperiences] = useState(null);
   useEffect(() => {
     const getAllExperiences = async () => {
@@ -14,7 +18,26 @@ const HomeExperiences = () => {
 
   return (
     <>
-      <h1>See all different experiences</h1>
+      <header>
+        {!userLogged ? (
+          <nav>
+            <Link to="/users/register">Sing in</Link>
+            <Link to="/users/login">Login</Link>
+          </nav>
+        ) : (
+          ""
+        )}
+        {userLogged ? (
+          <div>
+            <div>{userLogged.username}</div>
+            <Link to="/users/profile">User Profile</Link>
+          </div>
+        ) : (
+          ""
+        )}
+      </header>
+      <h1>Experiencias Diferentes</h1>
+      <h2>See all different experiences</h2>
       {experiences &&
         experiences?.map((experience) => (
           <div key={experience.id}>

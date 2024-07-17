@@ -3,7 +3,7 @@ import getPool from "../../database/getPool.js";
 
 // Función que realiza una consulta a la base de datos para actualizar el perfil de un usuario.
 const updateUserProfileModel = async (userId, data) => {
-  const { username, firstname, lastname, email } = data;
+  const { username, firstname, lastname, email, role } = data;
   const pool = await getPool();
 
   // Construimos dinámicamente la consulta SQL solo con los campos que se proporcionan.
@@ -25,6 +25,10 @@ const updateUserProfileModel = async (userId, data) => {
   if (email !== undefined) {
     setFragments.push(`email = ?`);
     values.push(email);
+  }
+  if (role !== undefined) {
+    setFragments.push(`role = ?`);
+    values.push(role);
   }
 
   // Añadimos el userId al array de valores.

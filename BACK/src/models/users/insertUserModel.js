@@ -42,7 +42,7 @@ const insertUserModel = async (
   }
 
   // Creamos el asunto del email de verificación.
-  const emailSubject = "Activa tu usuario en Experiencias Diferentes";
+  const emailSubject = "Activate your user in Experiencias Diferentes";
 
   // Creamos el contenido del email
   const emailBody = `

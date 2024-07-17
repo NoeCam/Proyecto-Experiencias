@@ -2,10 +2,10 @@
 import selectUserByIdModel from "../../models/users/selectUserByIdModel.js";
 
 // Importamos los servicios.
-// import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
+//import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 
 // Importamos el esquema.
-// import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
+import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
 
 const getUserProfileController = async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ const getUserProfileController = async (req, res, next) => {
     }
 
     // Validamos el body con Joi.
-    // await validateSchemaUtil(editUserProfileSchema, req.body);
+    //await validateSchemaUtil(editUserProfileSchema, req.body);
 
     // Obtenemos los datos del usuario para verificar si existe.
     const user = await selectUserByIdModel(req.user.id);
