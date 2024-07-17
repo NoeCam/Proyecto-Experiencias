@@ -18,7 +18,7 @@ const loginService = async ({ email, password }) => {
   if (!response.ok) throw new Error(json.message);
 
   // Retornar la respuesta JSON
-  return json.token;
+  return json;
 };
 
 export default loginService;

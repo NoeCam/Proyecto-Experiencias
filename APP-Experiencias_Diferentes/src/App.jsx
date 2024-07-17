@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import RecoverPassword from "./pages/RecoverPassword";
 import ModifyPassword from "./pages/ModifyPassword";
 import NewPassword from "./pages/NewPassword";
+import UserProfile from "./pages/UserProfile";
 import Experience from "./pages/Experience";
 import CreateExperience from "./pages/CreateExperience";
 import EditExperience from "./pages/EditExperience";
@@ -23,8 +24,9 @@ function App() {
         />
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/recover-password" element={<RecoverPassword />} />
-        <Route path="/user/modify-password" element={<ModifyPassword />} />
+        <Route path="/users/modify-password" element={<ModifyPassword />} />
         <Route path="/users/password" element={<NewPassword />} />
+        <Route path="/users/profile" element={<UserProfile />} />
         <Route
           path="/experiencias/:experienceId"
           element={<ExperienceById />}
@@ -34,8 +36,11 @@ function App() {
           element={<ExperienceState />}
         />
         <Route path="/experiencias/create" element={<CreateExperience />} />
-        <Route path="/experiencias/:experienceId/edit" element={<EditExperience />} />
-        <Route path="/experiencias" element={<Experience />} />
+        <Route
+          path="/experiencias/:experienceId/edit"
+          element={<EditExperience />}
+        />
+        <Route path="/" element={<Experience />} />
       </Routes>
     </>
   );

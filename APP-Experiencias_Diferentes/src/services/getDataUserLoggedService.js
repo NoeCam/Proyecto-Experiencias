@@ -1,8 +1,8 @@
-const getDataUserLoggedService = async ({ token }) => {
+const getDataUserLoggedService = async (token) => {
   const url = `${import.meta.env.VITE_API_URL}/users/profile`;
   const response = await fetch(url, {
     headers: {
-      Authorization: token,
+      authorization: token,
     },
   });
 

@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import loginService from "../services/loginService.js";
 import { AuthContext } from "../contexts/AuthContextProvider.jsx";
+import loginService from "../services/loginService.js";
 
 function FormLogin() {
   const [email, setEmail] = useState("");
@@ -23,9 +23,9 @@ function FormLogin() {
         password,
       });
 
-      setToken(response);
+      setToken(response.data.token);
       setResp(response);
-      navigate("/experiencias");
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
