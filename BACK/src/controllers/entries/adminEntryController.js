@@ -29,12 +29,13 @@ const adminEntryController = async (req, res, next) => {
     } = req.body;
 
     const userId = req.user?.id;
+
     // Verificar que el usuario sea admin
     const isAdmin = await verifyAdmin(userId);
     if (!isAdmin) {
       return res.status(403).send({
         status: "error",
-        message: "No tienes permisos para realizar esta acción",
+        message: "You do not have permissions to perform this action",
       });
     }
 
@@ -44,8 +45,8 @@ const adminEntryController = async (req, res, next) => {
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const experienceId = await insertExperienceModel(
       title,
-      description,
       location,
+      description,
       image,
       date,
       price,
@@ -56,12 +57,13 @@ const adminEntryController = async (req, res, next) => {
 
     res.send({
       status: "ok",
+      message: "Successfully created experience.",
       data: {
         experience: {
           id: experienceId,
           title,
-          description,
           location,
+          description,
           image,
           date,
           price,

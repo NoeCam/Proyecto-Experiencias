@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../contexts/AuthContextProvider";
 import createExperienceService from "../services/createExperienceService";
 
 // Estado para los datos del formulario
@@ -20,11 +21,11 @@ const CreateExperienceForm = () => {
   const [resp, setResp] = useState("");
 
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const { userLogged, token } = useContext(AuthContext);
   useEffect(() => {
-    // Verificar si el usuario es administrador
-    const role = localStorage.getItem("role");
-    if (role === "admin") {
+    //Verificar si el usuario es administrador
+
+    if (userLogged?.role && userLogged.role === "admin") {
       setIsAdmin(true);
     } else {
       setError("You do not have permission to create an experience.");
@@ -46,9 +47,11 @@ const CreateExperienceForm = () => {
     }
     try {
       // Llamar al servicio para crear una experiencia
-      const response = await createExperienceService(formData);
+      const response = await createExperienceService(token, formData);
+
       // Establecer la respuesta en el estado
       setResp(response);
+      setError(null);
     } catch (error) {
       // Establecer el error en el estado
       setError(error.message);
@@ -144,7 +147,7 @@ const CreateExperienceForm = () => {
       </div>
       <div>{error ? <p>{error}</p> : ""}</div>
       <div>
-        {resp.status === "ok" ? (
+        {resp.status == "ok" ? (
           <>
             <p>{resp.message}</p>
           </>
