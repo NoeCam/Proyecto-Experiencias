@@ -107,17 +107,16 @@ async function createTables() {
 }
 
 async function initDB() {
-
   try {
-
     await createDB();
+    console.log("Base de datos creada");
     await createTables();
+    console.log("Tablas creadas");
 
     process.exit(0);
   } catch (error) {
+    console.error(error);
     process.exit(1);
-    
-
   }
 }
 
