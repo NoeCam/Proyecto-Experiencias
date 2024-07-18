@@ -10,6 +10,7 @@ const experienceConfirmationController = async (req, res, next) => {
     //Validar el body con Joi.
     await validateSchemaUtil(experienceConfirmationSchema, req.body);
     await updateConfirmationService(experienceId, confirmedByAdmin);
+
     res.send({
       status: "ok",
       message: "Estado de confirmación modificado correctamente",
