@@ -4,8 +4,8 @@ import getPool from "../../database/getPool.js";
 // Función que realiza una consulta a la base de datos para agregar una nueva entrada.
 const insertExperienceModel = async (
   title,
-  description,
   location,
+  description,
   image,
   date,
   price,

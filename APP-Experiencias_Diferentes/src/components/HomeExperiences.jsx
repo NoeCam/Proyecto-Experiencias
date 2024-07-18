@@ -32,6 +32,8 @@ const HomeExperiences = () => {
           <div>
             <div>{userLogged.username}</div>
             <Link to="/users/profile">User Profile</Link>
+            <>&nbsp;|&nbsp;</>
+            <Link to="/experiencias/create">Create a new experience</Link>
           </div>
         ) : (
           ""
