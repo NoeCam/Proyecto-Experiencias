@@ -36,6 +36,14 @@ router.put(
   experienceConfirmationController
 );
 
+// //---------------------------
+// router.put(
+//   "/experiencias/:experienceId/experienceState",
+//   authUserController,
+//   experienceConfirmationController
+// );
+// //----------------------
+
 // Endpoint para reservar y cancelar la reserva de una experiencia
 router.put(
   "/experiencias/:experienceId/reservation",

@@ -4,11 +4,12 @@ import experienceConfirmationSchema from "../../schemas/entries/experienceConfir
 
 const experienceConfirmationController = async (req, res, next) => {
   try {
+    const experienceId = req.params.id;
     const { confirmedByAdmin } = req.body;
+
     //Validar el body con Joi.
     await validateSchemaUtil(experienceConfirmationSchema, req.body);
-
-    await updateConfirmationService(confirmedByAdmin);
+    await updateConfirmationService(experienceId, confirmedByAdmin);
 
     res.send({
       status: "ok",
