@@ -40,10 +40,10 @@ export const notFoundError = (resource) => {
 
 export const pendingActivationError = () => {
   throw {
-    httpStatus: 403, // Forbidden
-    code: "PENDING_ACTIVATION",
+    httpStatus: 404, // Forbidden
+    code: "STATUS CODE",
     message:
-      "User pending activation. Please verify your account before continuing.",
+      "User not found",
   };
 };
 
