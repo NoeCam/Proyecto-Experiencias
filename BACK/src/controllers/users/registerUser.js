@@ -7,14 +7,7 @@ import getPool from "../../database/getPool.js";
 import newUserSchema from "../../schemas/users/newUserSchema.js";
 import insertUserModel from "../../models/users/insertUserModel.js";
 
-// Define una función para validar datos con un esquema.
-export async function validateSchemaUtil(schema, data) {
-  const { error } = schema.validate(data); // Valida los datos contra el esquema.
-  if (error) {
-    // Si hay un error de validación...
-    throw new Error(`Validation error: ${error.details[0].message}`); // Lanza un error con el mensaje de validación.
-  }
-}
+import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 
 // Define el controlador para registrar usuarios.
 export default async function registerUser(req, res, next) {
