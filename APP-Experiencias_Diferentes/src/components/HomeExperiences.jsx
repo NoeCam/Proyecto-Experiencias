@@ -7,6 +7,7 @@ const HomeExperiences = () => {
 
   const { userLogged } = useContext(AuthContext);
   const [experiences, setExperiences] = useState(null);
+
   useEffect(() => {
     const getAllExperiences = async () => {
       const response = await fetch(`${VITE_API_URL}/experiencias`);
@@ -62,6 +63,9 @@ const HomeExperiences = () => {
             ) : (
               ""
             )}
+            <Link to={`/experiencias/${experience.id}`}>
+              Watch this experience
+            </Link>
           </div>
         ))}
     </>

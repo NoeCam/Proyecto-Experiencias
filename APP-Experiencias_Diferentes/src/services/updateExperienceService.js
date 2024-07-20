@@ -1,5 +1,7 @@
-const updateExperienceService = async ({
-    experienceId,
+const updateExperienceService = async (
+  token,
+  experienceId,
+  {
     title,
     location,
     description,
@@ -7,20 +9,18 @@ const updateExperienceService = async ({
     date,
     price,
     numMinPlaces,
-    numTotalPlaces
+    numTotalPlaces,
+    confirmedByAdmin
   }) => {
     // Construir la URL del endpoint de la API
-    const url = `${import.meta.env.VITE_API_URL}/experiences/${experienceId}`;
-  
-    //! Obtener el token de autenticación desde el almacenamiento local
-    const token = localStorage.getItem('token');
+    const url = `${import.meta.env.VITE_API_URL}/experiencias/${experienceId}/edit`;
 
     // Realizar una solicitud PUT para actualizar la experiencia
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       },
       body: JSON.stringify({
         title,
@@ -30,7 +30,8 @@ const updateExperienceService = async ({
         date,
         price,
         numMinPlaces,
-        numTotalPlaces
+        numTotalPlaces,
+        confirmedByAdmin
       })
     });
   

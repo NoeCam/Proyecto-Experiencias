@@ -9,6 +9,7 @@ const createExperienceService = async (
     price,
     numMinPlaces,
     numTotalPlaces,
+    confirmedByAdmin
   }
 ) => {
   // Construir la URL del endpoint de la API
@@ -30,6 +31,7 @@ const createExperienceService = async (
       price,
       numMinPlaces,
       numTotalPlaces,
+      confirmedByAdmin
     }),
   });
 

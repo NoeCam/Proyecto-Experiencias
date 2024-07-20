@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import createExperienceService from "../services/createExperienceService";
 
@@ -62,6 +63,13 @@ const CreateExperienceForm = () => {
   }
 
   return (
+    <>
+    <header>
+        <Link to={"/"}>
+          <p>Home</p>
+        </Link>
+        
+      </header>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Title:</label>
@@ -156,6 +164,7 @@ const CreateExperienceForm = () => {
         )}
       </div>
     </form>
+    </>
   );
 };
 
