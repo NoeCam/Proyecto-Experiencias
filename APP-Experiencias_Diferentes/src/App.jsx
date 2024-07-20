@@ -37,7 +37,7 @@ function App() {
         />
         <Route path="/experiencias/create" element={<CreateExperience />} />
         <Route
-          path="/experiencias/:experienceId/edit"
+          path="/experiencias/edit/:experienceId"
           element={<EditExperience />}
         />
         <Route path="/" element={<Experience />} />

@@ -3,8 +3,10 @@ import Joi from "joi";
 const editExperienceSchema = Joi.object({
   title: Joi.string().required(),
   location: Joi.string().required(),
-  image: Joi.string().uri().optional(),
+  description: Joi.string().required(),
+  image: Joi.string().optional(),
   date: Joi.date().iso().required(),
+  price: Joi.string().required(),
   numMinPlaces: Joi.number().integer().required(),
   numTotalPlaces: Joi.number().integer().required(),
   confirmedByAdmin: Joi.boolean().required(),
