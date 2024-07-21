@@ -22,11 +22,20 @@ const ViewUserProfile = () => {
         </Link>
       </header>
       <h3>View your User Profile</h3>
+      <img
+        src={
+          userLogged.avatar
+            ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
+            : `${import.meta.env.VITE_API_URL}/utils/userDefault.png`
+        }
+        alt="User Avatar"
+      />
       <p>Username: {userLogged.username}</p>
       <p>First name: {userLogged.firstname}</p>
       <p>Last name: {userLogged.lastname}</p>
       <p>email: {userLogged.email}</p>
       <p>role: {userLogged.role}</p>
+      <p>Last name: {userLogged.lastname}</p>
       <button type="submit" value="logout" onClick={handleSubmit}>
         Logout
       </button>

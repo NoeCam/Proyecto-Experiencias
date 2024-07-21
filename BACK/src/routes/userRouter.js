@@ -8,16 +8,17 @@ import {
   validateUserController,
   editUserProfileController,
   getUserProfileController,
+  editUserAvatarController,
 } from "../controllers/users/index.js";
 
 import authUserController from "../middleware/authUserController.js";
 
 const router = express.Router();
 
-//Crear un usuario pendiente de activar.
+// Crear un usuario pendiente de activar.
 router.post("/users/register", registerUser);
 
-//Validar a un usuario.
+// Validar a un usuario.
 router.put("/users/validate/:registrationCode", validateUserController);
 
 // Ruta para el login de usuario
@@ -29,10 +30,13 @@ router.post("/users/recover-password", sendRecoverPassController);
 // Editar la contraseña de un usuario con un código de recuperación.
 router.put("/users/password", editUserPassController);
 
-//Define la ruta para actualizar el perfirl de usuario.
+// Define la ruta para actualizar el perfirl de usuario.
 router.put("/users/profile", authUserController, editUserProfileController);
 
-//Muestra el perfil de usuario.
+// Muestra el perfil de usuario.
 router.get("/users/profile", authUserController, getUserProfileController);
+
+// Insertar avatar de usuario.
+router.put("/users/avatar", authUserController, editUserAvatarController);
 
 export default router;

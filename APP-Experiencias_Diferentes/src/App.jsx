@@ -12,6 +12,7 @@ import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 function App() {
   return (
