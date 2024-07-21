@@ -5,6 +5,7 @@ import validateUserController from "./validateUserController.js";
 import sendRecoverPassController from "./sendRecoverPassController.js";
 import editUserProfileController from "./editUserProfileController.js";
 import getUserProfileController from "./getUserProfileController.js";
+import editUserAvatarController from "./editUserAvatarController.js";
 
 export {
   editUserPassController,
@@ -14,4 +15,5 @@ export {
   sendRecoverPassController,
   editUserProfileController,
   getUserProfileController,
+  editUserAvatarController,
 };

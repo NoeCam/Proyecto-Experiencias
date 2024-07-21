@@ -1,17 +1,16 @@
 import express from "express";
-import path from "path";
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import routes from "./routes/index.js";
+import { UPLOADS_DIR } from "../env.js";
 
 const server = express();
-const PUBLIC_FOLDER = path.join(process.cwd(), "public");
 
 server.use(express.json());
 server.use(cors());
 server.use(fileUpload());
 
-server.use(express.static(PUBLIC_FOLDER));
+server.use("/uploads", express.static(UPLOADS_DIR));
 
 server.use(routes);
 

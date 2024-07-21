@@ -86,3 +86,19 @@ export const voteAlreadyExistsError = () => {
     message: "You cannot vote for the same experience more than once,",
   };
 };
+
+export const saveImageError = () => {
+  throw {
+    httpStatus: 500, // Server error
+    code: "SAVE_IMAGE_ERROR",
+    message: "Error saving an image.",
+  };
+};
+
+export const deleteImageError = () => {
+  throw {
+    httpStatus: 500, // Server error
+    code: "DELETE_IMAGE_ERROR",
+    message: "Error deleting an image.",
+  };
+};
