@@ -13,7 +13,7 @@ const experienceActivationController = async (req, res, next) => {
     if (!isAdmin) {
       return res.status(403).send({
         status: "error",
-        message: "No tienes permisos para realizar esta acción",
+        message: "You do not have permission to perform this action",
       });
     }
 
