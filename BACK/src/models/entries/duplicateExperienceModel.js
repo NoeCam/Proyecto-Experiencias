@@ -14,7 +14,7 @@ const duplicateExperienceModel = async (experienceId, userId) => {
     );
 
     if (experience.length === 0) {
-      throw new Error("Experiencia no encontrada"); // Lanza un error si la experiencia no existe.
+      throw new Error("Experience not found"); // Lanza un error si la experiencia no existe.
     }
 
     const {

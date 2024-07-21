@@ -12,7 +12,7 @@ const handleReservationController = async (req, res, next) => {
     // Validar el estado de la reserva (con un booleano)
     if (typeof state !== "boolean") {
       return res.status(400).json({
-        error: "Estado de la reserva no válido. Debe ser true o false.",
+        error: "Confirmation status successfully reserved",
       });
     }
 
@@ -24,7 +24,7 @@ const handleReservationController = async (req, res, next) => {
 
       res.send({
         status: "ok",
-        message: "Reserva modificada",
+        message: "Successfully reserved",
       });
     } catch (err) {
       next(err);

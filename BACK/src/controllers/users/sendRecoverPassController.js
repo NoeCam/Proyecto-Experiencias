@@ -26,7 +26,7 @@ const sendRecoverPassController = async (req, res, next) => {
 
     // Si no existe un usuario con ese email lanzamos un error.
     if (!user) {
-      notFoundError("usuario");
+      notFoundError("User");
     }
 
     // Generamos el código de recuperación de contraseña.

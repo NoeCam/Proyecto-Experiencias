@@ -12,7 +12,7 @@ const experienceConfirmationController = async (req, res, next) => {
     await updateConfirmationService(experienceId, confirmedByAdmin);
     res.send({
       status: "ok",
-      message: "Estado de confirmación modificado correctamente",
+      message: "Confirmation status successfully modified",
     });
   } catch (error) {
     next(error);
