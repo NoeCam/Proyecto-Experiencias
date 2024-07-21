@@ -1,18 +1,9 @@
-import Joi from "joi";
 import insertExperienceModel from "../../models/entries/insertExperienceModel.js";
 import verifyAdmin from "../../middleware/verifyAdminController.js";
+import { savePhotoUtils } from "../../utils/photoUtils.js";
 
-// Creamos el esquema.
-const experienciaSchema = Joi.object({
-  title: Joi.string().max(50).required(),
-  description: Joi.string().required(),
-  location: Joi.string().max(30).required(),
-  image: Joi.required(),
-  date: Joi.date().required(),
-  price: Joi.string().required(),
-  numMinPlaces: Joi.number().integer().positive().required(),
-  numTotalPlaces: Joi.number().integer().positive().required(),
-});
+import experienciaSchema from "../../schemas/entries/experienceSchema.js";
+import imgSchema from "../../schemas/imgSchema.js";
 
 // Función controladora final que agrega una nueva entrada.
 const adminEntryController = async (req, res, next) => {
@@ -21,7 +12,6 @@ const adminEntryController = async (req, res, next) => {
       title,
       description,
       location,
-      image,
       date,
       price,
       numMinPlaces,
@@ -39,8 +29,14 @@ const adminEntryController = async (req, res, next) => {
       });
     }
 
-    // Validamos el body con Joi.
+    let image = null;
+    if (req.files) {
+      image = await savePhotoUtils(req.files.image, 500);
+    }
+
+    // Validamos el body y la imagen con Joi.
     await experienciaSchema.validateAsync(req.body);
+    await imgSchema.validateAsync(req.files.image);
 
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const experienceId = await insertExperienceModel(

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import Header from "./Header";
 
 const ViewUserProfile = () => {
   const { userLogged, logout } = useContext(AuthContext);
@@ -16,17 +17,13 @@ const ViewUserProfile = () => {
 
   return userLogged ? (
     <>
-      <header>
-        <Link to={"/"}>
-          <p>Home</p>
-        </Link>
-      </header>
+      <Header />
       <h3>View your User Profile</h3>
       <img
         src={
           userLogged.avatar
             ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
-            : `${import.meta.env.VITE_API_URL}/utils/userDefault.png`
+            : `${import.meta.env.VITE_API_URL}/uploads/userDefault.png`
         }
         alt="User Avatar"
       />
@@ -35,18 +32,12 @@ const ViewUserProfile = () => {
       <p>Last name: {userLogged.lastname}</p>
       <p>email: {userLogged.email}</p>
       <p>role: {userLogged.role}</p>
-      <p>Last name: {userLogged.lastname}</p>
       <button type="submit" value="logout" onClick={handleSubmit}>
         Logout
       </button>
     </>
   ) : (
-    <header>
-      <Link to={"/"}>
-        <p>Home</p>
-      </Link>
-      <Link to={"/users/login"}>Login</Link>
-    </header>
+    <Header />
   );
 };
 

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import createExperienceService from "../services/createExperienceService";
+import Header from "./Header";
 
 // Estado para los datos del formulario
 const CreateExperienceForm = () => {
@@ -64,106 +65,101 @@ const CreateExperienceForm = () => {
 
   return (
     <>
-    <header>
-        <Link to={"/"}>
-          <p>Home</p>
-        </Link>
-        
-      </header>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Location:</label>
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Image:</label>
-        <input
-          type="file"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Date:</label>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Price:</label>
-        <input
-          type="text"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Minimum Number of Places:</label>
-        <input
-          type="number"
-          name="numMinPlaces"
-          value={formData.numMinPlaces}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Total Number of Places:</label>
-        <input
-          type="number"
-          name="numTotalPlaces"
-          value={formData.numTotalPlaces}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <input type="submit" value="Create Experience" />
-      </div>
-      <div>{error ? <p>{error}</p> : ""}</div>
-      <div>
-        {resp.status == "ok" ? (
-          <>
-            <p>{resp.message}</p>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
-    </form>
+      <Header />
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Location:</label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Image:</label>
+          <input
+            type="file"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Price:</label>
+          <input
+            type="text"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Minimum Number of Places:</label>
+          <input
+            type="number"
+            name="numMinPlaces"
+            value={formData.numMinPlaces}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Total Number of Places:</label>
+          <input
+            type="number"
+            name="numTotalPlaces"
+            value={formData.numTotalPlaces}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <input type="submit" value="Create Experience" />
+        </div>
+        <div>{error ? <p>{error}</p> : ""}</div>
+        <div>
+          {resp.status == "ok" ? (
+            <>
+              <p>{resp.message}</p>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+      </form>
     </>
   );
 };
