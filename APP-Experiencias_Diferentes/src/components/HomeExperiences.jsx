@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import Header from "./Header";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
@@ -19,27 +20,7 @@ const HomeExperiences = () => {
 
   return (
     <>
-      <header>
-        {!userLogged ? (
-          <nav>
-            <Link to="/users/register">Sing in</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/users/login">Login</Link>
-          </nav>
-        ) : (
-          ""
-        )}
-        {userLogged ? (
-          <div>
-            <div>{userLogged.username}</div>
-            <Link to="/users/profile">User Profile</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/experiencias/create">Create a new experience</Link>
-          </div>
-        ) : (
-          ""
-        )}
-      </header>
+      <Header />
       <h1>Experiencias Diferentes</h1>
       <h2>See all different experiences</h2>
       {experiences &&
@@ -48,7 +29,16 @@ const HomeExperiences = () => {
             <h3>Title: {experience.title}</h3>
             <p>Location: {experience.location}</p>
             <p>Description: {experience.description}</p>
-            <p>image: {experience.image}</p>
+            <img
+              src={
+                experience.image
+                  ? `${import.meta.env.VITE_API_URL}/uploads/${
+                      experience.image
+                    }`
+                  : "The experience does not contain images"
+              }
+              alt={experience.title}
+            />
             <p>date: {experience.date}</p>
             <p>price: {experience.price}</p>
             <p>active: {experience.active}</p>

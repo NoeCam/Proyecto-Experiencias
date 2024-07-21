@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "./Header";
 
 // Importa el servicio de registro de usuario
 import registerUserService from "../services/registerUserService";
@@ -75,6 +76,9 @@ const RegistrationForm = () => {
 
   return (
     <>
+      <Header />
+      <h1>Experiencias Diferentes</h1>
+      <h2>Sing in</h2>
       {/* Define el formulario y maneja el evento de submit */}
       <form onSubmit={handleSubmit}>
         <div>

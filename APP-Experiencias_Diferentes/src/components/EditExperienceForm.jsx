@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import updateExperienceService from "../services/updateExperienceService";
 import getExperienceService from "../services/getExperienceService"; // Suponiendo que tienes un servicio para obtener los detalles de una experiencia
 import { AuthContext } from "../contexts/AuthContextProvider";
+import Header from "./Header";
 
 const EditExperienceForm = () => {
   const { experienceId } = useParams();
@@ -55,7 +56,7 @@ const EditExperienceForm = () => {
           price: experience.price || "",
           numMinPlaces: experience.numMinPlaces || "",
           numTotalPlaces: experience.numTotalPlaces || "",
-          confirmedByAdmin: experience.confirmedByAdmin || false
+          confirmedByAdmin: experience.confirmedByAdmin || false,
         });
       } catch (error) {
         // Establecer el error en el estado
@@ -100,11 +101,7 @@ const EditExperienceForm = () => {
 
   return (
     <>
-      <header>
-        <Link to={"/"}>
-          <p>Home</p>
-        </Link>
-      </header>
+      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
