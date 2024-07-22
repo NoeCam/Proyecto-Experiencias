@@ -9,6 +9,7 @@ import {
   editUserProfileController,
   getUserProfileController,
   editUserAvatarController,
+  changeUserPasswordController
 } from "../controllers/users/index.js";
 
 import authUserController from "../middleware/authUserController.js";
@@ -31,6 +32,12 @@ router.post("/users/recover-password", sendRecoverPassController);
 router.put("/users/password", editUserPassController);
 
 // Define la ruta para actualizar el perfirl de usuario.
+
+
+// Editar la contraseña estando logueado.
+router.post("/change-password", changeUserPasswordController);
+
+//Define la ruta para actualizar el perfirl de usuario.
 router.put("/users/profile", authUserController, editUserProfileController);
 
 // Muestra el perfil de usuario.
