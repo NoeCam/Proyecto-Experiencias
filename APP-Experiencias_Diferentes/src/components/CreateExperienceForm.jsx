@@ -36,8 +36,11 @@ const CreateExperienceForm = () => {
 
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   // Manejar el envío del formulario
@@ -144,6 +147,15 @@ const CreateExperienceForm = () => {
             value={formData.numTotalPlaces}
             onChange={handleChange}
             required
+          />
+        </div>
+        <div>
+          <label>Confirmed by Admin:</label>
+          <input
+            type="checkbox"
+            name="confirmedByAdmin"
+            checked={formData.confirmedByAdmin}
+            onChange={handleChange}
           />
         </div>
         <div>
