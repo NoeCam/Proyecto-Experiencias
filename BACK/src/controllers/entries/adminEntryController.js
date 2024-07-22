@@ -36,7 +36,7 @@ const adminEntryController = async (req, res, next) => {
 
     // Validamos el body y la imagen con Joi.
     await experienciaSchema.validateAsync(req.body);
-    // await imgSchema.validateAsync(req.files.image);
+    await imgSchema.validateAsync(req.files.image);
 
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const experienceId = await insertExperienceModel(
