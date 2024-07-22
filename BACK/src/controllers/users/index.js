@@ -5,7 +5,11 @@ import validateUserController from "./validateUserController.js";
 import sendRecoverPassController from "./sendRecoverPassController.js";
 import editUserProfileController from "./editUserProfileController.js";
 import getUserProfileController from "./getUserProfileController.js";
+<<<<<<< Updated upstream
 import editUserAvatarController from "./editUserAvatarController.js";
+=======
+import changeUserPasswordController from "./changeUserPasswordController.js";
+>>>>>>> Stashed changes
 
 export {
   editUserPassController,
@@ -15,5 +19,9 @@ export {
   sendRecoverPassController,
   editUserProfileController,
   getUserProfileController,
+<<<<<<< Updated upstream
   editUserAvatarController,
+=======
+  changeUserPasswordController
+>>>>>>> Stashed changes
 };
