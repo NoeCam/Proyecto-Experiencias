@@ -42,7 +42,8 @@ async function createTables() {
         registrationCode CHAR(30),
         recoverPassCode CHAR(10),
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
-        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+        modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
+        last_password_change DATETIME DEFAULT NULL
         )
       `);
 
