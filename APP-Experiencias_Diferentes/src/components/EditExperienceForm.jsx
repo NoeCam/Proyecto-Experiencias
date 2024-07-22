@@ -49,7 +49,7 @@ const EditExperienceForm = () => {
           title: experience.title || "",
           location: experience.location || "",
           description: experience.description || "",
-          image: "",
+          image: experience.image || "",
           date: experience.date
             ? new Date(experience.date).toISOString().split("T")[0]
             : "",
@@ -66,12 +66,29 @@ const EditExperienceForm = () => {
     fetchExperience();
   }, [experienceId, userLogged]);
 
+  // Manejar cambios en el campo imagen
+  const handleChangeImage = (e) => {
+    setFormData({
+      ...formData,
+      ["image"]: e.target.files[0],
+    });
+  };
+
+  // Manejar cambios en el campos del formulario booleano
+  const handleChangeBoolean = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
 
@@ -83,14 +100,21 @@ const EditExperienceForm = () => {
       return;
     }
     try {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
       const response = await updateExperienceService(
         token,
         experienceId,
-        formData
+        formDataToSend
       );
+
+      // Establecer la respuesta en el estado
       setResp(response);
       setError(null);
     } catch (error) {
+      // Establecer el error en el estado
       setError(error.message);
     }
   };
@@ -137,8 +161,7 @@ const EditExperienceForm = () => {
           <input
             type="file"
             name="image"
-            value={formData.image}
-            onChange={handleChange}
+            onChange={handleChangeImage}
             required
           />
         </div>
@@ -188,7 +211,7 @@ const EditExperienceForm = () => {
             type="checkbox"
             name="confirmedByAdmin"
             checked={formData.confirmedByAdmin}
-            onChange={handleChange}
+            onChange={handleChangeBoolean}
           />
         </div>
         <div>

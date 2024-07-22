@@ -4,6 +4,8 @@ import verifyAdmin from "../../middleware/verifyAdminController.js";
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 import editExperienceSchema from "../../schemas/entries/editExperienceSchema.js";
 
+import { savePhotoUtils } from "../../utils/photoUtils.js";
+
 const editExperienceController = async (req, res, next) => {
   try {
     // Verificar que el usuario sea admin
@@ -15,7 +17,6 @@ const editExperienceController = async (req, res, next) => {
         message: "You do not have permission to perform this action",
       });
     }
-
     const experienceId = req.params.experienceId;
 
     //Validar el body con Joi.
@@ -25,13 +26,17 @@ const editExperienceController = async (req, res, next) => {
       title,
       location,
       description,
-      image,
       date,
       price,
       numMinPlaces,
       numTotalPlaces,
       confirmedByAdmin,
     } = req.body;
+
+    let image = null;
+    if (req.files) {
+      image = await savePhotoUtils(req.files.image, 500);
+    }
 
     await updateExperienceService(
       title,
