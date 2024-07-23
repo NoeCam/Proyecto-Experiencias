@@ -5,8 +5,11 @@ import { savePhotoUtils } from "../../utils/photoUtils.js";
 import experienciaSchema from "../../schemas/entries/experienceSchema.js";
 import imgSchema from "../../schemas/imgSchema.js"; // No sabemos si se usa, quizás deberíamos borrarlo.
 
+
+
 // Función controladora final que agrega una nueva entrada.
 const adminEntryController = async (req, res, next) => {
+  // let {image} = req.files.image;
   try {
     const {
       title,
@@ -36,7 +39,7 @@ const adminEntryController = async (req, res, next) => {
 
     // Validamos el body y la imagen con Joi.
     await experienciaSchema.validateAsync(req.body);
-    await imgSchema.validateAsync(req.files.image);
+    // image = await imgSchema.validateAsync(req.files.image);
 
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const experienceId = await insertExperienceModel(
@@ -50,7 +53,7 @@ const adminEntryController = async (req, res, next) => {
       numTotalPlaces,
       userId
     );
-
+    
     res.send({
       status: "ok",
       message: "Successfully created experience.",

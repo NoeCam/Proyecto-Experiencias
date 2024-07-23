@@ -10,7 +10,7 @@ const experienciaSchema = Joi.object({
   price: Joi.string().required(),
   numMinPlaces: Joi.number().integer().positive().required(),
   numTotalPlaces: Joi.number().integer().positive().required(),
-  confirmedByAdmin: Joi.boolean().required(),
+  confirmedByAdmin: Joi.boolean(),
 });
 
 export default experienciaSchema;
