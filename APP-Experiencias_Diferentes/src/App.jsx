@@ -11,6 +11,7 @@ import CreateExperience from "./pages/CreateExperience";
 import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
+import ExperienceList from './components/ExperienceList';
 import "react-toastify/dist/ReactToastify.css";
 import PageNotFound from "./components/PageNotFoundComponent";
 import "./App.css";
@@ -42,6 +43,7 @@ function App() {
           path="/experiencias/edit/:experienceId"
           element={<EditExperience />}
         />
+        <Route path="/experiencias" element={<ExperienceList />} />
         <Route path="/" element={<Experience />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
