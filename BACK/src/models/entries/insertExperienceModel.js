@@ -15,7 +15,7 @@ const insertExperienceModel = async (
 ) => {
   const pool = await getPool();
   // Insertamos la entrada.
-  await pool.query(
+  const result = await pool.query(
     `INSERT INTO experiences(
       title, 
       location, 
@@ -39,19 +39,8 @@ const insertExperienceModel = async (
       userId,
     ]
   );
-
-  let experienceIdResult = await pool.query(
-    `
-      SELECT e.id
-      FROM experiences e
-      ORDER BY e.id DESC
-      LIMIT 1;
-    `
-  );
-  let experienceId = experienceIdResult[0][0].id;
-
   // Retornamos el id de la experiencia.
-  return experienceId;
+  return result[0].insertId;
 };
 
 export default insertExperienceModel;
