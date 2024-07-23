@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./pages/Register";
 import ValidateUser from "./pages/ValidateUser";
 import Login from "./pages/Login";
@@ -12,6 +12,7 @@ import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
 import "react-toastify/dist/ReactToastify.css";
+import PageNotFound from "./components/PageNotFoundComponent";
 import "./App.css";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           element={<EditExperience />}
         />
         <Route path="/" element={<Experience />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
