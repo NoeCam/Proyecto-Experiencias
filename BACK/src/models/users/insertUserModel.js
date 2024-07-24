@@ -28,25 +28,26 @@ const insertUserModel = async (
     // Buscamos en la base de datos algún usuario con ese nombre.
     let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
       username,
-    ]);
-
-    // Si existe algún usuario con ese nombre lanzamos un error.
-    if (users.length > 0) {
-      emailAlreadyRegisteredError();
-    }
-
-    // Buscamos en la base de datos algún usuario con ese email.
+  
+  // Si existe algún usuario con ese nombre lanzamos un error.
+  if (users.length > 0) {
+    userAlreadyRegisteredError();
+  }
+   // Buscamos en la base de datos algún usuario con ese email.
     [users] = await connection.query(`SELECT id FROM users WHERE email = ?`, [
       email,
     ]);
-
-    // Si existe algún usuario con ese email lanzamos un error.
-    if (users.length > 0) {
-      userAlreadyRegisteredError();
-    }
-
-    // Creamos el asunto del email de verificación.
-    const emailSubject = "Activate your user in Experiencias Diferentes";
+  // Si existe algún usuario con ese email lanzamos un error.
+  if (users.length > 0) {
+    emailAlreadyRegisteredError();
+  }
+  // Insertamos el usuario.
+  await pool.query(
+    `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
+    [email, hashedPass, username, firstname, lastname, registrationCode]
+  );
+  // Creamos el asunto del email de verificación.
+  const emailSubject = "Activate your user in Experiencias Diferentes";
 
     // Creamos el contenido del email
     const emailBody = `
@@ -62,15 +63,6 @@ const insertUserModel = async (
 
     // Encriptamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
-
-    // Insertamos el usuario.
-    await connection.query(
-      `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
-      [email, hashedPass, username, firstname, lastname, registrationCode]
-    );
-  } finally {
-    if (connection) connection.release();
-  }
 };
 
 export default insertUserModel;

@@ -17,5 +17,5 @@ export {
   editUserProfileController,
   getUserProfileController,
   editUserAvatarController,
-  changeUserPasswordController,
+  changeUserPasswordController
 };
