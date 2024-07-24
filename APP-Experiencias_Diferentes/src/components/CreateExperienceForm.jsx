@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import createExperienceService from "../services/createExperienceService";
 import Header from "./Header";
@@ -15,8 +14,8 @@ const CreateExperienceForm = () => {
     price: "",
     numMinPlaces: "",
     numTotalPlaces: "",
+    confirmedByAdmin: false,
   });
-
   // Estado para los errores
   const [error, setError] = useState("");
   // Estado para la respuesta de la API
@@ -24,6 +23,7 @@ const CreateExperienceForm = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const { userLogged, token } = useContext(AuthContext);
+
   useEffect(() => {
     //Verificar si el usuario es administrador
 
@@ -34,12 +34,28 @@ const CreateExperienceForm = () => {
     }
   }, []);
 
-  // Manejar cambios en los campos del formulario
-  const handleChange = (e) => {
+  // Manejar cambios en el campo imagen
+  const handleChangeImage = (e) => {
+    setFormData({
+      ...formData,
+      ["image"]: e.target.files[0],
+    });
+  };
+
+  // Manejar cambios en el campos del formulario booleano
+  const handleChangeBoolean = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
+    });
+  };
+  // Manejar cambios en los campos del formulario
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -51,8 +67,12 @@ const CreateExperienceForm = () => {
       return;
     }
     try {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
       // Llamar al servicio para crear una experiencia
-      const response = await createExperienceService(token, formData);
+      const response = await createExperienceService(token, formDataToSend);
 
       // Establecer la respuesta en el estado
       setResp(response);
@@ -104,8 +124,7 @@ const CreateExperienceForm = () => {
           <input
             type="file"
             name="image"
-            value={formData.image}
-            onChange={handleChange}
+            onChange={handleChangeImage}
             required
           />
         </div>
@@ -155,7 +174,7 @@ const CreateExperienceForm = () => {
             type="checkbox"
             name="confirmedByAdmin"
             checked={formData.confirmedByAdmin}
-            onChange={handleChange}
+            onChange={handleChangeBoolean}
           />
         </div>
         <div>

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./pages/Register";
 import ValidateUser from "./pages/ValidateUser";
 import Login from "./pages/Login";
@@ -11,7 +11,9 @@ import CreateExperience from "./pages/CreateExperience";
 import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
+import ExperienceList from './components/ExperienceList';
 import "react-toastify/dist/ReactToastify.css";
+import PageNotFound from "./components/PageNotFoundComponent";
 import "./App.css";
 
 function App() {
@@ -41,7 +43,9 @@ function App() {
           path="/experiencias/edit/:experienceId"
           element={<EditExperience />}
         />
+        <Route path="/experiencias" element={<ExperienceList />} />
         <Route path="/" element={<Experience />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

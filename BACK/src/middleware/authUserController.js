@@ -29,6 +29,7 @@ const authUserController = async (req, res, next) => {
     // Si hemos llegado hasta aquí quiere decir que el token ya se ha desencriptado..
     // Creamos la propiedad "user" en el objeto "request" (es una propiedad inventada).
     req.user = tokenInfo;
+    console.log(tokenInfo);
 
     // Pasamos el control a la siguiente función controladora.
     next();
