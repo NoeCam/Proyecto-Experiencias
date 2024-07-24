@@ -30,7 +30,7 @@ const insertUserModel = async (
 
   // Si existe algún usuario con ese nombre lanzamos un error.
   if (users.length > 0) {
-    emailAlreadyRegisteredError();
+    userAlreadyRegisteredError();
   }
 
   // Buscamos en la base de datos algún usuario con ese email.
@@ -38,9 +38,13 @@ const insertUserModel = async (
 
   // Si existe algún usuario con ese email lanzamos un error.
   if (users.length > 0) {
-    userAlreadyRegisteredError();
+    emailAlreadyRegisteredError();
   }
-
+  // Insertamos el usuario.
+  await pool.query(
+    `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
+    [email, hashedPass, username, firstname, lastname, registrationCode]
+  );
   // Creamos el asunto del email de verificación.
   const emailSubject = "Activate your user in Experiencias Diferentes";
 
@@ -59,11 +63,6 @@ const insertUserModel = async (
   // Encriptamos la contraseña.
   const hashedPass = await bcrypt.hash(password, 10);
 
-  // Insertamos el usuario.
-  await pool.query(
-    `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
-    [email, hashedPass, username, firstname, lastname, registrationCode]
-  );
 };
 
 export default insertUserModel;
