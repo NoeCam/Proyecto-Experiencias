@@ -1,10 +1,10 @@
+import { validationError } from "../services/errorService.js";
+
 const validateSchemaUtil = async (schema, body) => {
   try {
     await schema.validateAsync(body);
   } catch (err) {
-    err.httpStatus = 400; // Bad Request
-    err.code = "MISSING_FIELDS";
-    throw err;
+    validationError(err.details[0].message);
   }
 };
 
