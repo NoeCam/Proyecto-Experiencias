@@ -42,8 +42,7 @@ export const pendingActivationError = () => {
   throw {
     httpStatus: 404, // Forbidden
     code: "STATUS CODE",
-    message:
-      "User not found",
+    message: "User not found",
   };
 };
 
@@ -100,5 +99,13 @@ export const deleteImageError = () => {
     httpStatus: 500, // Server error
     code: "DELETE_IMAGE_ERROR",
     message: "Error deleting an image.",
+  };
+};
+
+export const validationError = (message) => {
+  throw {
+    httpStatus: 400, // Bad Request
+    code: "MISSING_FIELDS",
+    message: "Validation error.",
   };
 };
