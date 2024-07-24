@@ -22,30 +22,34 @@ const insertUserModel = async (
   registrationCode
 ) => {
   const pool = await getPool();
+  const connection = await pool.getConnection();
 
-  // Buscamos en la base de datos algún usuario con ese nombre.
-  let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
-    username,
-  ]);
+  try {
+    // Buscamos en la base de datos algún usuario con ese nombre.
+    let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
+      username,
+    ]);
 
-  // Si existe algún usuario con ese nombre lanzamos un error.
-  if (users.length > 0) {
-    emailAlreadyRegisteredError();
-  }
+    // Si existe algún usuario con ese nombre lanzamos un error.
+    if (users.length > 0) {
+      emailAlreadyRegisteredError();
+    }
 
-  // Buscamos en la base de datos algún usuario con ese email.
-  [users] = await pool.query(`SELECT id FROM users WHERE email = ?`, [email]);
+    // Buscamos en la base de datos algún usuario con ese email.
+    [users] = await connection.query(`SELECT id FROM users WHERE email = ?`, [
+      email,
+    ]);
 
-  // Si existe algún usuario con ese email lanzamos un error.
-  if (users.length > 0) {
-    userAlreadyRegisteredError();
-  }
+    // Si existe algún usuario con ese email lanzamos un error.
+    if (users.length > 0) {
+      userAlreadyRegisteredError();
+    }
 
-  // Creamos el asunto del email de verificación.
-  const emailSubject = "Activate your user in Experiencias Diferentes";
+    // Creamos el asunto del email de verificación.
+    const emailSubject = "Activate your user in Experiencias Diferentes";
 
-  // Creamos el contenido del email
-  const emailBody = `
+    // Creamos el contenido del email
+    const emailBody = `
             ¡Welcome ${username}!
 
             Thank you for registering at Different Experiences. To activate your account, click the following link:
@@ -53,17 +57,20 @@ const insertUserModel = async (
             <a href="http://localhost:${PORT_FRONT}/users/validate/${registrationCode}">Activate my account</a>
         `;
 
-  // Enviamos el email de verificación al usuario.
-  await sendMailUtil(email, emailSubject, emailBody);
+    // Enviamos el email de verificación al usuario.
+    await sendMailUtil(email, emailSubject, emailBody);
 
-  // Encriptamos la contraseña.
-  const hashedPass = await bcrypt.hash(password, 10);
+    // Encriptamos la contraseña.
+    const hashedPass = await bcrypt.hash(password, 10);
 
-  // Insertamos el usuario.
-  await pool.query(
-    `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
-    [email, hashedPass, username, firstname, lastname, registrationCode]
-  );
+    // Insertamos el usuario.
+    await connection.query(
+      `INSERT INTO users(email, password, username, firstname, lastname, registrationCode) VALUES ( ?, ?, ?, ?, ?, ?)`,
+      [email, hashedPass, username, firstname, lastname, registrationCode]
+    );
+  } finally {
+    if (connection) connection.release();
+  }
 };
 
 export default insertUserModel;
