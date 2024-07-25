@@ -14,187 +14,91 @@ const selectSearchExperiencesService = async (
     ? direction
     : "ASC";
 
-  let experiences;
+  const queryBaseinitial = `
+    SELECT
+      e.id,
+      e.title,
+      e.location,
+      e.description,
+      e.image,
+      e.date,
+      e.price,
+      e.active,
+      IFNULL(v.rating, 0) AS rating,
+      IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
+      ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed`;
+
+  const queryIfUserIdFirst = `, 
+      IFNULL(va.valoratedByMe, 0) > 0 AS valoratedByMe,
+      IFNULL(re.reservedByMe, 0) > 0 AS reservedByMe`;
+
+  const queryBaseB = `
+    FROM experiences e
+    LEFT JOIN (
+      SELECT experienceId, AVG(value) AS rating
+      FROM valorations
+      GROUP BY experienceId
+    ) v ON e.id = v.experienceId
+    LEFT JOIN (
+      SELECT experienceId, SUM(numberOfReserve) AS availablePlaces
+      FROM reservations
+      GROUP BY experienceId
+    ) r ON e.id = r.experienceId`;
+
+  const queryIfUserIdEnd = `
+    LEFT JOIN (
+      SELECT experienceId, COUNT(*) AS reservedByMe
+      FROM reservations
+      WHERE userId = ?
+      GROUP BY experienceId
+    ) re ON e.id = re.experienceId
+    LEFT JOIN (
+      SELECT experienceId, COUNT(*) AS valoratedByMe
+      FROM valorations
+      WHERE userId = ?
+      GROUP BY experienceId
+    ) va ON e.id = va.experienceId`;
+
+  const searchCondition = search
+    ? ` WHERE e.title LIKE ? OR e.description LIKE ?`
+    : "";
+
+  const orderClause = ` ORDER BY e.${orderBy} ${orderDirection};`;
+
+  let query;
+  let values = [];
 
   const pool = await getPool();
+
   if (search) {
     if (userId) {
-      [experiences] = await pool.query(
-        `
-        SELECT
-          e.id,
-          e.title,
-          e.location,
-          e.description,
-          e.image,
-          e.date,
-          e.price,
-          e.active,
-          IFNULL(v.rating, 0) AS rating,
-          IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
-          ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed,
-          IFNULL(va.valoratedByMe, 0) > 0 AS valoratedByMe,
-          IFNULL(re.reservedByMe, 0) > 0 AS reservedByMe
-        FROM experiences e
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              AVG(value) AS rating
-          FROM valorations
-          GROUP BY experienceId
-          ) v ON e.id = v.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              SUM(numberOfReserve) AS availablePlaces
-          FROM reservations
-          GROUP BY experienceId
-          ) r ON e.id = r.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              COUNT(*) AS reservedByMe
-          FROM reservations
-          WHERE userId = ?
-          GROUP BY experienceId
-          ) re ON e.id = re.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              COUNT(*) AS valoratedByMe
-          FROM valorations
-          WHERE userId = ?
-          GROUP BY experienceId
-          ) va ON e.id = va.experienceId
-        WHERE e.title LIKE ? OR e.description LIKE ?
-        ORDER BY e.${orderBy} ${orderDirection};
-        `,
-        [userId, userId, `%${search}%`, `%${search}%`]
-      );
+      query =
+        queryBaseinitial +
+        queryIfUserIdFirst +
+        queryBaseB +
+        queryIfUserIdEnd +
+        searchCondition +
+        orderClause;
+      values = [userId, userId, `%${search}%`, `%${search}%`];
     } else {
-      [experiences] = await pool.query(
-        `
-          SELECT
-          e.id,
-          e.title,
-          e.location,
-          e.description,
-          e.image,
-          e.date,
-          e.price,
-          e.active,
-          IFNULL(v.rating, 0) AS rating,
-          IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
-          ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed
-        FROM experiences e
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              AVG(value) AS rating
-          FROM valorations
-          GROUP BY experienceId
-          ) v ON e.id = v.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              SUM(numberOfReserve) AS availablePlaces
-          FROM reservations
-          GROUP BY experienceId
-          ) r ON e.id = r.experienceId
-        WHERE e.title LIKE ? OR e.description LIKE ?
-        ORDER BY e.${orderBy} ${orderDirection};
-        `,
-        [`%${search}%`, `%${search}%`]
-      );
+      query = queryBaseinitial + queryBaseB + searchCondition + orderClause;
+      values = [`%${search}%`, `%${search}%`];
     }
   } else {
     if (userId) {
-      [experiences] = await pool.query(
-        `
-        SELECT
-          e.id,
-          e.title,
-          e.location,
-          e.description,
-          e.image,
-          e.date,
-          e.price,
-          e.active,
-          IFNULL(v.rating, 0) AS rating,
-          IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
-          ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed,
-          IFNULL(va.valoratedByMe, 0) > 0 AS valoratedByMe,
-          IFNULL(re.reservedByMe, 0) > 0 AS reservedByMe
-        FROM experiences e
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              AVG(value) AS rating
-          FROM valorations
-          GROUP BY experienceId
-          ) v ON e.id = v.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              SUM(numberOfReserve) AS availablePlaces
-          FROM reservations
-          GROUP BY experienceId
-          ) r ON e.id = r.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              COUNT(*) AS reservedByMe
-          FROM reservations
-          WHERE userId = ?
-          GROUP BY experienceId
-          ) re ON e.id = re.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              COUNT(*) AS valoratedByMe
-          FROM valorations
-          WHERE userId = ?
-          GROUP BY experienceId
-          ) va ON e.id = va.experienceId
-        ORDER BY e.${orderBy} ${orderDirection};
-        `,
-        [userId, userId]
-      );
+      query =
+        queryBaseinitial +
+        queryIfUserIdFirst +
+        queryBaseB +
+        queryIfUserIdEnd +
+        orderClause;
+      values = [userId, userId];
     } else {
-      [experiences] = await pool.query(
-        `
-        SELECT
-          e.id,
-          e.title,
-          e.location,
-          e.description,
-          e.image,
-          e.date,
-          e.price,
-          e.active,
-          IFNULL(v.rating, 0) AS rating,
-          IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
-          ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed
-        FROM experiences e
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              AVG(value) AS rating
-          FROM valorations
-          GROUP BY experienceId
-          ) v ON e.id = v.experienceId
-        LEFT JOIN (
-          SELECT
-              experienceId,
-              SUM(numberOfReserve) AS availablePlaces
-          FROM reservations
-          GROUP BY experienceId
-          ) r ON e.id = r.experienceId
-        ORDER BY e.${orderBy} ${orderDirection}; 
-      `
-      );
+      query = queryBaseinitial + queryBaseB + searchCondition + orderClause;
     }
   }
+
+  const [experiences] = await pool.query(query, values);
   return experiences;
 };
 

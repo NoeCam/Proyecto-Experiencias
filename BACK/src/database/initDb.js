@@ -66,58 +66,58 @@ async function createTables() {
         FOREIGN KEY (userId) REFERENCES users(id)
       )
       `);
-      await pool.query(`
-        CREATE TABLE IF NOT EXISTS reservations (
-         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-         numberOfReserve INT,
-         state BOOLEAN DEFAULT FALSE,
-         userId INT NOT NULL,
-         experienceId INT NOT NULL,
-         FOREIGN KEY (userId) REFERENCES users(id),
-         FOREIGN KEY (experienceId) REFERENCES experiences(id)
-       )
-         `);
- 
-     await pool.query(`
-       CREATE TABLE IF NOT EXISTS valorations (
-         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-         value TINYINT UNSIGNED NOT NULL,
-         userId INT NOT NULL,
-         experienceId INT NOT NULL,
-         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-         FOREIGN KEY (userId) REFERENCES users(id),
-         FOREIGN KEY (experienceId) REFERENCES experiences(id)
-       )
-       `);
- 
-     await pool.query(`
-       INSERT INTO users(email, password, username, firstName, lastName, active, role)
-       VALUES (
-         "${ADMIN_EMAIL}",
-         "${ADMIN_PASSWORD}",
-         "${ADMIN_FIRST_NAME}_${ADMIN_LAST_NAME}",
-         "${ADMIN_FIRST_NAME}",
-         "${ADMIN_LAST_NAME}",
-         true,
-         "admin");
-       `);
-   } catch (error) {
-     throw new Error("Error al crear las tablas", { cause: error });
-   }
- }
- 
- async function initDB() {
-   try {
-     await createDB();
-     console.log("Base de datos creada");
-     await createTables();
-     console.log("Tablas creadas");
- 
-     process.exit(0);
-   } catch (error) {
-     console.error(error);
-     process.exit(1);
-   }
- }
- 
- initDB();
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS reservations (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        quantityPerPerson INT,
+        state BOOLEAN DEFAULT FALSE,
+        userId INT NOT NULL,
+        experienceId INT NOT NULL,
+        FOREIGN KEY (userId) REFERENCES users(id),
+        FOREIGN KEY (experienceId) REFERENCES experiences(id)
+      )
+      `);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS valorations (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        value TINYINT UNSIGNED NOT NULL,
+        userId INT NOT NULL,
+        experienceId INT NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (userId) REFERENCES users(id),
+        FOREIGN KEY (experienceId) REFERENCES experiences(id)
+      )
+      `);
+
+    await pool.query(`
+      INSERT INTO users(email, password, username, firstName, lastName, active, role)
+      VALUES (
+        "${ADMIN_EMAIL}",
+        "${ADMIN_PASSWORD}",
+        "${ADMIN_FIRST_NAME}_${ADMIN_LAST_NAME}",
+        "${ADMIN_FIRST_NAME}",
+        "${ADMIN_LAST_NAME}",
+        true,
+        "admin");
+      `);
+  } catch (error) {
+    throw new Error("Error al crear las tablas", { cause: error });
+  }
+}
+
+async function initDB() {
+  try {
+    await createDB();
+    console.log("Base de datos creada");
+    await createTables();
+    console.log("Tablas creadas");
+
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+initDB();
