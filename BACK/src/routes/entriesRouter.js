@@ -3,7 +3,6 @@ import express from "express";
 // Importar funciones controladoras intermedias
 import {
   authUserController,
-  experienceActivationController,
   getUserController,
 } from "../middleware/index.js";
 
@@ -32,7 +31,6 @@ router.get("/experiencias", getUserController, experiencesListController);
 router.put(
   "/experiencias/:experienceId/experienceState",
   authUserController,
-  experienceActivationController,
   experienceConfirmationController
 );
 
