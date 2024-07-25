@@ -12,7 +12,6 @@ const updateActivationService = async (experienceId, active) => {
       [active, experienceId]
     );
     //const params = [active, experienceId];
-
     //const [result] = await db.execute(query, params);
     return true;
   } catch (error) {
