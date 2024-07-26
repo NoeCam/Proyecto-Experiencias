@@ -1,15 +1,12 @@
 import insertExperienceModel from "../../models/entries/insertExperienceModel.js";
-import verifyAdmin from "../../middleware/verifyAdminController.js";
 import { savePhotoUtils } from "../../utils/photoUtils.js";
 
 import experienciaSchema from "../../schemas/entries/experienceSchema.js";
 import imgSchema from "../../schemas/imgSchema.js"; // No sabemos si se usa, quizás deberíamos borrarlo.
 
 
-
 // Función controladora final que agrega una nueva entrada.
 const adminEntryController = async (req, res, next) => {
-  // let {image} = req.files.image;
   try {
     const {
       title,
@@ -22,15 +19,6 @@ const adminEntryController = async (req, res, next) => {
     } = req.body;
 
     const userId = req.user?.id;
-
-    // Verificar que el usuario sea admin
-    const isAdmin = await verifyAdmin(userId);
-    if (!isAdmin) {
-      return res.status(403).send({
-        status: "error",
-        message: "You do not have permissions to perform this action",
-      });
-    }
 
     let image = null;
     if (req.files) {
