@@ -9,10 +9,10 @@ import {
 // Importar funciones controladoras finales desde el índice de entradas
 import {
   adminEntryController,
-  experienceConfirmationController,
+  experienceAcivtionConfirmationController,
   experiencesListController,
   getExperienceController,
-  handleReservationController,
+  handleCancelledReservationController,
   editExperienceController,
   duplicateExperienceController,
   getReservedExperiencesById,
@@ -31,13 +31,14 @@ router.get("/experiencias", getUserController, experiencesListController);
 router.put(
   "/experiencias/:experienceId/experienceState",
   authUserController,
-  experienceConfirmationController
+  experienceAcivtionConfirmationController
 );
 
 // Endpoint para reservar y cancelar la reserva de una experiencia
 router.put(
   "/experiencias/:experienceId/reservation",
-  handleReservationController
+  authUserController,
+  handleCancelledReservationController
 );
 
 // Endpoint para listar las experiencias reservadas

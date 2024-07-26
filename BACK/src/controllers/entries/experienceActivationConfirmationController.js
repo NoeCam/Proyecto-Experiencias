@@ -29,7 +29,6 @@ const experienceConfirmationController = async (req, res, next) => {
     else if (active!=undefined) {
       const userId = req.user?.id;
       const isAdmin = await verifyAdmin(userId);
-      
       if (!isAdmin) {
         return res.status(403).send({
           status: "error",
