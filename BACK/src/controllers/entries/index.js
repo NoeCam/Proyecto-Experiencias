@@ -17,5 +17,5 @@ export {
   editExperienceController,
   duplicateExperienceController,
   getReservedExperiencesById,
-  voteExperienceController
+  voteExperienceController,
 };

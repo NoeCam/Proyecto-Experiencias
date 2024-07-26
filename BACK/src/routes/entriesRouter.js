@@ -4,6 +4,7 @@ import express from "express";
 import {
   authUserController,
   getUserController,
+  verifyAdmin
 } from "../middleware/index.js";
 
 // Importar funciones controladoras finales desde el índice de entradas
@@ -22,7 +23,7 @@ import {
 const router = express.Router();
 
 // Endpoint para la creación de experiencia por parte de un administrador
-router.post("/experiencias", authUserController, adminEntryController);
+router.post("/experiencias", authUserController, verifyAdmin, adminEntryController);
 
 // Obtención de la lista de experiencias
 router.get("/experiencias", getUserController, experiencesListController);
