@@ -40,7 +40,7 @@ const selectSearchExperiencesService = async (
       GROUP BY experienceId
     ) v ON e.id = v.experienceId
     LEFT JOIN (
-      SELECT experienceId, SUM(numberOfReserve) AS availablePlaces
+      SELECT experienceId, SUM(quantityPerPerson) AS availablePlaces
       FROM reservations
       GROUP BY experienceId
     ) r ON e.id = r.experienceId`;
@@ -91,6 +91,7 @@ const selectSearchExperiencesService = async (
         queryIfUserIdFirst +
         queryBaseB +
         queryIfUserIdEnd +
+        searchCondition +
         orderClause;
       values = [userId, userId];
     } else {
@@ -99,6 +100,7 @@ const selectSearchExperiencesService = async (
   }
 
   const [experiences] = await pool.query(query, values);
+
   return experiences;
 };
 

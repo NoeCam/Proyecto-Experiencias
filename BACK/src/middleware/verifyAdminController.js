@@ -1,7 +1,6 @@
 const verifyAdmin = async (req, res, next) => {
   try {
     const role = req.user.role;
-    console.log(role);
 
     if (role !== "admin") {
       return res.send({

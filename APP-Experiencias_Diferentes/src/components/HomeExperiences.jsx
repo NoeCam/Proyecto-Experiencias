@@ -10,11 +10,11 @@ const HomeExperiences = () => {
 
   const { userLogged } = useContext(AuthContext);
   const [experiences, setExperiences] = useState(null);
-  const [search, setSearch] = useState('');
-  const [order, setOrder] = useState('');
-  const [direction, setDirection] = useState('');
-  const [error, setError] = useState('');
-
+  const [search, setSearch] = useState("");
+  const [order, setOrder] = useState("");
+  const [direction, setDirection] = useState("");
+  const [error, setError] = useState("");
+  console.log("userLogged HomeExperience", userLogged);
   const fetchExperiences = async () => {
     try {
       const entries = await getExperiences(search, order, direction);
@@ -29,8 +29,8 @@ const HomeExperiences = () => {
   }, [search, order, direction]);
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    return new Date(dateString).toLocaleDateString('en-GB', options);
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-GB", options);
   };
 
   return (
@@ -38,7 +38,11 @@ const HomeExperiences = () => {
       <Header />
       <h1>Experiencias Diferentes</h1>
       <h2>See all different experiences</h2>
-      <ExperienceFilter setSearch={setSearch} setOrder={setOrder} setDirection={setDirection} />
+      <ExperienceFilter
+        setSearch={setSearch}
+        setOrder={setOrder}
+        setDirection={setDirection}
+      />
 
       {error && <p>{error}</p>}
 
@@ -58,14 +62,16 @@ const HomeExperiences = () => {
             />
             <p>Date: {formatDate(experience.date)}</p>
             <p>Price: {experience.price}</p>
-            <p>Active: {experience.active ? 'Yes' : 'No'}</p>
+            <p>Active: {experience.active ? "Yes" : "No"}</p>
             <p>Rating: {experience.rating}</p>
             <p>Available Places: {experience.availablePlaces}</p>
-            <p>Confirmed: {experience.confirmed ? 'Yes' : 'No'}</p>
+            <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p>
             {userLogged ? (
               <div>
-                <p>Valorated By Me: {experience.valoratedByMe ? 'Yes' : 'No'}</p>
-                <p>Reserved By Me: {experience.reservedByMe ? 'Yes' : 'No'}</p>
+                <p>
+                  Valorated By Me: {experience.valoratedByMe ? "Yes" : "No"}
+                </p>
+                <p>Reserved By Me: {experience.reservedByMe ? "Yes" : "No"}</p>
               </div>
             ) : (
               ""
