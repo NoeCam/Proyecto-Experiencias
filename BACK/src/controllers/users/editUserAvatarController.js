@@ -4,7 +4,6 @@ import updateUserAvatarService from "../../services/users/updateUserAvatarServic
 
 const editUserAvatarController = async (req, res, next) => {
   try {
-    //console.log(req.files.avatar);
     const user = await selectUserByIdModel(req.user.id);
 
     if (user.avatar) {
