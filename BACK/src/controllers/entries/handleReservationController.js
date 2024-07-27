@@ -21,7 +21,8 @@ const handleReservationController = async (req, res, next) => {
     const pool = await getPool();
 
     // Comprobar si la experiencia está activa y tiene plazas disponibles
-    const experienceQuery = "SELECT active, spots FROM experiences WHERE id = ?";
+    const experienceQuery =
+      "SELECT active, spots FROM experiences WHERE id = ?";
     const [experience] = await pool.query(experienceQuery, [id]);
 
     if (!experience || !experience.active) {
@@ -37,7 +38,8 @@ const handleReservationController = async (req, res, next) => {
     }
 
     // Comprobar si la reserva pertenece al usuario autenticado
-    const reservationQuery = "SELECT id FROM reservations WHERE id = ? AND user_id = ?";
+    const reservationQuery =
+      "SELECT id FROM reservations WHERE id = ? AND user_id = ?";
     const [reservation] = await pool.query(reservationQuery, [id, userId]);
 
     if (!reservation) {
@@ -54,7 +56,6 @@ const handleReservationController = async (req, res, next) => {
       status: "ok",
       message: "Reserva modificada",
     });
-
   } catch (error) {
     if (error) {
       return res.status(400).json({ error: error.message });
@@ -64,13 +65,6 @@ const handleReservationController = async (req, res, next) => {
 };
 
 export default handleReservationController;
-
-
-
-
-
-
-
 
 // import getPool from "../../database/getPool.js";
 // import handleReservationSchema from "../../schemas/entries/handleReservationSchema.js";
@@ -110,7 +104,3 @@ export default handleReservationController;
 // };
 
 // export default handleReservationController;
-
-
-
-

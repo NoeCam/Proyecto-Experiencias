@@ -1,10 +1,7 @@
 import express from "express";
 
 // Importar funciones controladoras intermedias
-import {
-  authUserController,
-  getUserController,
-} from "../middleware/index.js";
+import { authUserController, getUserController } from "../middleware/index.js";
 
 // Importar funciones controladoras finales desde el índice de entradas
 import {
@@ -17,6 +14,7 @@ import {
   duplicateExperienceController,
   getReservedExperiencesById,
   voteExperienceController,
+  makeReservationController,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -34,7 +32,14 @@ router.put(
   experienceConfirmationController
 );
 
-// Endpoint para reservar y cancelar la reserva de una experiencia
+// Endpoint para hacer una reserva de una experiencia
+router.post(
+  "/experiencias/:experienceId/reservation",
+  authUserController,
+  makeReservationController
+);
+
+// Endpoint para cancelar la reserva de una experiencia
 router.put(
   "/experiencias/:experienceId/reservation",
   handleReservationController
@@ -48,7 +53,11 @@ router.get(
 );
 
 // Endpoint para visualizar una experiencia específica
-router.get("/experiencias/:experienceId", getExperienceController);
+router.get(
+  "/experiencias/:experienceId",
+  authUserController,
+  getExperienceController
+);
 
 //Endpoint modificar experiencia (admin)
 router.put(
