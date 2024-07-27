@@ -32,7 +32,6 @@ router.get("/experiencias", getUserController, experiencesListController);
 router.put(
   "/experiencias/:experienceId/experienceState",
   authUserController,
-  verifyAdmin,
   experienceAcivtionConfirmationController
 );
 
@@ -57,7 +56,6 @@ router.get("/experiencias/:experienceId", getExperienceController);
 router.put(
   "/experiencias/:experienceId/edit",
   authUserController,
-  verifyAdmin,
   editExperienceController
 );
 
@@ -65,7 +63,6 @@ router.put(
 router.post(
   "/experiencias/:id/duplicate",
   authUserController,
-  verifyAdmin,
   duplicateExperienceController
 );
 

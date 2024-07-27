@@ -14,13 +14,13 @@ const duplicateExperienceController = async (req, res, next) => {
     await validateSchemaUtil(duplicateExperienceSchema, req.params);
 
     // Verificar que el usuario sea admin
-    // const isAdmin = await verifyAdmin(id);
-    // if (!isAdmin) {
-    //   return res.status(403).send({
-    //     status: "error",
-    //     message: "You do not have permission to perform this action",
-    //   });
-    // }
+    const isAdmin = await verifyAdmin(id);
+    if (!isAdmin) {
+      return res.status(403).send({
+        status: "error",
+        message: "You do not have permission to perform this action",
+      });
+    }
 
     // Duplica la experiencia original.
     const newExperienceId = await duplicateExperienceModel(id, req.user.id);
