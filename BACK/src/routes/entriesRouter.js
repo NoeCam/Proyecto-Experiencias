@@ -1,15 +1,19 @@
 import express from "express";
 
 // Importar funciones controladoras intermedias
-import { authUserController, getUserController } from "../middleware/index.js";
+import {
+  authUserController,
+  getUserController,
+  verifyAdmin,
+} from "../middleware/index.js";
 
 // Importar funciones controladoras finales desde el índice de entradas
 import {
   adminEntryController,
-  experienceConfirmationController,
+  experienceAcivtionConfirmationController,
   experiencesListController,
   getExperienceController,
-  handleReservationController,
+  handleCancelledReservationController,
   editExperienceController,
   duplicateExperienceController,
   getReservedExperiencesById,
@@ -20,7 +24,12 @@ import {
 const router = express.Router();
 
 // Endpoint para la creación de experiencia por parte de un administrador
-router.post("/experiencias", authUserController, adminEntryController);
+router.post(
+  "/experiencias",
+  authUserController,
+  verifyAdmin,
+  adminEntryController
+);
 
 // Obtención de la lista de experiencias
 router.get("/experiencias", getUserController, experiencesListController);
@@ -29,7 +38,8 @@ router.get("/experiencias", getUserController, experiencesListController);
 router.put(
   "/experiencias/:experienceId/experienceState",
   authUserController,
-  experienceConfirmationController
+  verifyAdmin,
+  experienceAcivtionConfirmationController
 );
 
 // Endpoint para hacer una reserva de una experiencia
@@ -42,7 +52,8 @@ router.post(
 // Endpoint para cancelar la reserva de una experiencia
 router.put(
   "/experiencias/:experienceId/reservation",
-  handleReservationController
+  authUserController,
+  handleCancelledReservationController
 );
 
 // Endpoint para listar las experiencias reservadas
@@ -63,6 +74,7 @@ router.get(
 router.put(
   "/experiencias/:experienceId/edit",
   authUserController,
+  verifyAdmin,
   editExperienceController
 );
 
@@ -70,6 +82,7 @@ router.put(
 router.post(
   "/experiencias/:id/duplicate",
   authUserController,
+  verifyAdmin,
   duplicateExperienceController
 );
 

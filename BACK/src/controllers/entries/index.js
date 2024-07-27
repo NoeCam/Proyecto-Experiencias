@@ -1,8 +1,8 @@
 import adminEntryController from "./adminEntryController.js";
-import experienceConfirmationController from "./experienceConfirmationController.js";
+import experienceAcivtionConfirmationController from "./experienceActivationConfirmationController.js";
 import experiencesListController from "./experiencesListController.js";
 import getExperienceController from "./getExperienceController.js";
-import handleReservationController from "./handleReservationController.js";
+import handleCancelledReservationController from "./handleCancelledReservationController.js";
 import editExperienceController from "./editExperienceController.js";
 import duplicateExperienceController from "./duplicateExperienceController.js";
 import getReservedExperiencesById from "./getReservedExperiencesById.js";
@@ -11,10 +11,10 @@ import makeReservationController from "./makeReservationController.js";
 
 export {
   adminEntryController,
-  experienceConfirmationController,
+  experienceAcivtionConfirmationController,
   experiencesListController,
   getExperienceController,
-  handleReservationController,
+  handleCancelledReservationController,
   editExperienceController,
   duplicateExperienceController,
   getReservedExperiencesById,
