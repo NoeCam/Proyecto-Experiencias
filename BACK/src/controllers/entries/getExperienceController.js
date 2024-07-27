@@ -1,18 +1,9 @@
-import selectSearchExperiencesService from "../../services/entries/selectSearchExperiencesService.js";
+import visualizeExperienceModel from "../../models/entries/visualizeExperienceModel.js";
 
 const getExperienceController = async (req, res, next) => {
   try {
     const experienceId = req.params.experienceId;
-    const experiences = await selectSearchExperiencesService(
-      null,
-      null,
-      null,
-      req.user.id
-    );
-
-    const experience = experiences.find(
-      (exp) => exp.id === parseInt(experienceId)
-    );
+    const experience = await visualizeExperienceModel(experienceId);
 
     res.send({
       status: "ok",

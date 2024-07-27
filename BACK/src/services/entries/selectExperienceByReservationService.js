@@ -17,7 +17,7 @@ const selectExperienceByReservationService = async (userId) => {
       e.date,
       e.price,
       e.active,
-      r.quantityPerPerson,
+      r.numberOfReserve,
       r.userId,
       r.experienceId
     FROM reservations r
