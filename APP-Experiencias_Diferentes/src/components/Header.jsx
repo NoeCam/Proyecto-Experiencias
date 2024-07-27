@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -21,13 +21,19 @@ const Header = () => {
           ""
         )}
         {userLogged ? (
-          <div>
+          <nav>
             <Link to="/">Home</Link>
             <>&nbsp;|&nbsp;</>
             <Link to="/users/profile">{userLogged.username}</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/experiencias/create">Create a new experience</Link>
-          </div>
+            {userLogged?.role && userLogged.role === "admin" ? (
+              <>
+                &nbsp;|&nbsp;
+                <Link to="/experiencias/create">Create a new experience</Link>
+              </>
+            ) : (
+              ""
+            )}
+          </nav>
         ) : (
           ""
         )}
