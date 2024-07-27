@@ -38,9 +38,13 @@ const UserValidation = () => {
             <h3>There was an error in the validation.</h3>
             <p>{response.message}</p>
             <div>
-              <Link to={"/users/login"}>Login</Link>
+              <Link to={"/users/login"}>
+                <p>Login</p>
+              </Link>
               <>&nbsp;|&nbsp;</>
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"}>
+                <p>Home</p>
+              </Link>
             </div>
           </>
         )}
