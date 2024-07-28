@@ -1,8 +1,106 @@
-# React + Vite
+# Experiencias Diferentes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una plataforma donde los usuarios pueden explorar y reservar diversas experiencias, como tours, paseos en barco, y actividades al aire libre en distintas ciudades de España.
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Experiencias Inolvidables es una aplicación web que permite a los usuarios descubrir, reservar y gestionar diversas experiencias. Ya sea un walking tour por Ferrol, un paseo en kayak desde Hoyos del Espino, o un city tour en bicicleta por Madrid, nuestra plataforma ofrece una amplia gama de actividades para todos los gustos.
+
+### Funcionalidades Principales
+
+- **Usuarios**:
+  - Registro y gestión de perfil.
+  - Visualización y edición de datos de perfil.
+  - Cambio de contraseña.
+  - Subir o editar imagen de perfil.
+  - Cambio de rol a administrador.
+  - Visualización y reserva de experiencias.
+  - Cancelación de reservas.
+  - Gestión de reservas (múltiples plazas o varias reservas).
+
+- **Administradores**:
+  - Todas las funcionalidades de un usuario.
+  - Creación de nuevas experiencias.
+  - Edición y duplicación de experiencias existentes.
+  - Cambio del estado de una experiencia (activa/desactivada).
+  - Reserva de experiencias.
+
+## Requisitos Previos
+
+Antes de iniciar la aplicación, asegúrate de tener instalados los siguientes programas:
+
+- Node.js v14+
+- npm (o yarn)
+
+## Instalación
+
+Sigue estos pasos para clonar el repositorio e instalar las dependencias necesarias:
+
+
+git clone https://github.com/Miguel-Iglesias/Proyecto-Experiencias.git
+cd Proyecto-Experiencias
+npm install
+
+## Arrancar el Frontend
+Para arrancar el frontend de la aplicación, primero accede al directorio del frontend y luego utiliza el siguiente comando:
+cd APP-Experiencias_Diferentes/
+npm run dev
+
+Este comando levantará la aplicación en modo de desarrollo. Abre http://localhost:3000 para verla en tu navegador.
+
+## Listado de Rutas
+
+A continuación se presenta un listado de las rutas disponibles en la aplicación:
+
+/users/register: Registro de nuevos usuarios.
+/users/validate/:registrationCode: Validación de usuarios registrados.
+/users/login: Página de inicio de sesión.
+/users/recover-password: Recuperación de contraseña.
+/users/modify-password: Modificación de contraseña.
+/users/password: Establecer nueva contraseña.
+/users/profile: Página de perfil de usuario.
+/experiencias: Lista de todas las experiencias disponibles.
+/experiencias/:experienceId: Detalles de una experiencia en particular.
+/experiencias/:experienceId/experienceState: Estado de una experiencia.
+/experiencias/create: Creación de una nueva experiencia.
+/experiencias/edit/:experienceId: Edición de una experiencia existente.
+/: Página principal de la aplicación.
+*: Página de no encontrado (404).
+Variables de Entorno
+Asegúrate de configurar las siguientes variables de entorno en un archivo .env.local:
+
+
+
+
+VITE_API_URL=http://localhost:3020
+VITE_APP_URL=http://localhost:5173
+
+
+## Información del Proyecto
+
+Nombre: app-experiencias-diferentes
+
+
+
+## Contribuciones
+Si deseas contribuir al proyecto, por favor sigue estos pasos:
+
+Haz un fork del proyecto.
+Crea una nueva rama (git checkout -b feature/nueva-caracteristica).
+Realiza tus cambios y haz commit (git commit -m 'Añadir nueva característica').
+Sube tus cambios (git push origin feature/nueva-caracteristica).
+Abre un Pull Request.
+
+
+## Miembros del Proyecto
+
+Noelia Camelia
+Ana Perez
+Alberto
+Tomás VB
+Ricardo Hidalgo
+Miguel Iglesias
+
+Contacto
+
+Para contactar con los creadores del proyecto, puedes ponerte en contacto directamente desde sus cuentas de LinkedIn.
