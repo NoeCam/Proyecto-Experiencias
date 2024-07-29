@@ -1,17 +1,13 @@
-// Importamos los modelos.
 import selectUserByIdModel from "../../models/users/selectUserByIdModel.js";
 import updateUserProfileModel from "../../models/users/updateUserProfileModel.js";
-
-// Importamos los servicios.
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
-
-// Importamos el esquema.
 import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
+import bcrypt from "bcrypt";
 
 const editUserProfileController = async (req, res, next) => {
   try {
     if (!req.user?.id) {
-      return res.status(401).send({
+      return res.status(401).json({
         status: "error",
         message: "Unauthenticated user",
       });
@@ -24,24 +20,48 @@ const editUserProfileController = async (req, res, next) => {
     const user = await selectUserByIdModel(req.user.id);
 
     if (!user) {
-      return res.status(404).send({
+      return res.status(404).json({
         status: "error",
         message: "User not found",
       });
     }
 
-    // Actualizamos los datos del usuario.
-    const updatedUser = await updateUserProfileModel(req.user.id, req.body);
+    // Verificamos la contraseña actual si se proporciona.
+    if (req.body.password) {
+      const passwordMatch = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (!passwordMatch) {
+        return res.status(400).json({
+          status: "error",
+          message: "Current password is incorrect",
+        });
+      }
+    }
 
-    res.send({
+    // Si se proporciona una nueva contraseña, la ciframos y pasamos como password.
+    const updatedData = {
+      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.newPassword ? req.body.newPassword : undefined,
+    };
+
+    // Actualizamos los datos del usuario.
+    const updatedUser = await updateUserProfileModel(req.user.id, updatedData);
+
+    res.status(200).json({
       status: "ok",
-      message: "Updated user",
+      message: "Profile updated successfully",
       data: {
         user: updatedUser,
       },
     });
   } catch (err) {
-    next(err);
+    console.error("Error in editUserProfileController:", err);
+    next(err); // Pasar el error al middleware de manejo de errores
   }
 };
 
