@@ -1,12 +1,10 @@
-// Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../database/getPool.js";
+import bcrypt from "bcrypt";
 
-// Función que realiza una consulta a la base de datos para actualizar el perfil de un usuario.
 const updateUserProfileModel = async (userId, data) => {
-  const { username, firstname, lastname, email, role } = data;
+  const { username, firstname, lastname, email, role, password } = data;
   const pool = await getPool();
 
-  // Construimos dinámicamente la consulta SQL solo con los campos que se proporcionan.
   const setFragments = [];
   const values = [];
 
@@ -30,22 +28,32 @@ const updateUserProfileModel = async (userId, data) => {
     setFragments.push(`role = ?`);
     values.push(role);
   }
+  if (password !== undefined) {
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    setFragments.push(`password = ?`);
+    values.push(hashedPassword);
+  }
 
-  // Añadimos el userId al array de valores.
   values.push(userId);
 
-  // Unimos los fragmentos con comas para formar la parte SET de la consulta.
   const setClause = setFragments.join(", ");
 
-  // Definimos la consulta completa.
   const query = `
-        UPDATE users
-        SET ${setClause}
-        WHERE id = ?
-    `;
+    UPDATE users
+    SET ${setClause}
+    WHERE id = ?
+  `;
 
-  // Ejecutamos la consulta SQL utilizando 'pool.query' y pasamos la consulta y los valores.
   await pool.query(query, values);
+
+  // Devolver los datos actualizados del usuario
+  const [rows] = await pool.query(
+    `SELECT id, username, firstname, lastname, email, role FROM users WHERE id = ?`,
+    [userId]
+  );
+
+  return rows[0]; // Retorna el usuario actualizado
 };
 
 export default updateUserProfileModel;

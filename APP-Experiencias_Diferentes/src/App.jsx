@@ -6,12 +6,13 @@ import RecoverPassword from "./pages/RecoverPassword";
 import ModifyPassword from "./pages/ModifyPassword";
 import NewPassword from "./pages/NewPassword";
 import UserProfile from "./pages/UserProfile";
+import ProfileUpdate from "./pages/ProfileUpdate";
 import Experience from "./pages/Experience";
 import CreateExperience from "./pages/CreateExperience";
 import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
-import ExperienceList from './components/ExperienceList';
+import ExperienceList from "./components/ExperienceList";
 import "react-toastify/dist/ReactToastify.css";
 import PageNotFound from "./components/PageNotFoundComponent";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/users/modify-password" element={<ModifyPassword />} />
         <Route path="/users/password" element={<NewPassword />} />
         <Route path="/users/profile" element={<UserProfile />} />
+        <Route path="/users/edit-profile" element={<ProfileUpdate />} />
         <Route
           path="/experiencias/:experienceId"
           element={<ExperienceById />}

@@ -35,6 +35,10 @@ const ViewUserProfile = () => {
       <button type="submit" value="logout" onClick={handleSubmit}>
         Logout
       </button>
+      {/* Botón para ir a la página de edición del perfil */}
+      <button onClick={() => navigate("/users/edit-profile")}>
+        Edit Profile
+      </button>
     </>
   ) : (
     <Header />

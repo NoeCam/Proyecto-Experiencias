@@ -7,6 +7,8 @@ const editUserProfileSchema = Joi.object({
   firstname: Joi.string().required(),
   lastname: Joi.string().required(),
   email: Joi.string().email().required(),
+  password: Joi.string().min(6).optional(), // La contraseña actual puede ser opcional
+  newPassword: Joi.string().min(6).optional(), // La nueva contraseña también es opcional
 });
 
 export default editUserProfileSchema;

@@ -8,15 +8,20 @@ const authUserController = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
-      notAuthenticatedError();
+      throw notAuthenticatedError();
+    }
+
+    const token = authorization.split(" ")[1]; // Suponiendo el formato "Bearer <token>"
+    if (!token) {
+      throw notAuthenticatedError();
     }
 
     let tokenInfo;
 
     try {
-      tokenInfo = jwt.verify(authorization, process.env.SECRET);
+      tokenInfo = jwt.verify(token, process.env.SECRET);
     } catch (err) {
-      invalidCredentialsError();
+      throw invalidCredentialsError();
     }
 
     req.user = tokenInfo;
