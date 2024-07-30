@@ -11,7 +11,7 @@ const authUserController = async (req, res, next) => {
       throw notAuthenticatedError();
     }
 
-    const token = authorization.split(" ")[1]; // Suponiendo el formato "Bearer <token>"
+    const token = authorization; // El token se espera directamente en el encabezado `Authorization`
     if (!token) {
       throw notAuthenticatedError();
     }

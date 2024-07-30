@@ -5,7 +5,7 @@ const getDataUserLoggedService = async (token) => {
     method: "GET", // Asegúrate de especificar el método HTTP
     headers: {
       "Content-Type": "application/json", // Especifica el tipo de contenido
-      Authorization: `Bearer ${token}`, // Incluye el tipo de autorización
+      Authorization: token,
     },
   });
 

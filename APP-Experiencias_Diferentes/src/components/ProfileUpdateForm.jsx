@@ -9,16 +9,18 @@ const ProfileUpdateForm = () => {
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Cargar datos del perfil cuando el componente se monta
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        setLoading(true);
         const response = await fetch("/users/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Añadir el token aquí
+            Authorization: localStorage.getItem("token"), // Añadir el token aquí
           },
         });
         if (response.ok) {
@@ -28,12 +30,15 @@ const ProfileUpdateForm = () => {
           setFirstname(userData.firstname);
           setLastname(userData.lastname);
         } else {
-          console.error("Failed to load user data");
-          toast.error("Failed to load user data");
+          const errorData = await response.json();
+          toast.error(
+            `Failed to load user data: ${errorData.message || "Unknown error"}`
+          );
         }
       } catch (error) {
-        console.error("Error loading user data", error);
         toast.error("Error loading user data");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -44,12 +49,26 @@ const ProfileUpdateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validar que las contraseñas cumplen con los requisitos
+    if (
+      newPassword &&
+      (newPassword.length < 8 ||
+        !/[A-Z]/.test(newPassword) ||
+        !/[a-z]/.test(newPassword) ||
+        !/\d/.test(newPassword) ||
+        !/[¡!$%^&*()_+|~=`{}:";'<>¿?,.]/.test(newPassword))
+    ) {
+      toast.error("New password does not meet the requirements.");
+      return;
+    }
+
     try {
+      setLoading(true);
       const response = await fetch("/users/profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Añadir el token aquí
+          Authorization: localStorage.getItem("token"), // Añadir el token aquí
         },
         body: JSON.stringify({
           email,
@@ -63,6 +82,7 @@ const ProfileUpdateForm = () => {
 
       if (response.ok) {
         toast.success("Profile updated successfully");
+        // Opcional: Redirigir al usuario o limpiar el formulario
       } else {
         const textResponse = await response.text();
         let errorData = {};
@@ -71,12 +91,10 @@ const ProfileUpdateForm = () => {
           try {
             errorData = JSON.parse(textResponse); // Intentar analizar JSON
           } catch (jsonError) {
-            console.error("Failed to parse error response as JSON", jsonError);
             toast.error("Failed to parse error response");
             return; // Salir si no se puede analizar el JSON
           }
         } else {
-          console.error("Received empty error response");
           toast.error("Received empty error response");
           return;
         }
@@ -86,8 +104,9 @@ const ProfileUpdateForm = () => {
         );
       }
     } catch (error) {
-      console.error("Error updating profile", error);
       toast.error("Error updating profile");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -147,7 +166,9 @@ const ProfileUpdateForm = () => {
           onChange={(e) => setNewPassword(e.target.value)}
         />
       </label>
-      <button type="submit">Update Profile</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Updating..." : "Update Profile"}
+      </button>
       <ToastContainer />
     </form>
   );
