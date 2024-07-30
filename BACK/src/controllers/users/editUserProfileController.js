@@ -40,14 +40,17 @@ const editUserProfileController = async (req, res, next) => {
       }
     }
 
-    // Si se proporciona una nueva contraseña, la ciframos y pasamos como password.
+    // Si se proporciona una nueva contraseña, la ciframos.
     const updatedData = {
       username: req.body.username,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: req.body.newPassword ? req.body.newPassword : undefined,
     };
+
+    if (req.body.newPassword) {
+      updatedData.password = await bcrypt.hash(req.body.newPassword, 10);
+    }
 
     // Actualizamos los datos del usuario.
     const updatedUser = await updateUserProfileModel(req.user.id, updatedData);
@@ -61,6 +64,10 @@ const editUserProfileController = async (req, res, next) => {
     });
   } catch (err) {
     console.error("Error in editUserProfileController:", err);
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+    });
     next(err); // Pasar el error al middleware de manejo de errores
   }
 };
