@@ -46,12 +46,13 @@ Para arrancar el frontend de la aplicación, primero accede al directorio del fr
 cd APP-Experiencias_Diferentes/
 npm run dev
 
-Este comando levantará la aplicación en modo de desarrollo. Abre http://localhost:3000 para verla en tu navegador.
+Este comando levantará la aplicación en modo de desarrollo. Escribe la ruta con el puerto de .env.local: http://localhost:{PORT_FRONT} para verla en tu navegador.
 
 ## Listado de Rutas
 
 A continuación se presenta un listado de las rutas disponibles en la aplicación:
 
+/: Página principal de la aplicación.
 /users/register: Registro de nuevos usuarios.
 /users/validate/:registrationCode: Validación de usuarios registrados.
 /users/login: Página de inicio de sesión.
@@ -64,12 +65,9 @@ A continuación se presenta un listado de las rutas disponibles en la aplicació
 /experiencias/:experienceId/experienceState: Estado de una experiencia.
 /experiencias/create: Creación de una nueva experiencia.
 /experiencias/edit/:experienceId: Edición de una experiencia existente.
-/: Página principal de la aplicación.
 *: Página de no encontrado (404).
 Variables de Entorno
 Asegúrate de configurar las siguientes variables de entorno en un archivo .env.local:
-
-
 
 
 VITE_API_URL=http://localhost:3020
@@ -81,8 +79,8 @@ VITE_APP_URL=http://localhost:5173
 Nombre: app-experiencias-diferentes
 
 
-
 ## Contribuciones
+
 Si deseas contribuir al proyecto, por favor sigue estos pasos:
 
 Haz un fork del proyecto.
@@ -103,4 +101,11 @@ Miguel Iglesias
 
 Contacto
 
-Para contactar con los creadores del proyecto, puedes ponerte en contacto directamente desde sus cuentas de LinkedIn.
+Para contactar con los creadores del proyecto, puedes ponerte en contacto directamente desde sus cuentas de LinkedIn:
+
+- https://www.linkedin.com/in/noelia-camelia-acosta
+- https://www.linkedin.com/in/ricardo-hidalgo-jiménez
+- https://www.linkedin.com/in/migueliglesiascami%C3%B1a/
+- https://www.linkedin.com/in/tomás-vázquez-blanco/
+- https://www.linkedin.com/in/alberto-jiménez-gonzález
+- https://www.linkedin.com/in/ana-pérez-santiago
