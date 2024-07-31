@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
-import Header from "./Header";
 
 const ViewUserProfile = () => {
   const { userLogged, logout } = useContext(AuthContext);
@@ -17,13 +16,13 @@ const ViewUserProfile = () => {
 
   return userLogged ? (
     <>
-      <Header />
       <h3>View your User Profile</h3>
       <img
+        className="w-20"
         src={
           userLogged.avatar
             ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
-            : `${import.meta.env.VITE_API_URL}/uploads/userDefault.png`
+            : "/userDefault.png"
         }
         alt="User Avatar"
       />
@@ -32,11 +31,19 @@ const ViewUserProfile = () => {
       <p>Last name: {userLogged.lastname}</p>
       <p>email: {userLogged.email}</p>
       <p>role: {userLogged.role}</p>
-      <button type="submit" value="logout" onClick={handleSubmit}>
+      <button
+        className="blue-Button"
+        type="submit"
+        value="logout"
+        onClick={handleSubmit}
+      >
         Logout
       </button>
       {/* Botón para ir a la página de edición del perfil */}
-      <button onClick={() => navigate("/users/edit-profile")}>
+      <button
+        className="blue-Button"
+        onClick={() => navigate("/users/edit-profile")}
+      >
         Edit Profile
       </button>
     </>

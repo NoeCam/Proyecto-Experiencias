@@ -1,4 +1,33 @@
-/* CSS Base  */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .blue-Button {
+    @apply bg-cyan-300 rounded-3xl m-1 px-4 py-1 text-white font-medium justify-center;
+  }
+
+  .yellow-Button {
+    @apply bg-yellow-300 rounded-3xl m-1 px-4 py-1 font-medium justify-center block text-center;
+  }
+
+  .icon-NavBar {
+    @apply w-5 inline md:hidden shadow-lg;
+  }
+
+  .text-NavBar {
+    @apply hidden md:block;
+  }
+
+  .h3 {
+    @apply text-xl font-medium text-white text-center;
+  }
+
+  .h4 {
+    @apply text-lg font-bold text-center;
+  }
+
+  p {
+    @apply text-center;
+  }
+}

@@ -30,13 +30,11 @@ const loginUserController = async (req, res, next) => {
 
     // Variable que almacenará un valor booleano indicando si la contraseña es correcto o no.
     let validPass;
-
     // Si existe un usuario comprobamos si la contraseña coincide.
     if (user) {
       // Comprobamos si la contraseña es válida.
       validPass = await bcrypt.compare(password, user.password);
     }
-
     // Si las contraseña no coincide o no existe un usuario con el email proporcionado
     // lanzamos un error.
     if (!user || !validPass) {

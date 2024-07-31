@@ -67,11 +67,12 @@ const ProfileUpdateForm = () => {
     try {
       setLoading(true);
       const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+
       const response = await fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"), // Añadir el token aquí
+          Authorization: token, // Añadir el token aquí
         },
         body: JSON.stringify({
           email,

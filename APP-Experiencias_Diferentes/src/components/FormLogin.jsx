@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider.jsx";
 import loginService from "../services/loginService.js";
-import Header from "./Header.jsx";
 
 function FormLogin() {
   const [email, setEmail] = useState("");
@@ -52,9 +51,7 @@ function FormLogin() {
 
   return (
     <>
-      <Header />
-      <h1>Experiencias Diferentes</h1>
-      <h2>Login</h2>
+      <h3 className="h3">Login</h3>
       <form onSubmit={handleFormSubmit}>
         <div>
           <label htmlFor="email">Email</label>
@@ -80,11 +77,13 @@ function FormLogin() {
         </div>
 
         <div>
-          <input type="submit" value="Log in" />
+          <input className="blue-Button" type="submit" value="Log in" />
         </div>
 
         <div>
-          <Link to="/users/recover-password">Recover Password</Link>
+          <Link className="blue-Button" to="/users/recover-password">
+            Recover Password
+          </Link>
         </div>
 
         <div>{error && <p>{error}</p>}</div>

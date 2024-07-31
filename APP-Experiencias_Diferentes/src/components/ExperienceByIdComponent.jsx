@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 
-import Header from "./Header";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import makeReservationService from "../services/makeReserevationService";
 import getExperienceService from "../services/getExperienceService";
@@ -111,10 +110,7 @@ const GetExperienceById = () => {
 
   return (
     <>
-      <Header />
       <h3>Your selection: {experience.title}</h3>
-      <p>Location: {experience.location}</p>
-      <p>Description: {experience.description}</p>
       <img
         src={
           experience.image
@@ -123,6 +119,8 @@ const GetExperienceById = () => {
         }
         alt={experience.title}
       />
+      <p>Location: {experience.location}</p>
+      <p>Description: {experience.description}</p>
       <p>Date: {experience.date}</p>
       <p>Price: {experience.price}</p>
       <p>Active: {experience.active}</p>
@@ -163,6 +161,7 @@ const GetExperienceById = () => {
             </button>
           </div>
           <input
+            className="blue-Button"
             type="submit"
             value="Reserve"
             onClick={handleClick}

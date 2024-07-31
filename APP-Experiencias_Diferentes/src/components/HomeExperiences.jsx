@@ -14,7 +14,7 @@ const HomeExperiences = () => {
   const [order, setOrder] = useState("");
   const [direction, setDirection] = useState("");
   const [error, setError] = useState("");
-  console.log("userLogged HomeExperience", userLogged);
+
   const fetchExperiences = async () => {
     try {
       const entries = await getExperiences(search, order, direction);
@@ -35,38 +35,51 @@ const HomeExperiences = () => {
 
   return (
     <>
-      <Header />
-      <h1>Experiencias Diferentes</h1>
-      <h2>See all different experiences</h2>
       <ExperienceFilter
         setSearch={setSearch}
         setOrder={setOrder}
         setDirection={setDirection}
       />
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
+        E<span className="text-yellow-500">x</span>periencias
+      </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider">
+        {" "}
+        <span className="text-yellow-500">D</span>iferentes
+      </h2>
 
-      {error && <p>{error}</p>}
+      <div className=" bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
+        {error && <p>{error}</p>}
 
-      {experiences &&
-        experiences.map((experience) => (
-          <div key={experience.id}>
-            <h3>Title: {experience.title}</h3>
-            <p>Location: {experience.location}</p>
-            <p>Description: {experience.description}</p>
-            <img
-              src={
-                experience.image
-                  ? `${VITE_API_URL}/uploads/${experience.image}`
-                  : "The experience does not contain images"
-              }
-              alt={experience.title}
-            />
-            <p>Date: {formatDate(experience.date)}</p>
-            <p>Price: {experience.price}</p>
-            <p>Active: {experience.active ? "Yes" : "No"}</p>
+        {experiences &&
+          experiences.map((experience) => (
+            <div
+              key={experience.id}
+              className="flex grid-row bg-cyan-400 bg-opacity-50 m-2 p-5 rounded-3xl"
+            >
+              <div className="w-1/2">
+                {" "}
+                <img
+                  className="rounded-3xl h-full object-cover"
+                  src={
+                    experience.image
+                      ? `${VITE_API_URL}/uploads/${experience.image}`
+                      : "The experience does not contain images"
+                  }
+                  alt={experience.title}
+                />
+              </div>
+              <div className="ml-5 w-1/2">
+                <h4 className="h4">{experience.title}</h4>
+                <p>{experience.location}</p>
+                {/* <p>Description: {experience.description}</p>
+            <p>Date: {formatDate(experience.date)}</p> */}
+                <p>Price: {experience.price}</p>
+                {/* <p>Active: {experience.active ? "Yes" : "No"}</p>
             <p>Rating: {experience.rating}</p>
             <p>Available Places: {experience.availablePlaces}</p>
-            <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p>
-            {userLogged ? (
+            <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p> */}
+                {/* {userLogged ? (
               <div>
                 <p>
                   Valorated By Me: {experience.valoratedByMe ? "Yes" : "No"}
@@ -75,12 +88,18 @@ const HomeExperiences = () => {
               </div>
             ) : (
               ""
-            )}
-            <Link to={`/experiencias/${experience.id}`}>
-              Watch this experience
-            </Link>
-          </div>
-        ))}
+            )} */}
+
+                <Link
+                  className="yellow-Button"
+                  to={`/experiencias/${experience.id}`}
+                >
+                  Watch
+                </Link>
+              </div>
+            </div>
+          ))}
+      </div>
     </>
   );
 };

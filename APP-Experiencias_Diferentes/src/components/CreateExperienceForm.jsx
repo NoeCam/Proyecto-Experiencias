@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import createExperienceService from "../services/createExperienceService";
-import Header from "./Header";
 
 // Estado para los datos del formulario
 const CreateExperienceForm = () => {
@@ -88,7 +87,6 @@ const CreateExperienceForm = () => {
 
   return (
     <>
-      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
@@ -178,7 +176,11 @@ const CreateExperienceForm = () => {
           />
         </div>
         <div>
-          <input type="submit" value="Create Experience" />
+          <input
+            className="blue-Button"
+            type="submit"
+            value="Create Experience"
+          />
         </div>
         <div>{error ? <p>{error}</p> : ""}</div>
         <div>

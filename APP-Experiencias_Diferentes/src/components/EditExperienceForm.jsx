@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import updateExperienceService from "../services/updateExperienceService";
 import getExperienceService from "../services/getExperienceService"; // Suponiendo que tienes un servicio para obtener los detalles de una experiencia
 import { AuthContext } from "../contexts/AuthContextProvider";
-import Header from "./Header";
 
 const EditExperienceForm = () => {
   const { experienceId } = useParams();
@@ -125,7 +124,6 @@ const EditExperienceForm = () => {
 
   return (
     <>
-      <Header />
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
@@ -215,7 +213,11 @@ const EditExperienceForm = () => {
           />
         </div>
         <div>
-          <input type="submit" value="Edit Experience" />
+          <input
+            className="blue-Button"
+            type="submit"
+            value="Edit Experience"
+          />
         </div>
         <div>
           {error ? <p>{error}</p> : ""}
