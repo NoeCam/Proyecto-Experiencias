@@ -5,7 +5,7 @@ import Header from "./Header";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import makeReservationService from "../services/makeReserevationService";
 import getExperienceService from "../services/getExperienceService";
-import {RatingValue, DefaultRating, ReadonlyRating} from "./RatingStar";
+import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
 
 // Importa los componentes ToastContainer y toast de react-toastify para mostrar notificaciones
 import { ToastContainer, toast } from "react-toastify";
@@ -120,7 +120,7 @@ const GetExperienceById = () => {
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
-  const month = currentDate.getMonth()+1;
+  const month = currentDate.getMonth() + 1;
   const day = currentDate.getDate();
 
   return (
@@ -139,12 +139,19 @@ const GetExperienceById = () => {
       />
 
       {/* Calificaciones en estrellas */}
+      {console.log("userId",reservation.userId)}  
+
+      {/* userId viene undifined */}
+      
       {
-       userLogged && reservation.userId === userLogged && 
-       yearExperience<year ||
-       (yearExperience === year && monthExperience < month) || 
-      (yearExperience === year && monthExperience === month && dayExperience <= day) 
-       ? <div><h3>Value the experience</h3> <RatingValue/> </div> : <div><h3>Experience's ratings</h3> <ReadonlyRating/></div>
+        console.log("userLoged",userLogged)
+      }
+      {
+          reservation.userId == userLogged &&
+          (yearExperience < year ||
+          (yearExperience === year && monthExperience < month) ||
+          (yearExperience === year && monthExperience === month && dayExperience < day))
+          ? <div><h3>Value the experience</h3> <RatingValue /> </div> : <div><h3>Experience's ratings</h3> <ReadonlyRating /></div>
       }
 
       <p>Date: {formatDate(experience.date)}</p>
