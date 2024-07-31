@@ -5,6 +5,7 @@ import Header from "./Header";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import makeReservationService from "../services/makeReserevationService";
 import getExperienceService from "../services/getExperienceService";
+import {RatingValue, DefaultRating, ReadonlyRating} from "./RatingStar";
 
 // Importa los componentes ToastContainer y toast de react-toastify para mostrar notificaciones
 import { ToastContainer, toast } from "react-toastify";
@@ -113,6 +114,15 @@ const GetExperienceById = () => {
     return new Date(dateString).toLocaleDateString("en-GB", options);
   };
 
+  const yearExperience = parseInt(experience.date?.split("-")[0]);
+  const monthExperience = parseInt(experience.date?.split("-")[1]);
+  const dayExperience = parseInt(experience.date?.split("-")[2]);
+
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth()+1;
+  const day = currentDate.getDate();
+
   return (
     <>
       <Header />
@@ -127,7 +137,18 @@ const GetExperienceById = () => {
         }
         alt={experience.title}
       />
+
+      {/* Calificaciones en estrellas */}
+      {
+       userLogged && reservation.userId === userLogged && 
+       yearExperience<year ||
+       (yearExperience === year && monthExperience < month) || 
+      (yearExperience === year && monthExperience === month && dayExperience <= day) 
+       ? <div><h3>Value the experience</h3> <RatingValue/> </div> : <div><h3>Experience's ratings</h3> <ReadonlyRating/></div>
+      }
+
       <p>Date: {formatDate(experience.date)}</p>
+
       <p>Price: {experience.price}</p>
       <p>Active: {experience.active}</p>
       <p>Rating: {experience.rating}</p>
