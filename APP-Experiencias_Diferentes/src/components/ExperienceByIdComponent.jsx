@@ -108,6 +108,10 @@ const GetExperienceById = () => {
       quantityPerPerson: reservation.quantityPerPerson + amount,
     });
   };
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-GB", options);
+  };
 
   return (
     <>
@@ -123,7 +127,7 @@ const GetExperienceById = () => {
         }
         alt={experience.title}
       />
-      <p>Date: {experience.date}</p>
+      <p>Date: {formatDate(experience.date)}</p>
       <p>Price: {experience.price}</p>
       <p>Active: {experience.active}</p>
       <p>Rating: {experience.rating}</p>
