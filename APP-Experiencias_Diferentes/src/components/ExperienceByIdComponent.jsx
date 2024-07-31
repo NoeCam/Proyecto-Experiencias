@@ -109,6 +109,10 @@ const GetExperienceById = () => {
       quantityPerPerson: reservation.quantityPerPerson + amount,
     });
   };
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-GB", options);
+  };
 
   const yearExperience = parseInt(experience.date?.split("-")[0]);
   const monthExperience = parseInt(experience.date?.split("-")[1]);
@@ -143,7 +147,8 @@ const GetExperienceById = () => {
        ? <div><h3>Value the experience</h3> <RatingValue/> </div> : <div><h3>Experience's ratings</h3> <ReadonlyRating/></div>
       }
 
-      <p>Date: {experience.date}</p>
+      <p>Date: {formatDate(experience.date)}</p>
+
       <p>Price: {experience.price}</p>
       <p>Active: {experience.active}</p>
       <p>Rating: {experience.rating}</p>
