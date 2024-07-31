@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import Header from "./Header";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
+import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
@@ -63,7 +64,12 @@ const HomeExperiences = () => {
             <p>Date: {formatDate(experience.date)}</p>
             <p>Price: {experience.price}</p>
             <p>Active: {experience.active ? "Yes" : "No"}</p>
-            <p>Rating: {experience.rating}</p>
+            <div>
+              Rating:
+              {/* <RatingValue/>  */}
+              {/* <DefaultRating /> */}
+              <ReadonlyRating />
+            </div>
             <p>Available Places: {experience.availablePlaces}</p>
             <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p>
             {userLogged ? (
@@ -85,4 +91,4 @@ const HomeExperiences = () => {
   );
 };
 
-export default HomeExperiences;
+export default HomeExperiences
