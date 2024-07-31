@@ -12,11 +12,13 @@ const ProfileUpdateForm = () => {
   const [loading, setLoading] = useState(false);
 
   // Cargar datos del perfil cuando el componente se monta
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/users/profile", {
+        const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+        const response = await fetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +66,8 @@ const ProfileUpdateForm = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("/users/profile", {
+      const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+      const response = await fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
