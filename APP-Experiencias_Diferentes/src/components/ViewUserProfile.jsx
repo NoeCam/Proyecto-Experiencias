@@ -18,36 +18,41 @@ const ViewUserProfile = () => {
 
   return userLogged ? (
     <>
-      <h3>View your User Profile</h3>
-      <img
-        className="w-20"
-        src={
-          userLogged.avatar
-            ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
-            : "/userDefault.png"
-        }
-        alt="User Avatar"
-      />
-      <p>Username: {userLogged.username}</p>
-      <p>First name: {userLogged.firstname}</p>
-      <p>Last name: {userLogged.lastname}</p>
-      <p>email: {userLogged.email}</p>
-      <p>role: {userLogged.role}</p>
-      <button
-        className="blue-Button"
-        type="submit"
-        value="logout"
-        onClick={handleSubmit}
-      >
-        Logout
-      </button>
-      {/* Botón para ir a la página de edición del perfil */}
-      <button
-        className="blue-Button"
-        onClick={() => navigate("/users/edit-profile")}
-      >
-        Edit Profile
-      </button>
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
+      </h1>
+      <h3 className="h3">View your User Profile</h3>
+      <div className="div-content">
+        <img
+          className="w-20"
+          src={
+            userLogged.avatar
+              ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
+              : "/userDefault.png"
+          }
+          alt="User Avatar"
+        />
+        <p>Username: {userLogged.username}</p>
+        <p>First name: {userLogged.firstname}</p>
+        <p>Last name: {userLogged.lastname}</p>
+        <p>email: {userLogged.email}</p>
+        <p>role: {userLogged.role}</p>
+        <button
+          className="blue-Button"
+          type="submit"
+          value="logout"
+          onClick={handleSubmit}
+        >
+          Logout
+        </button>
+        {/* Botón para ir a la página de edición del perfil */}
+        <button
+          className="blue-Button"
+          onClick={() => navigate("/users/edit-profile")}
+        >
+          Edit Profile
+        </button>
+      </div>
     </>
   ) : (
     <Header />

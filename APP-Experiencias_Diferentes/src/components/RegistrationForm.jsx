@@ -75,77 +75,89 @@ const RegistrationForm = () => {
 
   return (
     <>
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
+        E<span className="text-yellow-500">x</span>periencias <>&nbsp;</>
+        <span className="text-cyan-500 mb-5">D</span>iferentes
+      </h1>
       <h3 className="h3">Sing in</h3>
       {/* Define el formulario y maneja el evento de submit */}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Enter username"
-            value={username}
-            required
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="firstname">First Name:</label>
-          <input
-            type="text"
-            name="firstname"
-            placeholder="Enter first name"
-            value={firstname}
-            required
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastname">Last Name:</label>
-          <input
-            type="text"
-            name="lastname"
-            placeholder="Enter last name"
-            value={lastname}
-            required
-            onChange={(e) => setLastname(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={confirmPassword}
-            required
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <input className="blue-Button" type="submit" value="Send" />
-        </div>
-      </form>
+      <div className="div-content">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input
+              className="input"
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              value={username}
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="firstname">First Name:</label>
+            <input
+              className="input"
+              type="text"
+              name="firstname"
+              placeholder="Enter first name"
+              value={firstname}
+              required
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="lastname">Last Name:</label>
+            <input
+              className="input"
+              type="text"
+              name="lastname"
+              placeholder="Enter last name"
+              value={lastname}
+              required
+              onChange={(e) => setLastname(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              className="input"
+              type="password"
+              name="password"
+              value={password}
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input
+              className="input"
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              required
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <input className="blue-Button" type="submit" value="Send" />
+          </div>
+        </form>
+      </div>
       <ToastContainer />
     </>
   );

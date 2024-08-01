@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import Header from "./Header";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
+import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
@@ -40,12 +41,12 @@ const HomeExperiences = () => {
         setOrder={setOrder}
         setDirection={setDirection}
       />
-      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
-      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider">
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
         {" "}
-        <span className="text-yellow-500">D</span>iferentes
+        <span className="text-cyan-500">D</span>iferentes
       </h2>
 
       <div className=" bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
@@ -55,7 +56,7 @@ const HomeExperiences = () => {
           experiences.map((experience) => (
             <div
               key={experience.id}
-              className="flex grid-row bg-cyan-400 bg-opacity-50 m-2 p-5 rounded-3xl"
+              className="flex grid-row md:grid-cols-4 bg-cyan-500 bg-opacity-50 m-2 p-5 rounded-3xl"
             >
               <div className="w-1/2">
                 {" "}
@@ -71,14 +72,20 @@ const HomeExperiences = () => {
               </div>
               <div className="ml-5 w-1/2">
                 <h4 className="h4">{experience.title}</h4>
-                <p>{experience.location}</p>
+                <p className="p">{experience.location}</p>
                 {/* <p>Description: {experience.description}</p>
             <p>Date: {formatDate(experience.date)}</p> */}
-                <p>Price: {experience.price}</p>
-                {/* <p>Active: {experience.active ? "Yes" : "No"}</p>
-            <p>Rating: {experience.rating}</p>
-            <p>Available Places: {experience.availablePlaces}</p>
-            <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p> */}
+                <p className="p">Price: {experience.price}</p>
+                {/* <p>Active: {experience.active ? "Yes" : "No"}</p>*/}
+                {/*<p>Rating: {experience.rating}</p>>*/}
+
+                <ReadonlyRating
+                  value={Number(experience.rating)}
+                  className="flex flex-wrap"
+                />
+
+                {/*  <p>Available Places: {experience.availablePlaces}</p>
+                <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p> */}
                 {/* {userLogged ? (
               <div>
                 <p>
@@ -89,9 +96,8 @@ const HomeExperiences = () => {
             ) : (
               ""
             )} */}
-
                 <Link
-                  className="yellow-Button"
+                  className="white-Button"
                   to={`/experiencias/${experience.id}`}
                 >
                   Watch

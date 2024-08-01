@@ -87,10 +87,16 @@ const CreateExperienceForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
+        E<span className="text-yellow-500">x</span>periencias <>&nbsp;</>
+        <span className="text-cyan-500 mb-5">D</span>iferentes
+      </h1>
+      <h3 className="h3">Create New Experience</h3>
+      <form className="div-content-not-center" onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
           <input
+            className="input"
             type="text"
             name="title"
             value={formData.title}
@@ -101,6 +107,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Location:</label>
           <input
+            className="input"
             type="text"
             name="location"
             value={formData.location}
@@ -111,6 +118,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Description:</label>
           <textarea
+            className="input"
             name="description"
             value={formData.description}
             onChange={handleChange}
@@ -129,6 +137,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Date:</label>
           <input
+            className="input"
             type="date"
             name="date"
             value={formData.date}
@@ -139,6 +148,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Price:</label>
           <input
+            className="input"
             type="text"
             name="price"
             value={formData.price}
@@ -149,6 +159,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Minimum Number of Places:</label>
           <input
+            className="input"
             type="number"
             name="numMinPlaces"
             value={formData.numMinPlaces}
@@ -159,6 +170,7 @@ const CreateExperienceForm = () => {
         <div>
           <label>Total Number of Places:</label>
           <input
+            className="input"
             type="number"
             name="numTotalPlaces"
             value={formData.numTotalPlaces}
