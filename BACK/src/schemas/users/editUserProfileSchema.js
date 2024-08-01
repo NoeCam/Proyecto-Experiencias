@@ -17,19 +17,19 @@ const joiErrorMessages = {
 
 // Definimos el esquema para la actualización del perfil del usuario.
 const editUserProfileSchema = Joi.object({
-  username: Joi.string().required().messages({
+  username: Joi.string().messages({
     "string.empty": "Username is required.",
     "any.required": "Username is required.",
   }),
-  firstname: Joi.string().required().messages({
+  firstname: Joi.string().messages({
     "string.empty": "First name is required.",
     "any.required": "First name is required.",
   }),
-  lastname: Joi.string().required().messages({
+  lastname: Joi.string().messages({
     "string.empty": "Last name is required.",
     "any.required": "Last name is required.",
   }),
-  email: Joi.string().email().required().messages({
+  email: Joi.string().email().messages({
     "string.empty": "Email is required.",
     "string.email": "The email must be valid.",
     "any.required": "Email is required.",

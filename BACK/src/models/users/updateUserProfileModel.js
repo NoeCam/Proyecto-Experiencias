@@ -30,9 +30,9 @@ const updateUserProfileModel = async (userId, data) => {
   }
   if (password !== undefined) {
     // Hash the new password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    //const hashedPassword = await bcrypt.hash(password, 10);
     setFragments.push(`password = ?`);
-    values.push(hashedPassword);
+    values.push(password);
   }
 
   values.push(userId);
