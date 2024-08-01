@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { AuthContext } from "../contexts/AuthContextProvider";
 
 const ProfileUpdateForm = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ const ProfileUpdateForm = () => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { token } = useContext(AuthContext);
 
   // Cargar datos del perfil cuando el componente se monta
 
@@ -95,11 +98,11 @@ const ProfileUpdateForm = () => {
           try {
             errorData = JSON.parse(textResponse); // Intentar analizar JSON
           } catch (jsonError) {
-            toast.error("Failed to parse error response");
+            toast.error(`Failed to parse error response: ${errorData.message}`);
             return; // Salir si no se puede analizar el JSON
           }
         } else {
-          toast.error("Received empty error response");
+          toast.error(`Received empty error response: ${errorData.message}`);
           return;
         }
 
@@ -108,7 +111,7 @@ const ProfileUpdateForm = () => {
         );
       }
     } catch (error) {
-      toast.error("Error updating profile");
+      toast.error(`Error updating profile: ${errorData.message}`);
     } finally {
       setLoading(false);
     }
