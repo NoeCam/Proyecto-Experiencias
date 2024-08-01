@@ -22,29 +22,42 @@ const UserValidation = () => {
 
   return (
     <>
-      <div>
-        {response.status == "ok" ? (
-          <>
-            <h2>The user was validated succesfully.</h2>
-            <h3>Go to Login</h3>
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
+      </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
+      {response.status == "ok" ? (
+        <>
+          <h3 className="h3">The user was validated succesfully.</h3>
+          <div className="div-content">
+            <h4>Go to Login</h4>
             <div>
-              <Link to={"/users/login"}>
+              <Link className="blue-Button" to={"/users/login"}>
                 <p>Login</p>
               </Link>
             </div>
-          </>
-        ) : (
-          <>
-            <h3>There was an error in the validation.</h3>
+          </div>
+        </>
+      ) : (
+        <>
+          <h3 className="h3">There was an error in the validation.</h3>
+          <div className="div-content">
             <p>{response.message}</p>
             <div>
-              <Link to={"/users/login"}>Login</Link>
-              <>&nbsp;|&nbsp;</>
-              <Link to={"/"}>Home</Link>
+              <Link className="blue-Button" to={"/users/login"}>
+                Login
+              </Link>
+              <Link className="blue-Button" to={"/"}>
+                Home
+              </Link>
             </div>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
+
       <div>{error ? <p>{error}</p> : ""}</div>
     </>
   );

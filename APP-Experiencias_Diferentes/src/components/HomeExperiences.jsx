@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
-import Header from "./Header";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
 import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
@@ -49,7 +48,7 @@ const HomeExperiences = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
 
-      <div className=" bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
+      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
         {error && <p>{error}</p>}
 
         {experiences &&
@@ -73,29 +72,11 @@ const HomeExperiences = () => {
               <div className="ml-5 w-1/2">
                 <h4 className="h4">{experience.title}</h4>
                 <p className="p">{experience.location}</p>
-                {/* <p>Description: {experience.description}</p>
-            <p>Date: {formatDate(experience.date)}</p> */}
                 <p className="p">Price: {experience.price}</p>
-                {/* <p>Active: {experience.active ? "Yes" : "No"}</p>*/}
-                {/*<p>Rating: {experience.rating}</p>>*/}
-
                 <ReadonlyRating
                   value={Number(experience.rating)}
                   className="flex flex-wrap"
                 />
-
-                {/*  <p>Available Places: {experience.availablePlaces}</p>
-                <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p> */}
-                {/* {userLogged ? (
-              <div>
-                <p>
-                  Valorated By Me: {experience.valoratedByMe ? "Yes" : "No"}
-                </p>
-                <p>Reserved By Me: {experience.reservedByMe ? "Yes" : "No"}</p>
-              </div>
-            ) : (
-              ""
-            )} */}
                 <Link
                   className="white-Button"
                   to={`/experiencias/${experience.id}`}
