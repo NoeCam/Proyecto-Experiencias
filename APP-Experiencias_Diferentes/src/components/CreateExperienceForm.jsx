@@ -1,5 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContextProvider";
+
+import { ToastContainer, toast } from "react-toastify";
+
 import createExperienceService from "../services/createExperienceService";
 
 // Estado para los datos del formulario
@@ -29,7 +32,8 @@ const CreateExperienceForm = () => {
     if (userLogged?.role && userLogged.role === "admin") {
       setIsAdmin(true);
     } else {
-      setError("You do not have permission to create an experience.");
+      setError(error.message);
+      toast.error(error.message);
     }
   }, []);
 
@@ -63,6 +67,7 @@ const CreateExperienceForm = () => {
     e.preventDefault();
     if (!isAdmin) {
       setError("You do not have permission to create an experience.");
+      toast.error(error.message);
       return;
     }
     try {
@@ -74,11 +79,13 @@ const CreateExperienceForm = () => {
       const response = await createExperienceService(token, formDataToSend);
 
       // Establecer la respuesta en el estado
-      setResp(response);
+      //setResp(response);
       setError(null);
+      toast.success(response.message);
     } catch (error) {
       // Establecer el error en el estado
       setError(error.message);
+      toast.error(error.message);
     }
   };
   if (!isAdmin) {
@@ -87,124 +94,130 @@ const CreateExperienceForm = () => {
 
   return (
     <>
-      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
-        E<span className="text-yellow-500">x</span>periencias <>&nbsp;</>
-        <span className="text-cyan-500 mb-5">D</span>iferentes
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
       </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
       <h3 className="h3">Create New Experience</h3>
-      <form className="div-content-not-center" onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            className="input"
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Location:</label>
-          <input
-            className="input"
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            className="input"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Image:</label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleChangeImage}
-            required
-          />
-        </div>
-        <div>
-          <label>Date:</label>
-          <input
-            className="input"
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            className="input"
-            type="text"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Minimum Number of Places:</label>
-          <input
-            className="input"
-            type="number"
-            name="numMinPlaces"
-            value={formData.numMinPlaces}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Total Number of Places:</label>
-          <input
-            className="input"
-            type="number"
-            name="numTotalPlaces"
-            value={formData.numTotalPlaces}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirmed by Admin:</label>
-          <input
-            type="checkbox"
-            name="confirmedByAdmin"
-            checked={formData.confirmedByAdmin}
-            onChange={handleChangeBoolean}
-          />
-        </div>
-        <div>
-          <input
-            className="blue-Button"
-            type="submit"
-            value="Create Experience"
-          />
-        </div>
-        <div>{error ? <p>{error}</p> : ""}</div>
-        <div>
-          {resp.status == "ok" ? (
-            <>
-              <p>{resp.message}</p>
-            </>
-          ) : (
-            ""
-          )}
-        </div>
-      </form>
+      <div className="flex text-center justify-center">
+        <form className="div-content-not-center" onSubmit={handleSubmit}>
+          <div>
+            <label>Title:</label>
+            <input
+              className="input"
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Location:</label>
+            <input
+              className="input"
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Description:</label>
+            <textarea
+              className="input"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Image:</label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleChangeImage}
+              required
+            />
+          </div>
+          <div>
+            <label>Date:</label>
+            <input
+              className="input"
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Price:</label>
+            <input
+              className="input"
+              type="text"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Minimum Number of Places:</label>
+            <input
+              className="input"
+              type="number"
+              name="numMinPlaces"
+              value={formData.numMinPlaces}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Total Number of Places:</label>
+            <input
+              className="input"
+              type="number"
+              name="numTotalPlaces"
+              value={formData.numTotalPlaces}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Confirmed by Admin:</label>
+            <input
+              type="checkbox"
+              name="confirmedByAdmin"
+              checked={formData.confirmedByAdmin}
+              onChange={handleChangeBoolean}
+            />
+          </div>
+          <div>
+            <input
+              className="blue-Button"
+              type="submit"
+              value="Create Experience"
+            />
+          </div>
+          <div>{error ? <p>{error}</p> : ""}</div>
+          <div>
+            {resp.status == "ok" ? (
+              <>
+                <p>{resp.message}</p>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
+        </form>
+      </div>
+      <ToastContainer />
     </>
   );
 };

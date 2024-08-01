@@ -34,12 +34,14 @@ function FormLogin() {
       });
 
       setToken(response.data.token);
-      setResp(response);
+      //setResp(response);
 
       // Muestra un mensaje de éxito si el registro es exitoso
       if (response.status == "ok") {
         toast.success(response.message);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000); // 2000 milisegundos = 2 segundos
       } else {
         // Muestra un mensaje de error si el registro falla
         toast.error("Login failed");
@@ -51,10 +53,13 @@ function FormLogin() {
 
   return (
     <>
-      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
-        E<span className="text-yellow-500">x</span>periencias <>&nbsp;</>
-        <span className="text-cyan-500 mb-5">D</span>iferentes
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
       </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
       <h3 className="h3">Login</h3>
       <div className="div-content">
         <form onSubmit={handleFormSubmit}>

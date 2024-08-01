@@ -36,7 +36,7 @@
   }
 
   .div-content {
-    @apply flex flex-col items-center justify-center bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl;
+    @apply flex flex-col items-center justify-center bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl md:w-1/2;
   }
 
   .div-content-not-center {
