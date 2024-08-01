@@ -8,36 +8,76 @@ const Header = () => {
 
   return (
     <>
-      <header>
-        {!userLogged ? (
-          <nav>
-            <Link to="/">Home</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/users/register">Sing in</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/users/login">Login</Link>
-          </nav>
-        ) : (
-          ""
-        )}
-        {userLogged ? (
-          <nav>
-            <Link to="/">Home</Link>
-            <>&nbsp;|&nbsp;</>
-            <Link to="/users/profile">{userLogged.username}</Link>
-            {userLogged?.role && userLogged.role === "admin" ? (
-              <>
-                &nbsp;|&nbsp;
-                <Link to="/experiencias/create">Create a new experience</Link>
-              </>
-            ) : (
-              ""
-            )}
-          </nav>
-        ) : (
-          ""
-        )}
-      </header>
+      {!userLogged ? (
+        <nav className="flex justify-around w-full">
+          <Link to="/">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconHome.svg"
+              alt="Home"
+            />
+            <p className="text-NavBar">Home</p>
+          </Link>
+          <>&nbsp;</>
+          <Link to="/users/register">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconNewUser.svg"
+              alt="Sing in"
+            />
+            <p className="text-NavBar">Sing in</p>
+          </Link>
+          <>&nbsp;</>
+          <Link to="/users/login">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconUserProfile.svg"
+              alt="Login"
+            />
+            <p className="text-NavBar">Login</p>
+          </Link>
+        </nav>
+      ) : (
+        ""
+      )}
+      {userLogged ? (
+        <nav className="flex justify-around w-full">
+          <Link to="/">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconHome.svg"
+              alt="Home"
+            />
+            <p className="text-NavBar">Home</p>
+          </Link>
+          <>&nbsp;</>
+          <Link to="/users/profile">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconUserProfile.svg"
+              alt={userLogged.username}
+            />
+            <p className="text-NavBar">{userLogged.username}</p>
+          </Link>
+          {userLogged?.role && userLogged.role === "admin" ? (
+            <>
+              &nbsp;
+              <Link to="/experiencias/create">
+                <img
+                  className="icon-NavBar"
+                  src="/src/assets/iconPlus.svg"
+                  alt="Create a new experience"
+                />
+                <p className="text-NavBar">Create a new experience</p>
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
+        </nav>
+      ) : (
+        ""
+      )}
     </>
   );
 };

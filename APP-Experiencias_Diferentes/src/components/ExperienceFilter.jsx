@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const ExperienceFilter = ({ setSearch, setOrder, setDirection }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [orderValue, setOrderValue] = useState('');
-  const [directionValue, setDirectionValue] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [orderValue, setOrderValue] = useState("");
+  const [directionValue, setDirectionValue] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -21,17 +21,28 @@ const ExperienceFilter = ({ setSearch, setOrder, setDirection }) => {
   };
 
   return (
-    <div>
-      <input type="text" placeholder="Search Location" onChange={handleSearchChange} />
-      <select onChange={handleOrderChange}>
+    <div className="flex justify-center">
+      <input
+        className="rounded-3xl bg-slate-200 my-1 mx-1 px-3 w-36 md:w-64 lg:w-80"
+        type="text"
+        placeholder="Search"
+        onChange={handleSearchChange}
+      />
+      <select
+        className="rounded-l-3xl bg-slate-200 my-1 pl-3"
+        onChange={handleOrderChange}
+      >
         <option value="">Order by</option>
         <option value="date">Date</option>
         <option value="price">Price</option>
         <option value="location">Location</option>
       </select>
-      <select onChange={handleDirectionChange}>
-        <option value="ASC">Ascending</option>
-        <option value="DESC">Descending</option>
+      <select
+        className="rounded-r-3xl bg-slate-200 my-1 mr-1 pr-3"
+        onChange={handleDirectionChange}
+      >
+        <option value="ASC">Asc</option>
+        <option value="DESC">Desc</option>
       </select>
     </div>
   );

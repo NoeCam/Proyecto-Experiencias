@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import updateExperienceService from "../services/updateExperienceService";
 import getExperienceService from "../services/getExperienceService"; // Suponiendo que tienes un servicio para obtener los detalles de una experiencia
 import { AuthContext } from "../contexts/AuthContextProvider";
-import Header from "./Header";
 
 const EditExperienceForm = () => {
   const { experienceId } = useParams();
@@ -125,11 +124,12 @@ const EditExperienceForm = () => {
 
   return (
     <>
-      <Header />
-      <form onSubmit={handleSubmit}>
+      <h3 className="h3">Edit Experience</h3>
+      <form className="div-content-not-center" onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
           <input
+            className="input"
             type="text"
             name="title"
             value={formData.title}
@@ -140,6 +140,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Location:</label>
           <input
+            className="input"
             type="text"
             name="location"
             value={formData.location}
@@ -150,6 +151,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Description:</label>
           <textarea
+            className="input"
             name="description"
             value={formData.description}
             onChange={handleChange}
@@ -168,6 +170,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Date:</label>
           <input
+            className="input"
             type="date"
             name="date"
             value={formData.date}
@@ -178,6 +181,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Price:</label>
           <input
+            className="input"
             type="text"
             name="price"
             value={formData.price}
@@ -188,6 +192,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Minimum Number of Places:</label>
           <input
+            className="input"
             type="number"
             name="numMinPlaces"
             value={formData.numMinPlaces}
@@ -198,6 +203,7 @@ const EditExperienceForm = () => {
         <div>
           <label>Total Number of Places:</label>
           <input
+            className="input"
             type="number"
             name="numTotalPlaces"
             value={formData.numTotalPlaces}
@@ -215,7 +221,11 @@ const EditExperienceForm = () => {
           />
         </div>
         <div>
-          <input type="submit" value="Edit Experience" />
+          <input
+            className="blue-Button"
+            type="submit"
+            value="Edit Experience"
+          />
         </div>
         <div>
           {error ? <p>{error}</p> : ""}

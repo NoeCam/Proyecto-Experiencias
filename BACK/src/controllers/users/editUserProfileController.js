@@ -12,7 +12,6 @@ const editUserProfileController = async (req, res, next) => {
         message: "Unauthenticated user",
       });
     }
-
     // Validamos el body con Joi.
     await validateSchemaUtil(editUserProfileSchema, req.body);
 

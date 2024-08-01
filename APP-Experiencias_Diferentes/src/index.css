@@ -1,4 +1,45 @@
-/* CSS Base  */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .blue-Button {
+    @apply bg-cyan-500 rounded-3xl m-1 px-4 py-1 text-white font-medium justify-center;
+  }
+
+  .white-Button {
+    @apply bg-white rounded-3xl m-1 px-4 py-1 font-medium justify-center block text-center;
+  }
+
+  .icon-NavBar {
+    @apply w-5 inline md:hidden;
+  }
+
+  .text-NavBar {
+    @apply hidden md:block hover:bg-slate-600 hover:text-white px-20 py-1 rounded-3xl;
+  }
+
+  .h3 {
+    @apply text-3xl font-medium text-white text-center mt-5 mb-10;
+  }
+
+  .h4 {
+    @apply text-lg font-bold text-center;
+  }
+
+  .p {
+    @apply text-center;
+  }
+
+  .input {
+    @apply rounded-3xl bg-gray-300 my-1 mx-1 px-3 w-36;
+  }
+
+  .div-content {
+    @apply flex flex-col items-center justify-center bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl;
+  }
+
+  .div-content-not-center {
+    @apply bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl;
+  }
+}

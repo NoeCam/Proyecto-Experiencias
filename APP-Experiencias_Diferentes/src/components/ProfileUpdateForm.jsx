@@ -67,11 +67,12 @@ const ProfileUpdateForm = () => {
     try {
       setLoading(true);
       const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+
       const response = await fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"), // Añadir el token aquí
+          Authorization: token, // Añadir el token aquí
         },
         body: JSON.stringify({
           email,
@@ -114,66 +115,77 @@ const ProfileUpdateForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Update Profile</h2>
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        First Name:
-        <input
-          type="text"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Last Name:
-        <input
-          type="text"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Current Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        New Password:
-        <input
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-      </label>
-      <button type="submit" disabled={loading}>
-        {loading ? "Updating..." : "Update Profile"}
-      </button>
-      <ToastContainer />
-    </form>
+    <>
+      <h3 className="h3">Update Your Profile</h3>
+      <div className="div-content">
+        <form onSubmit={handleSubmit}>
+          <h2>Update Profile</h2>
+          <label>
+            Email:
+            <input
+              className="input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Username:
+            <input
+              className="input"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            First Name:
+            <input
+              className="input"
+              type="text"
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Last Name:
+            <input
+              className="input"
+              type="text"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Current Password:
+            <input
+              className="input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            New Password:
+            <input
+              className="input"
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </label>
+          <button className="blue-Button" type="submit" disabled={loading}>
+            {loading ? "Updating..." : "Update Profile"}
+          </button>
+          <ToastContainer />
+        </form>
+      </div>
+    </>
   );
 };
 

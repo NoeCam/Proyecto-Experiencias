@@ -6,14 +6,20 @@ export function DefaultRating() {
 
 export function RatingValue() {
   return (
-      <div>
-      <Rating 
-        className="text-amber-400 w-5"
-      />
+    <div>
+      <Rating className="text-amber-400 w-5" />
     </div>
   );
 }
 
-export function ReadonlyRating() {
-  return <Rating value={4} readonly className="text-amber-400 w-5"/>;
+export function ReadonlyRating({ value }) {
+  return (
+    <Rating
+      value={value}
+      readonly
+      unratedColor="amber"
+      ratedColor="amber"
+      className="text-amber-400 w-5"
+    />
+  );
 }

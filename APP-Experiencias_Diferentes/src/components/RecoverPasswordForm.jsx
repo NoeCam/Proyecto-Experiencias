@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import setRecoverPasswordService from "../services/setRecoverPasswordService";
-import Header from "./Header";
 
 const RecoverPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -27,19 +26,19 @@ const RecoverPasswordForm = () => {
 
   return (
     <>
-      <Header />
-      <h3>Recover password</h3>
-      <form onSubmit={handleSubmit}>
+      <h3 className="h3">Recover password</h3>
+      <form className="div-content" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="">Email</label>
           <input
+            className="input"
             type="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button>Send</button>
+        <button className="blue-Button">Send</button>
         {error ? <p>{error}</p> : ""}
         {resp.status == "ok" ? <p>{resp}</p> : ""}
       </form>
