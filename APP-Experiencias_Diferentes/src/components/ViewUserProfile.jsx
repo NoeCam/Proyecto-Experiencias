@@ -26,7 +26,7 @@ const ViewUserProfile = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">View your User Profile</h3>
-      <div className="div-content mx-auto">
+      <div className="div-content">
         <img
           className="w-20"
           src={
