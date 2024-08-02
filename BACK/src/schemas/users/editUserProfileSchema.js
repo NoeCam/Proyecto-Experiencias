@@ -1,14 +1,8 @@
 // Importamos Joi para la validación del esquema.
 import Joi from "joi";
 
-// Definimos la expresión regular para la contraseña.
-const passwordPattern =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~=`{}:";'<>¿?,.]{8,}$/;
-
 // Definimos los mensajes de error personalizados.
 const joiErrorMessages = {
-  "string.pattern.base":
-    "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
   "string.empty": "This field cannot be empty.",
   "string.min": "This field must have at least {#limit} characters.",
   "any.required": "This field is required.",
@@ -34,17 +28,8 @@ const editUserProfileSchema = Joi.object({
     "string.email": "The email must be valid.",
     "any.required": "Email is required.",
   }),
-  password: Joi.string().pattern(passwordPattern).optional().messages({
-    "string.pattern.base":
-      "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
-    "string.empty": "Current password cannot be empty.",
-    "string.min": "Current password must have at least 6 characters.",
-  }),
-  newPassword: Joi.string().pattern(passwordPattern).optional().messages({
-    "string.pattern.base":
-      "New password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
-    "string.empty": "New password cannot be empty.",
-    "string.min": "New password must have at least 6 characters.",
+  avatar: Joi.string().optional().messages({
+    "string.empty": "Avatar cannot be empty.",
   }),
 });
 
