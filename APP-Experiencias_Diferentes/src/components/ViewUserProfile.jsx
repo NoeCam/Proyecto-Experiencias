@@ -18,9 +18,13 @@ const ViewUserProfile = () => {
 
   return userLogged ? (
     <>
-      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider mt-5">
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
       <h3 className="h3">View your User Profile</h3>
       <div className="div-content">
         <img

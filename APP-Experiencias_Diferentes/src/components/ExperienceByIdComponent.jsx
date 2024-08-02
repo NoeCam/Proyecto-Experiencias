@@ -42,7 +42,7 @@ const GetExperienceById = () => {
       } catch (error) {
         // Establecer el error en el estado
         setError(error.message);
-        toast.error("Failed to fetch experience");
+        toast.error(`Failed to fetch experience: ${error.message}`);
       }
     };
     fetchExperience();
@@ -124,107 +124,113 @@ const GetExperienceById = () => {
 
   return (
     <>
-      <h1 className="flex font-titleLicorice text-5xl font-black justify-center my-3 text-white tracking-wider">
-        E<span className="text-yellow-500">x</span>periencias <>&nbsp;</>
-        <span className="text-cyan-500 mb-5">D</span>iferentes
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
       </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
       <h3 className="h3">Your selection: {experience.title}</h3>
-      <div className="div-content">
-        <img
-          className="rounded-3xl"
-          src={
-            experience.image
-              ? `${VITE_API_URL}/uploads/${experience.image}`
-              : "The experience does not contain images"
-          }
-          alt={experience.title}
-        />
-        <p>Location: {experience.location}</p>
-        <p>Description: {experience.description}</p>
-        <p>Date: {formatDate(experience.date)}</p>
-        {reservation.userId == userLogged &&
-        (yearExperience < year ||
-          (yearExperience === year && monthExperience < month) ||
-          (yearExperience === year &&
-            monthExperience === month &&
-            dayExperience < day)) ? (
-          <div>
-            <h3>Value the experience</h3> <RatingValue />{" "}
-          </div>
-        ) : (
-          <div>
-            <h3>Experience's ratings</h3> <ReadonlyRating />
-          </div>
-        )}
-        <p>Price: {experience.price}</p>
-        <p>Active: {experience.active}</p>
-        <p>Rating: {experience.rating}</p>
-        <p>
-          Available Places:{" "}
-          {experience.availablePlaces > 0
-            ? experience.availablePlaces - reservation.quantityPerPerson
-            : experience.availablePlaces}
-        </p>
-        <p>Confirmed: {experience.confirmed}</p>
-        {userLogged ? (
-          <div className="flex flex-col items-center justify-center">
-            <p>valoratedByMe: {experience.valoratedByMe}</p>
-            <p>reservedByMe: {experience.reservedByMe ? "Yes" : "No"}</p>
-            <label>Number of Places to reserve:</label>
+      <div className="flex text-center justify-center">
+        <div className="div-content">
+          <img
+            className="rounded-3xl"
+            src={
+              experience.image
+                ? `${VITE_API_URL}/uploads/${experience.image}`
+                : "The experience does not contain images"
+            }
+            alt={experience.title}
+          />
+          <p>Location: {experience.location}</p>
+          <p>Description: {experience.description}</p>
+          <p>Date: {formatDate(experience.date)}</p>
+          {reservation.userId == userLogged &&
+          (yearExperience < year ||
+            (yearExperience === year && monthExperience < month) ||
+            (yearExperience === year &&
+              monthExperience === month &&
+              dayExperience < day)) ? (
             <div>
-              <button
-                onClick={() => changeNumber(-1)}
-                disabled={reservation.quantityPerPerson <= 0}
-              >
-                <img
-                  className="icon-NavBar"
-                  src="/src/assets/iconMinusReservations.svg"
-                  alt="-"
-                />
-              </button>
-              <input
-                className="bg-slate-300 mx-1 my-3 w-12 md:w-64 lg:w-80 text-center rounded-3xl"
-                type="number"
-                name="reservations"
-                value={reservation.quantityPerPerson}
-                readOnly
-                required
-              />
-              <button
-                onClick={() => changeNumber(1)}
-                disabled={
-                  reservation.quantityPerPerson >= experience.availablePlaces
-                }
-              >
-                <img
-                  className="icon-NavBar"
-                  src="/src/assets/iconPlusReservations.svg"
-                  alt="+"
-                />
-              </button>
+              <h3>Value the experience</h3> <RatingValue />{" "}
             </div>
-            <input
+          ) : (
+            <div>
+              <h3>Experience's ratings</h3> <ReadonlyRating />
+            </div>
+          )}
+          <p>Price: {experience.price}</p>
+          <p>Active: {experience.active}</p>
+          <p>Rating: {experience.rating}</p>
+          <p>
+            Available Places:{" "}
+            {experience.availablePlaces > 0
+              ? experience.availablePlaces - reservation.quantityPerPerson
+              : experience.availablePlaces}
+          </p>
+          <p>Confirmed: {experience.confirmed}</p>
+          {userLogged ? (
+            <div className="flex flex-col items-center justify-center">
+              <p>valoratedByMe: {experience.valoratedByMe}</p>
+              <p>reservedByMe: {experience.reservedByMe ? "Yes" : "No"}</p>
+              <label>Number of Places to reserve:</label>
+              <div>
+                <button
+                  onClick={() => changeNumber(-1)}
+                  disabled={reservation.quantityPerPerson <= 0}
+                >
+                  <img
+                    className="w-5 inline"
+                    src="/src/assets/iconMinusReservations.svg"
+                    alt="-"
+                  />
+                </button>
+                <input
+                  className="bg-slate-300 mx-1 my-3 w-12 md:w-64 lg:w-80 text-center rounded-3xl"
+                  type="number"
+                  name="reservations"
+                  value={reservation.quantityPerPerson}
+                  readOnly
+                  required
+                />
+                <button
+                  onClick={() => changeNumber(1)}
+                  disabled={
+                    reservation.quantityPerPerson >= experience.availablePlaces
+                  }
+                >
+                  <img
+                    className="w-5 inline"
+                    src="/src/assets/iconPlusReservations.svg"
+                    alt="+"
+                  />
+                </button>
+              </div>
+              <input
+                className="blue-Button"
+                type="submit"
+                value="Reserve"
+                onClick={handleClick}
+                disabled={experience.availablePlaces <= 0}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+          {userLogged?.role && userLogged.role === "admin" ? (
+            <Link
               className="blue-Button"
-              type="submit"
-              value="Reserve"
-              onClick={handleClick}
-              disabled={experience.availablePlaces <= 0}
-            />
-          </div>
-        ) : (
-          ""
-        )}
-        {userLogged?.role && userLogged.role === "admin" ? (
-          <Link
-            className="blue-Button"
-            to={`/experiencias/edit/${experienceId}`}
-          >
-            Edit your experience
-          </Link>
-        ) : (
-          ""
-        )}
+              to={`/experiencias/edit/${experienceId}`}
+            >
+              Edit your experience
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
+
       <ToastContainer />
     </>
   );

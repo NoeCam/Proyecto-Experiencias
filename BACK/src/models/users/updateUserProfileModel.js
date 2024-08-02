@@ -6,7 +6,7 @@ const updateUserProfileModel = async (userId, data) => {
     throw new Error("Invalid input: No data provided for update.");
   }
 
-  const { username, firstname, lastname, email, role, password } = data;
+  const { username, firstname, lastname, email, role, password, avatar } = data; // Incluye el campo avatar
   const pool = await getPool();
 
   const setFragments = [];
@@ -32,10 +32,13 @@ const updateUserProfileModel = async (userId, data) => {
     setFragments.push(`role = ?`);
     values.push(role);
   }
-  if (password) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+  if (password !== undefined) {
     setFragments.push(`password = ?`);
-    values.push(hashedPassword);
+    values.push(password);
+  }
+  if (avatar) {
+    setFragments.push(`avatar = ?`); // Añade la actualización del campo avatar
+    values.push(avatar);
   }
 
   if (setFragments.length === 0) {
@@ -60,7 +63,7 @@ const updateUserProfileModel = async (userId, data) => {
 
   // Devolver los datos actualizados del usuario
   const [rows] = await pool.query(
-    `SELECT id, username, firstname, lastname, email, role FROM users WHERE id = ?`,
+    `SELECT id, username, firstname, lastname, email, role, avatar FROM users WHERE id = ?`, // Incluye avatar en la selección
     [userId]
   );
 

@@ -5,35 +5,33 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
 const ProfileUpdateForm = () => {
-  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
   const { token } = useContext(AuthContext);
 
   // Cargar datos del perfil cuando el componente se monta
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+        const url = `${import.meta.env.VITE_API_URL}/users/profile`;
         const response = await fetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"), // Añadir el token aquí
+            Authorization: token,
           },
         });
         if (response.ok) {
           const userData = await response.json();
-          setEmail(userData.email);
-          setUsername(userData.username);
-          setFirstname(userData.firstname);
-          setLastname(userData.lastname);
+          setUsername(userData.username || "");
+          setFirstname(userData.firstname || "");
+          setLastname(userData.lastname || "");
+          setEmail(userData.email || "");
         } else {
           const errorData = await response.json();
           toast.error(
@@ -48,43 +46,31 @@ const ProfileUpdateForm = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [token]);
 
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar que las contraseñas cumplen con los requisitos
-    if (
-      newPassword &&
-      (newPassword.length < 8 ||
-        !/[A-Z]/.test(newPassword) ||
-        !/[a-z]/.test(newPassword) ||
-        !/\d/.test(newPassword) ||
-        !/[¡!$%^&*()_+|~=`{}:";'<>¿?,.]/.test(newPassword))
-    ) {
-      toast.error("New password does not meet the requirements.");
-      return;
-    }
-
     try {
       setLoading(true);
-      const url = `${import.meta.env.VITE_API_URL}/users/profile `;
+      const url = `${import.meta.env.VITE_API_URL}/users/profile`;
+
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("firstname", firstname);
+      formData.append("lastname", lastname);
+      formData.append("email", email);
+      if (avatar) {
+        formData.append("avatar", avatar);
+      }
 
       const response = await fetch(url, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: token, // Añadir el token aquí
+          Authorization: token,
         },
-        body: JSON.stringify({
-          email,
-          username,
-          firstname,
-          lastname,
-          password,
-          newPassword,
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -96,10 +82,10 @@ const ProfileUpdateForm = () => {
 
         if (textResponse) {
           try {
-            errorData = JSON.parse(textResponse); // Intentar analizar JSON
+            errorData = JSON.parse(textResponse);
           } catch (jsonError) {
             toast.error(`Failed to parse error response: ${errorData.message}`);
-            return; // Salir si no se puede analizar el JSON
+            return;
           }
         } else {
           toast.error(`Received empty error response: ${errorData.message}`);
@@ -111,79 +97,95 @@ const ProfileUpdateForm = () => {
         );
       }
     } catch (error) {
-      toast.error(`Error updating profile: ${errorData.message}`);
+      toast.error(`Error updating profile: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
 
+  // Manejar el reset del formulario
+  const handleReset = () => {
+    setUsername("");
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setAvatar(null);
+  };
+
   return (
     <>
-      <h3 className="h3">Update Your Profile</h3>
+      <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
+        E<span className="text-yellow-500">x</span>periencias
+      </h1>
+      <h2 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mb-3">
+        {" "}
+        <span className="text-cyan-500">D</span>iferentes
+      </h2>
+      <h3 className="h3">Update Profile</h3>
       <div className="div-content">
         <form onSubmit={handleSubmit}>
-          <h2>Update Profile</h2>
-          <label>
-            Email:
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input
+              className="input"
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              value={username}
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="firstname">First Name:</label>
+            <input
+              className="input"
+              type="text"
+              name="firstname"
+              placeholder="Enter first name"
+              value={firstname}
+              required
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="lastname">Last Name:</label>
+            <input
+              className="input"
+              type="text"
+              name="lastname"
+              placeholder="Enter last name"
+              value={lastname}
+              required
+              onChange={(e) => setLastname(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
             <input
               className="input"
               type="email"
+              name="email"
+              placeholder="Enter email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
-          </label>
-          <label>
-            Username:
+          </div>
+          <div>
+            <label htmlFor="avatar">Avatar:</label>
             <input
               className="input"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              type="file"
+              accept="image/*"
+              onChange={(e) => setAvatar(e.target.files[0])}
             />
-          </label>
-          <label>
-            First Name:
-            <input
-              className="input"
-              type="text"
-              value={firstname}
-              onChange={(e) => setFirstname(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Last Name:
-            <input
-              className="input"
-              type="text"
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Current Password:
-            <input
-              className="input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            New Password:
-            <input
-              className="input"
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </label>
+          </div>
           <button className="blue-Button" type="submit" disabled={loading}>
             {loading ? "Updating..." : "Update Profile"}
+          </button>
+          <button className="gray-Button" type="button" onClick={handleReset}>
+            Reset
           </button>
           <ToastContainer />
         </form>
