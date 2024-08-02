@@ -4,6 +4,8 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
 import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
@@ -21,6 +23,7 @@ const HomeExperiences = () => {
       setExperiences(entries);
     } catch (error) {
       setError(error.message);
+      toast.error("Error fetching experiences: " + error.message);
     }
   };
 
@@ -35,6 +38,7 @@ const HomeExperiences = () => {
 
   return (
     <>
+      <ToastContainer />
       <ExperienceFilter
         setSearch={setSearch}
         setOrder={setOrder}
