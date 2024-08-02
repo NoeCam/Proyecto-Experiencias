@@ -1,13 +1,14 @@
 import { useState } from "react";
 import changeRecoverPasswordService from "../services/changeRecoverPasswordService";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ChangeRecoverPassword = () => {
   const [email, setEmail] = useState("");
   const [recoverPassCode, setRecoverPassCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -15,18 +16,22 @@ const ChangeRecoverPassword = () => {
     e.preventDefault();
 
     if (newPassword !== newPasswordRepeat) {
-      setError("Passwords are different");
+      toast.error("Passwords are different");
       return;
     }
 
     try {
       const data = { email, recoverPassCode, newPassword };
-
       const json = await changeRecoverPasswordService(data);
 
-      navigate("/users/login");
+      toast.success("Password successfully changed");
+
+      // Añadir un retraso de 3 segundos antes de navegar a "/users/login"
+      setTimeout(() => {
+        navigate("/users/login");
+      }, 3000);
     } catch (error) {
-      setError(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -53,7 +58,7 @@ const ChangeRecoverPassword = () => {
             />
           </div>
           <div>
-            <label htmlFor="">recovery code</label>
+            <label htmlFor="">Recovery code</label>
             <input
               type="text"
               name="recoverPassCode"
@@ -77,9 +82,9 @@ const ChangeRecoverPassword = () => {
             />
           </div>
           <button>Confirm</button>
-          {error ? <p>{error}</p> : ""}
         </form>
       </div>
+      <ToastContainer />
     </>
   );
 };

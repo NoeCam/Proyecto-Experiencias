@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import setRecoverPasswordService from "../services/setRecoverPasswordService";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const RecoverPasswordForm = () => {
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState("");
-
   const [resp, setResp] = useState("");
 
   const navigate = useNavigate();
@@ -16,16 +16,20 @@ const RecoverPasswordForm = () => {
 
     try {
       const rta = await setRecoverPasswordService(email);
-      //setRta(rta.message);
-      //navegar a una vista para modificar el password
-      navigate("/users/modify-password");
+      setResp(rta.message);
+      toast.success("Recovery email sent successfully");
+      setTimeout(() => {
+        navigate("/users/modify-password");
+      }, 3000);
     } catch (error) {
       setError(error.message);
+      toast.error("Error sending recovery email: " + error.message);
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
@@ -46,8 +50,8 @@ const RecoverPasswordForm = () => {
           />
         </div>
         <button className="blue-Button">Send</button>
-        {error ? <p>{error}</p> : ""}
-        {resp.status == "ok" ? <p>{resp}</p> : ""}
+        {error && <p>{error}</p>}
+        {resp.status === "ok" && <p>{resp}</p>}
       </form>
     </>
   );

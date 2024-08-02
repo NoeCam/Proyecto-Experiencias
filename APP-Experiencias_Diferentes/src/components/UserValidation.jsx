@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import validateUserService from "../services/validateUserService";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserValidation = () => {
   const { registrationCode } = useParams();
@@ -12,8 +14,10 @@ const UserValidation = () => {
       try {
         const response = await validateUserService({ registrationCode });
         setResponse(response);
+        toast.success("User validated successfully");
       } catch (error) {
         setError(error.message);
+        toast.error("Error validating user: " + error.message);
       }
     };
 
@@ -22,6 +26,7 @@ const UserValidation = () => {
 
   return (
     <>
+      <ToastContainer />
       <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
@@ -29,9 +34,9 @@ const UserValidation = () => {
         {" "}
         <span className="text-cyan-500">D</span>iferentes
       </h2>
-      {response.status == "ok" ? (
+      {response.status === "ok" ? (
         <>
-          <h3 className="h3">The user was validated succesfully.</h3>
+          <h3 className="h3">The user was validated successfully.</h3>
           <div className="div-content">
             <h4>Go to Login</h4>
             <div>
@@ -58,7 +63,7 @@ const UserValidation = () => {
         </>
       )}
 
-      <div>{error ? <p>{error}</p> : ""}</div>
+      <div>{error && <p>{error}</p>}</div>
     </>
   );
 };
