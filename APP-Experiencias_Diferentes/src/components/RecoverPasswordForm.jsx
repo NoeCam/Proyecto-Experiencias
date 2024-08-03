@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+
 import setRecoverPasswordService from "../services/setRecoverPasswordService";
 
 const RecoverPasswordForm = () => {
@@ -15,12 +18,17 @@ const RecoverPasswordForm = () => {
     e.preventDefault();
 
     try {
-      const rta = await setRecoverPasswordService(email);
-      //setRta(rta.message);
-      //navegar a una vista para modificar el password
-      navigate("/users/modify-password");
+      const resp = await setRecoverPasswordService(email);
+
+      if (resp.status == "ok") {
+        toast.success(resp.message);
+        setTimeout(() => {
+          navigate("/users/modify-password");
+        }, 2000); // 2000 milisegundos = 2 segundos
+      }
     } catch (error) {
-      setError(error.message);
+      //setError(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -34,21 +42,24 @@ const RecoverPasswordForm = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">Recover password</h3>
-      <form className="div-content" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            className="input"
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <button className="blue-Button">Send</button>
-        {error ? <p>{error}</p> : ""}
-        {resp.status == "ok" ? <p>{resp}</p> : ""}
-      </form>
+      <div className="flex sm:justify-center ">
+        <form className="div-content" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="">Email</label>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <button className="blue-Button">Send</button>
+          {error ? <p>{error}</p> : ""}
+          {resp.status == "ok" ? <p>{resp}</p> : ""}
+        </form>
+      </div>
+      <ToastContainer />
     </>
   );
 };

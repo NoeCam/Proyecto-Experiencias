@@ -55,7 +55,7 @@ async function createTables() {
         description TEXT NOT NULL,
         image VARCHAR(100) NOT NULL,
         date DATE,
-        price VARCHAR(30),
+        price INT NOT NULL,
         numMinPlaces INT,
         numTotalPlaces INT,
         active BOOLEAN DEFAULT true,
