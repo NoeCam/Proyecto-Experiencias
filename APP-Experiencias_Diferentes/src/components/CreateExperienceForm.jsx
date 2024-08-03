@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 
 import createExperienceService from "../services/createExperienceService";
 
+import { useNavigate } from "react-router-dom";
+
 // Estado para los datos del formulario
 const CreateExperienceForm = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,7 @@ const CreateExperienceForm = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const { userLogged, token } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     //Verificar si el usuario es administrador
@@ -77,12 +80,26 @@ const CreateExperienceForm = () => {
       });
       // Llamar al servicio para crear una experiencia
       const response = await createExperienceService(token, formDataToSend);
-
+      const experienceId = response.data.experience.id;
+      console.log(experienceId);
       // Establecer la respuesta en el estado
       //setResp(response);
       setError(null);
-      setError(null);
-      toast.success(response.message);
+
+
+
+      if (response.status == "ok") {
+        toast.success(response.message);
+        setTimeout(() => {
+          navigate(`/experiencias/${experienceId}`);
+        }, 2000); // 2000 milisegundos = 2 segundos
+      } else {
+        // Muestra un mensaje de error si el login falla
+        toast.error("Failed redirection");
+      }
+
+
+
     } catch (error) {
       // Establecer el error en el estado
       //setError(error.message);

@@ -23,6 +23,8 @@ const selectSearchExperiencesService = async (
       e.image,
       e.date,
       e.price,
+      e.numMinPlaces,
+      e.numTotalPlaces,
       e.active,
       IFNULL(v.rating, 0) AS rating,
       IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
