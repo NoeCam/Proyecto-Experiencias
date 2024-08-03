@@ -159,7 +159,7 @@ const CreateExperienceForm = () => {
               />
             </div>
             <div>
-              <label>Price:</label>
+              <label>Price (€):</label>
               <input
                 className="input"
                 type="number"

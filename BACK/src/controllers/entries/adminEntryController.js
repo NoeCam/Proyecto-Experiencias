@@ -4,7 +4,6 @@ import { savePhotoUtils } from "../../utils/photoUtils.js";
 import experienciaSchema from "../../schemas/entries/experienceSchema.js";
 import imgSchema from "../../schemas/imgSchema.js"; // No sabemos si se usa, quizás deberíamos borrarlo.
 
-
 // Función controladora final que agrega una nueva entrada.
 const adminEntryController = async (req, res, next) => {
   try {
@@ -41,7 +40,7 @@ const adminEntryController = async (req, res, next) => {
       numTotalPlaces,
       userId
     );
-    
+
     res.send({
       status: "ok",
       message: "Successfully created experience.",

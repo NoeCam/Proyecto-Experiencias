@@ -143,9 +143,17 @@ const GetExperienceById = () => {
             }
             alt={experience.title}
           />
-          <p>Location: {experience.location}</p>
-          <p>Description: {experience.description}</p>
-          <p>Date: {formatDate(experience.date)}</p>
+          <p className="m-3">
+            <span className="font-bold">Location:</span> {experience.location}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Description:</span>{" "}
+            {experience.description}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Date:</span>
+            {formatDate(experience.date)}
+          </p>
           {reservation.userId == userLogged &&
           (yearExperience < year ||
             (yearExperience === year && monthExperience < month) ||
@@ -153,28 +161,46 @@ const GetExperienceById = () => {
               monthExperience === month &&
               dayExperience < day)) ? (
             <div>
-              <h3>Value the experience</h3> <RatingValue />{" "}
+              <h3 className="font-bold">Value the experience</h3>{" "}
+              <RatingValue />{" "}
             </div>
           ) : (
             <div>
-              <h3>Experience's ratings</h3> <ReadonlyRating />
+              <h3 className="font-bold">Experience's ratings</h3>{" "}
+              <ReadonlyRating />
             </div>
           )}
-          <p>Price: {experience.price}</p>
-          <p>Active: {experience.active}</p>
-          <p>Rating: {experience.rating}</p>
-          <p>
-            Available Places:{" "}
-            {experience.availablePlaces > 0
+          <p className="m-3">
+            <span className="font-bold">Price:</span> {experience.price} €
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Active:</span> {experience.active}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Rating:</span> {experience.rating}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Available Places:</span>{" "}
+            {experience.availablePlaces
               ? experience.availablePlaces - reservation.quantityPerPerson
               : experience.availablePlaces}
           </p>
-          <p>Confirmed: {experience.confirmed}</p>
+          <p className="mb-3">
+            <span className="font-bold">Confirmed:</span> {experience.confirmed}
+          </p>
           {userLogged ? (
             <div className="flex flex-col items-center justify-center">
-              <p>valoratedByMe: {experience.valoratedByMe}</p>
-              <p>reservedByMe: {experience.reservedByMe ? "Yes" : "No"}</p>
-              <label>Number of Places to reserve:</label>
+              <p className="mb-3">
+                <span className="font-bold">Valorated By Me:</span>{" "}
+                {experience.valoratedByMe}
+              </p>
+              <p className="mb-3">
+                <span className="font-bold">Reserved By Me:</span>{" "}
+                {experience.reservedByMe ? "Yes" : "No"}
+              </p>
+              <label>
+                <span className="font-bold">Number of Places to reserve:</span>
+              </label>
               <div>
                 <button
                   onClick={() => changeNumber(-1)}

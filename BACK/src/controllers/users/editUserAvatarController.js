@@ -12,7 +12,7 @@ const editUserAvatarController = async (req, res, next) => {
     }
 
     //guardo el archivo nuevo en uploads y le doy en ancho de imagen
-    const avatarName = await savePhotoUtils(req.files.avatar, 100);
+    const avatarName = await savePhotoUtils(req.files.avatar, 500);
     // actualizo la tabla users en la base de datos
     await updateUserAvatarService(avatarName, req.user.id);
     res.send({

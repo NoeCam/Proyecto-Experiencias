@@ -29,7 +29,7 @@ const ViewUserProfile = () => {
       <div className="flex sm:justify-center ">
         <div className="div-content">
           <img
-            className="w-32"
+            className="w-56 bg-contain mb-5 rounded-full"
             src={
               userLogged.avatar
                 ? `${import.meta.env.VITE_API_URL}/uploads/${userLogged.avatar}`
@@ -37,11 +37,22 @@ const ViewUserProfile = () => {
             }
             alt="User Avatar"
           />
-          <p>Username: {userLogged.username}</p>
-          <p>First name: {userLogged.firstname}</p>
-          <p>Last name: {userLogged.lastname}</p>
-          <p>email: {userLogged.email}</p>
-          <p>role: {userLogged.role}</p>
+          <p className="mb-3">
+            <span className="font-bold"> Username:</span> {userLogged.username}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">First name:</span>{" "}
+            {userLogged.firstname}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Last name:</span> {userLogged.lastname}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">E-mail:</span> {userLogged.email}
+          </p>
+          <p className="mb-3">
+            <span className="font-bold">Role:</span> {userLogged.role}
+          </p>
           <button
             className="blue-Button"
             type="submit"
@@ -61,7 +72,7 @@ const ViewUserProfile = () => {
       </div>
     </>
   ) : (
-    <Header />
+    navigate("/")
   );
 };
 

@@ -7,6 +7,10 @@
     @apply bg-cyan-500 rounded-3xl mx-1 mt-5 px-4 py-1 text-white font-medium justify-center;
   }
 
+  .grey-Button {
+    @apply bg-gray-500 rounded-3xl mx-1 mt-5 px-4 py-1 text-white font-medium justify-center;
+  }
+
   .white-Button {
     @apply bg-white rounded-3xl m-1 px-4 py-1 font-medium justify-center block text-center;
   }

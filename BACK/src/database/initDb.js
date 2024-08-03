@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import getPool from "./getPool.js";
 
 import {
@@ -90,11 +92,13 @@ async function createTables() {
       )
       `);
 
+    const hashedPass = await bcrypt.hash(ADMIN_PASSWORD, 10);
+
     await pool.query(`
       INSERT INTO users(email, password, username, firstName, lastName, active, role)
       VALUES (
         "${ADMIN_EMAIL}",
-        "${ADMIN_PASSWORD}",
+        "${hashedPass}",
         "${ADMIN_FIRST_NAME}_${ADMIN_LAST_NAME}",
         "${ADMIN_FIRST_NAME}",
         "${ADMIN_LAST_NAME}",
