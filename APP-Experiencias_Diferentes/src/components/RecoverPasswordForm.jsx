@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import setRecoverPasswordService from "../services/setRecoverPasswordService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RecoverPasswordForm = () => {
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState("");
-
   const [resp, setResp] = useState("");
 
   const navigate = useNavigate();
@@ -18,22 +18,21 @@ const RecoverPasswordForm = () => {
     e.preventDefault();
 
     try {
-      const resp = await setRecoverPasswordService(email);
-
-      if (resp.status == "ok") {
-        toast.success(resp.message);
-        setTimeout(() => {
-          navigate("/users/modify-password");
-        }, 2000); // 2000 milisegundos = 2 segundos
-      }
+      const rta = await setRecoverPasswordService(email);
+      setResp(rta.message);
+      toast.success("Recovery email sent successfully");
+      setTimeout(() => {
+        navigate("/users/modify-password");
+      }, 2000);
     } catch (error) {
-      //setError(error.message);
-      toast.error(error.message);
+      setError(error.message);
+      toast.error("Error sending recovery email: " + error.message);
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
@@ -59,7 +58,6 @@ const RecoverPasswordForm = () => {
           {resp.status == "ok" ? <p>{resp}</p> : ""}
         </form>
       </div>
-      <ToastContainer />
     </>
   );
 };

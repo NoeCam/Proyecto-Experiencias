@@ -71,7 +71,7 @@ const insertUserModel = async (
     await sendMailUtil(email, emailSubject, emailBody);
   } catch (error) {
     console.error(error);
-    throw new Error("Error inserting user");
+    throw new Error("Username or Email already registared");
   } finally {
     // Liberamos la conexión.
     if (connection) connection.release();

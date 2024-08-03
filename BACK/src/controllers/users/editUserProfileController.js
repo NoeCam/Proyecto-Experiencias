@@ -3,6 +3,7 @@ import updateUserProfileModel from "../../models/users/updateUserProfileModel.js
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
 import bcrypt from "bcrypt";
+import { savePhotoUtils, deletePhotoUtils } from "../../utils/photoUtils.js";
 
 const editUserProfileController = async (req, res, next) => {
   try {
@@ -12,6 +13,7 @@ const editUserProfileController = async (req, res, next) => {
         message: "Unauthenticated user",
       });
     }
+
     // Validamos el body con Joi.
     await validateSchemaUtil(editUserProfileSchema, req.body);
 
@@ -39,7 +41,7 @@ const editUserProfileController = async (req, res, next) => {
       }
     }
 
-    // Si se proporciona una nueva contraseña, la ciframos.
+    // Actualizamos los datos del usuario.
     const updatedData = {
       username: req.body.username,
       firstname: req.body.firstname,
@@ -47,11 +49,24 @@ const editUserProfileController = async (req, res, next) => {
       email: req.body.email,
     };
 
+    // Si se proporciona una nueva contraseña, la ciframos.
     if (req.body.newPassword) {
       updatedData.password = await bcrypt.hash(req.body.newPassword, 10);
     }
 
-    // Actualizamos los datos del usuario.
+    // Manejo del avatar.
+    if (req.files?.avatar) {
+      // Borra el avatar anterior si existe
+      if (user.avatar) {
+        await deletePhotoUtils(user.avatar);
+      }
+
+      // Guarda el nuevo avatar
+      const avatarName = await savePhotoUtils(req.files.avatar, 100);
+      updatedData.avatar = avatarName;
+    }
+
+    // Actualizamos los datos del usuario en la base de datos.
     const updatedUser = await updateUserProfileModel(req.user.id, updatedData);
 
     res.status(200).json({
