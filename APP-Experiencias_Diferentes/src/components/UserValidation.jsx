@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import validateUserService from "../services/validateUserService";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UserValidation = () => {
