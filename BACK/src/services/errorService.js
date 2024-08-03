@@ -106,6 +106,6 @@ export const validationError = (message) => {
   throw {
     httpStatus: 400, // Bad Request
     code: "MISSING_FIELDS",
-    message: "Validation error.",
+    message: message,
   };
 };
