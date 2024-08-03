@@ -7,7 +7,7 @@ const experienciaSchema = Joi.object({
   location: Joi.string().max(30).required().messages(joiErrorMessages),
   description: Joi.string().required().messages(joiErrorMessages),
   date: Joi.date().required(),
-  price: Joi.string().required(),
+  price: Joi.number().required(),
   numMinPlaces: Joi.number().integer().positive().required(),
   numTotalPlaces: Joi.number().integer().positive().required(),
   confirmedByAdmin: Joi.boolean(),

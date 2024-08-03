@@ -140,114 +140,116 @@ const EditExperienceForm = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">Edit Experience</h3>
-      <div className="flex text-center justify-center">
-        <form className="div-content-not-center" onSubmit={handleSubmit}>
-          <div>
-            <label>Title:</label>
-            <input
-              className="input"
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Location:</label>
-            <input
-              className="input"
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Description:</label>
-            <textarea
-              className="input"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Image URL:</label>
-            <input
-              type="file"
-              name="image"
-              onChange={handleChangeImage}
-              required
-            />
-          </div>
-          <div>
-            <label>Date:</label>
-            <input
-              className="input"
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Price:</label>
-            <input
-              className="input"
-              type="text"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Minimum Number of Places:</label>
-            <input
-              className="input"
-              type="number"
-              name="numMinPlaces"
-              value={formData.numMinPlaces}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Total Number of Places:</label>
-            <input
-              className="input"
-              type="number"
-              name="numTotalPlaces"
-              value={formData.numTotalPlaces}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label>Confirmed by Admin:</label>
-            <input
-              type="checkbox"
-              name="confirmedByAdmin"
-              checked={formData.confirmedByAdmin}
-              onChange={handleChangeBoolean}
-            />
-          </div>
-          <div>
-            <input
-              className="blue-Button"
-              type="submit"
-              value="Edit Experience"
-            />
-          </div>
-          <div>
-            {error ? <p>{error}</p> : ""}
-            {resp.status === "ok" ? <p>{resp.message}</p> : ""}
-          </div>
-        </form>
+      <div className="flex sm:justify-center ">
+        <div className="div-content">
+          <form className="mx-8 sm:m-0" onSubmit={handleSubmit}>
+            <div>
+              <label>Title:</label>
+              <input
+                className="input"
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Location:</label>
+              <input
+                className="input"
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Description:</label>
+              <textarea
+                className="input"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Image URL:</label>
+              <input
+                type="file"
+                name="image"
+                onChange={handleChangeImage}
+                required
+              />
+            </div>
+            <div>
+              <label>Date:</label>
+              <input
+                className="input"
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Price:</label>
+              <input
+                className="input"
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Minimum Number of Places:</label>
+              <input
+                className="input"
+                type="number"
+                name="numMinPlaces"
+                value={formData.numMinPlaces}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Total Number of Places:</label>
+              <input
+                className="input"
+                type="number"
+                name="numTotalPlaces"
+                value={formData.numTotalPlaces}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Confirmed by Admin:</label>
+              <input
+                type="checkbox"
+                name="confirmedByAdmin"
+                checked={formData.confirmedByAdmin}
+                onChange={handleChangeBoolean}
+              />
+            </div>
+            <div className="text-center">
+              <input
+                className="blue-Button"
+                type="submit"
+                value="Edit Experience"
+              />
+            </div>
+            <div>
+              {error ? <p>{error}</p> : ""}
+              {resp.status === "ok" ? <p>{resp.message}</p> : ""}
+            </div>
+          </form>
+        </div>
       </div>
       <ToastContainer />
     </>

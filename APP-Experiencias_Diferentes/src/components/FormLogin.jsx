@@ -43,7 +43,7 @@ function FormLogin() {
           navigate("/");
         }, 3000); // 3000 milisegundos = 3 segundos
       } else {
-        // Muestra un mensaje de error si el registro falla
+        // Muestra un mensaje de error si el login falla
         toast.error("Login failed");
       }
     } catch (error) {
@@ -61,9 +61,9 @@ function FormLogin() {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">Login</h3>
-      <div className="div-content">
-        <form onSubmit={handleFormSubmit}>
-          <div>
+      <div className="flex sm:justify-center ">
+        <div className="div-content">
+          <form className="mx-8 sm:m-0" onSubmit={handleFormSubmit}>
             <label htmlFor="email">Email</label>
             <input
               className="input"
@@ -74,10 +74,8 @@ function FormLogin() {
               required
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
 
-          <div>
-            <label htmlFor="password">Pasword</label>
+            <label htmlFor="password">Password</label>
             <input
               className="input"
               type="password"
@@ -86,19 +84,19 @@ function FormLogin() {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
 
-          <div>
-            <input className="blue-Button" type="submit" value="Log in" />
+            <div className="text-center">
+              <input className="blue-Button" type="submit" value="Log in" />
 
-            <Link className="blue-Button" to="/users/recover-password">
-              Recover Password
-            </Link>
-          </div>
+              <Link className="blue-Button" to="/users/recover-password">
+                Recover Password
+              </Link>
+            </div>
 
-          <div>{error && <p>{error}</p>}</div>
-          <div>{resp.status === "ok" && <p>{resp.message}</p>}</div>
-        </form>
+            <div>{error && <p>{error}</p>}</div>
+            <div>{resp.status === "ok" && <p>{resp.message}</p>}</div>
+          </form>
+        </div>
       </div>
       <ToastContainer />
     </>

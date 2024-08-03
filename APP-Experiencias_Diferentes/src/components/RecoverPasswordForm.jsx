@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+
 import setRecoverPasswordService from "../services/setRecoverPasswordService";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const RecoverPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +23,7 @@ const RecoverPasswordForm = () => {
       toast.success("Recovery email sent successfully");
       setTimeout(() => {
         navigate("/users/modify-password");
-      }, 3000);
+      }, 2000);
     } catch (error) {
       setError(error.message);
       toast.error("Error sending recovery email: " + error.message);
@@ -38,21 +41,23 @@ const RecoverPasswordForm = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">Recover password</h3>
-      <form className="div-content" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            className="input"
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <button className="blue-Button">Send</button>
-        {error && <p>{error}</p>}
-        {resp.status === "ok" && <p>{resp}</p>}
-      </form>
+      <div className="flex sm:justify-center ">
+        <form className="div-content" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="">Email</label>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <button className="blue-Button">Send</button>
+          {error ? <p>{error}</p> : ""}
+          {resp.status == "ok" ? <p>{resp}</p> : ""}
+        </form>
+      </div>
     </>
   );
 };
