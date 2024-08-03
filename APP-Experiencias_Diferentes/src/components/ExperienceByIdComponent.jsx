@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import makeReservationService from "../services/makeReserevationService";
 import getExperienceService from "../services/getExperienceService";
-import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
+import { RatingValue, ReadonlyRating } from "./RatingStar";
 
 // Importa los componentes ToastContainer y toast de react-toastify para mostrar notificaciones
 import { ToastContainer, toast } from "react-toastify";

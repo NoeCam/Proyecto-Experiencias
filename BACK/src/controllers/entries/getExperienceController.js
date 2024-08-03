@@ -9,11 +9,9 @@ const getExperienceController = async (req, res, next) => {
       null,
       req.user.id
     );
-
     const experience = experiences.find(
       (exp) => exp.id === parseInt(experienceId)
     );
-
     res.send({
       status: "ok",
       data: {

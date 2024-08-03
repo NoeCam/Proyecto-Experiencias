@@ -84,8 +84,8 @@ const HomeExperiences = () => {
                 {/*<p>Rating: {experience.rating}</p>>*/}
 
                 <ReadonlyRating
-                  value={Number(experience.rating)}
-                  className="flex flex-wrap"
+                  value={Number(experience.rating)} // Por defecto, muestra 4 estrellas pintadas
+                  className="flex justify-center"
                 />
 
                 {/*  <p>Available Places: {experience.availablePlaces}</p>

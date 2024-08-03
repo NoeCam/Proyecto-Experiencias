@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -21,19 +21,20 @@ const EditExperienceForm = () => {
     numTotalPlaces: "",
     confirmedByAdmin: false,
   });
-
   // Estado para los errores
   const [error, setError] = useState("");
   // Estado para la respuesta de la API
   const [resp, setResp] = useState("");
-
+  
   const [isAdmin, setIsAdmin] = useState(false);
   const { userLogged, token } = useContext(AuthContext);
-
+  
+  const navigate = useNavigate();
+  
   // Efecto para obtener los detalles de la experiencia cuando el componente se monta
   useEffect(() => {
     // Verificar si el usuario es administrador
-
+    
     if (userLogged?.role && userLogged.role === "admin") {
       setIsAdmin(true);
     } else {
@@ -41,12 +42,12 @@ const EditExperienceForm = () => {
       toast.error(error.message);
       return;
     }
-
+    
     const fetchExperience = async () => {
       try {
         // Llamar al servicio para obtener los detalles de la experiencia
         const experience = await getExperienceService(experienceId, token);
-
+        
         // Asegúrate de que la estructura de datos coincida con formData
         setFormData({
           title: experience.title || "",
@@ -54,8 +55,8 @@ const EditExperienceForm = () => {
           description: experience.description || "",
           image: experience.image || "",
           date: experience.date
-            ? new Date(experience.date).toISOString().split("T")[0]
-            : "",
+          ? new Date(experience.date).toISOString().split("T")[0]
+          : "",
           price: experience.price || "",
           numMinPlaces: experience.numMinPlaces || "",
           numTotalPlaces: experience.numTotalPlaces || "",
@@ -69,7 +70,8 @@ const EditExperienceForm = () => {
     };
     fetchExperience();
   }, [experienceId, userLogged]);
-
+  
+  console.log(formData);
   // Manejar cambios en el campo imagen
   const handleChangeImage = (e) => {
     setFormData({
@@ -118,10 +120,19 @@ const EditExperienceForm = () => {
       // Establecer la respuesta en el estado
       //setResp(response);
       setError(null);
-      toast.success(response.message);
+
+      if (response.status == "ok") {
+        toast.success(response.message);
+        setTimeout(() => {
+          navigate(`/experiencias/${experienceId}`);
+        }, 2000); // 2000 milisegundos = 2 segundos
+      } else {
+        // Muestra un mensaje de error si el login falla
+        toast.error("Failed redirection");
+      }
     } catch (error) {
       // Establecer el error en el estado
-      setError(error.message);
+      // setError(error.message);
       toast.error(error.message);
     }
   };
@@ -180,6 +191,7 @@ const EditExperienceForm = () => {
               <input
                 type="file"
                 name="image"
+                
                 onChange={handleChangeImage}
                 required
               />

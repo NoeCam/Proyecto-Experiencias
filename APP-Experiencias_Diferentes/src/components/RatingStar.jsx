@@ -1,25 +1,58 @@
-import { Rating } from "@material-tailwind/react";
+import { useState } from 'react';
 
 export function DefaultRating() {
-  return <Rating value={4} />;
+  return <ReadonlyRating value={4} />;
 }
 
-export function RatingValue() {
+export function RatingValue({ initialValue = 4, onChange }) {
+  const [rating, setRating] = useState(initialValue);
+  const [hoveredValue, setHoveredValue] = useState(null);
+
+  const handleMouseEnter = (index) => setHoveredValue(index + 1);
+  const handleMouseLeave = () => setHoveredValue(null);
+  const handleClick = (index) => {
+    setRating(index + 1);
+    onChange(index + 1);
+  };
+
   return (
-    <div>
-      <Rating className="text-amber-400 w-5" />
+    <div className="flex justify-center space-x-1">
+      {Array.from({ length: 5 }, (_, index) => (
+        <svg
+          key={index}
+          xmlns="http://www.w3.org/2000/svg"
+          className={`h-5 w-5 cursor-pointer ${
+            (hoveredValue || rating) > index ? 'text-amber-400' : 'text-gray-300'
+          }`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => handleClick(index)}
+        >
+          <path d="M9.049 2.927C9.243 2.364 9.755 2 10.381 2c.625 0 1.138.364 1.332.927l1.162 3.579h3.666c.593 0 1.12.357 1.342.914.22.558.074 1.194-.364 1.616l-2.985 2.626 1.162 3.579c.194.563.074 1.199-.364 1.616-.439.418-1.075.574-1.665.395l-3.016-1.067-3.015 1.067c-.59.179-1.226.023-1.665-.395-.438-.417-.558-1.053-.364-1.616l1.162-3.579-2.985-2.626c-.438-.422-.584-1.058-.364-1.616.222-.557.75-.914 1.342-.914h3.666L9.049 2.927z" />
+        </svg>
+      ))}
     </div>
   );
 }
 
 export function ReadonlyRating({ value }) {
   return (
-    <Rating
-      value={value}
-      readonly
-      unratedColor="amber"
-      ratedColor="amber"
-      className="text-amber-400 w-5"
-    />
+    <div className="flex justify-center space-x-1">
+      {Array.from({ length: 5 }, (_, index) => (
+        <svg
+          key={index}
+          xmlns="http://www.w3.org/2000/svg"
+          className={`h-5 w-5 ${
+            value > index ? 'text-amber-400' : 'text-gray-300'
+          }`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927C9.243 2.364 9.755 2 10.381 2c.625 0 1.138.364 1.332.927l1.162 3.579h3.666c.593 0 1.12.357 1.342.914.22.558.074 1.194-.364 1.616l-2.985 2.626 1.162 3.579c.194.563.074 1.199-.364 1.616-.439.418-1.075.574-1.665.395l-3.016-1.067-3.015 1.067c-.59.179-1.226.023-1.665-.395-.438-.417-.558-1.053-.364-1.616l1.162-3.579-2.985-2.626c-.438-.422-.584-1.058-.364-1.616.222-.557.75-.914 1.342-.914h3.666L9.049 2.927z" />
+        </svg>
+      ))}
+    </div>
   );
 }
