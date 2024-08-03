@@ -10,7 +10,7 @@ const verifyAdmin = async (req, res, next) => {
     }
     next();
   } catch (error) {
-    next(err);
+    next(error);
   }
 };
 
