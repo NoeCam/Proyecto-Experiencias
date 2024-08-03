@@ -62,7 +62,7 @@ const editUserProfileController = async (req, res, next) => {
       }
 
       // Guarda el nuevo avatar
-      const avatarName = await savePhotoUtils(req.files.avatar, 100);
+      const avatarName = await savePhotoUtils(req.files.avatar, 500);
       updatedData.avatar = avatarName;
     }
 

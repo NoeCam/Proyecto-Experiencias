@@ -9,6 +9,7 @@ const ChangeRecoverPassword = () => {
   const [recoverPassCode, setRecoverPassCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 

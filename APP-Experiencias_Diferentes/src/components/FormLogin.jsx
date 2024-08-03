@@ -41,7 +41,7 @@ function FormLogin() {
         toast.success(response.message);
         setTimeout(() => {
           navigate("/");
-        }, 3000); // 3000 milisegundos = 3 segundos
+        }, 2000); // 2000 milisegundos = 2 segundos
       } else {
         // Muestra un mensaje de error si el login falla
         toast.error("Login failed");

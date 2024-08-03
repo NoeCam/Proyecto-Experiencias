@@ -31,6 +31,10 @@ const editExperienceController = async (req, res, next) => {
       confirmedByAdmin,
     } = req.body;
 
+    if (experienceId.image) {
+      await deletePhotoUtils(experienceId.image);
+    }
+
     let image = null;
     if (req.files) {
       image = await savePhotoUtils(req.files.image, 500);

@@ -50,15 +50,7 @@ const Header = () => {
             />
             <p className="text-NavBar">Home</p>
           </Link>
-          <>&nbsp;</>
-          <Link to="/users/profile">
-            <img
-              className="icon-NavBar"
-              src="/src/assets/iconUserProfile.svg"
-              alt={userLogged.username}
-            />
-            <p className="text-NavBar">{userLogged.username}</p>
-          </Link>
+
           {userLogged?.role && userLogged.role === "admin" ? (
             <>
               &nbsp;
@@ -74,6 +66,16 @@ const Header = () => {
           ) : (
             ""
           )}
+
+          <>&nbsp;</>
+          <Link to="/users/profile">
+            <img
+              className="icon-NavBar"
+              src="/src/assets/iconUserProfile.svg"
+              alt={userLogged.username}
+            />
+            <p className="text-NavBar">{userLogged.username}</p>
+          </Link>
         </nav>
       ) : (
         ""
