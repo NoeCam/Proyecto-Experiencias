@@ -2,19 +2,10 @@ import updateExperienceService from "../../services/entries/updateExperienceServ
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 import editExperienceSchema from "../../schemas/entries/editExperienceSchema.js";
 
-import { savePhotoUtils } from "../../utils/photoUtils.js";
+import { savePhotoUtils, deletePhotoUtils } from "../../utils/photoUtils.js";
 
 const editExperienceController = async (req, res, next) => {
   try {
-    // Verificar que el usuario sea admin
-    // const userId = req.user.id;
-    // const isAdmin = await verifyAdmin(userId);
-    // if (!isAdmin) {
-    //   return res.status(403).send({
-    //     status: "error",
-    //     message: "You do not have permission to perform this action",
-    //   });
-    // }
     const experienceId = req.params.experienceId;
 
     //Validar el body con Joi.
@@ -24,6 +15,7 @@ const editExperienceController = async (req, res, next) => {
       title,
       location,
       description,
+      oldImage,
       date,
       price,
       numMinPlaces,
@@ -31,12 +23,12 @@ const editExperienceController = async (req, res, next) => {
       confirmedByAdmin,
     } = req.body;
 
-    if (experienceId.image) {
-      await deletePhotoUtils(experienceId.image);
-    }
+    let image = oldImage ?? null;
 
-    let image = null;
     if (req.files) {
+      if (image) {
+        await deletePhotoUtils(image);
+      }
       image = await savePhotoUtils(req.files.image, 500);
     }
 

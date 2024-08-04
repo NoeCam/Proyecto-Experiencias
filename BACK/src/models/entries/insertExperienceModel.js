@@ -11,8 +11,11 @@ const insertExperienceModel = async (
   price,
   numMinPlaces,
   numTotalPlaces,
+  confirmedByAdmin,
   userId
 ) => {
+  const confirmedByAdminBoolean = confirmedByAdmin == "true" ? true : false;
+
   const pool = await getPool();
   // Insertamos la entrada.
   const result = await pool.query(
@@ -25,8 +28,9 @@ const insertExperienceModel = async (
       price, 
       numMinPlaces, 
       numTotalPlaces,
+      confirmedByAdmin,
       userId) 
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       title,
       location,
@@ -36,6 +40,7 @@ const insertExperienceModel = async (
       price,
       numMinPlaces,
       numTotalPlaces,
+      confirmedByAdminBoolean,
       userId,
     ]
   );

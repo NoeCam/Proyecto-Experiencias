@@ -15,6 +15,7 @@ const adminEntryController = async (req, res, next) => {
       price,
       numMinPlaces,
       numTotalPlaces,
+      confirmedByAdmin,
     } = req.body;
 
     const userId = req.user?.id;
@@ -38,6 +39,7 @@ const adminEntryController = async (req, res, next) => {
       price,
       numMinPlaces,
       numTotalPlaces,
+      confirmedByAdmin,
       userId
     );
 
@@ -55,6 +57,7 @@ const adminEntryController = async (req, res, next) => {
           price,
           numMinPlaces,
           numTotalPlaces,
+          confirmedByAdmin,
           userId,
           createdAt: new Date(),
         },
