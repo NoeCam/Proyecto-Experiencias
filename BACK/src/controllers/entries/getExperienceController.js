@@ -7,7 +7,7 @@ const getExperienceController = async (req, res, next) => {
       null,
       null,
       null,
-      req.user.id
+      req.user?.id
     );
     const experience = experiences.find(
       (exp) => exp.id === parseInt(experienceId)

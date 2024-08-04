@@ -63,7 +63,6 @@ const RegistrationForm = () => {
       // Muestra un mensaje de éxito si el registro es exitoso
       if (response.status === "ok") {
         toast.success(response.message);
-        setError("");
       } else {
         // Muestra un mensaje de error si el registro falla
         toast.error("Registration failed");

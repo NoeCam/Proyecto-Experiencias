@@ -66,7 +66,7 @@ router.get(
 // Endpoint para visualizar una experiencia específica
 router.get(
   "/experiencias/:experienceId",
-  authUserController,
+  getUserController,
   getExperienceController
 );
 
