@@ -1,7 +1,6 @@
 import duplicateExperienceModel from "../../models/entries/duplicateExperienceModel.js"; // Importa el modelo de duplicación.
 import insertPhotoModel from "../../models/entries/insertExperienceModel.js"; // Importa el modelo para insertar fotos.
-import { savePhotoService } from "../../services/photoService.js"; // Importa el servicio de guardado de fotos.
-import verifyAdmin from "../../middleware/verifyAdminController.js";
+import { savePhotoUtils } from "../../utils/photoUtils.js"; // Importa el servicio de guardado de fotos.
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 import duplicateExperienceSchema from "../../schemas/entries/duplicateExperienceSchema.js";
 
@@ -13,15 +12,6 @@ const duplicateExperienceController = async (req, res, next) => {
     // Validar el parámetro id con Joi.
     await validateSchemaUtil(duplicateExperienceSchema, req.params);
 
-    // Verificar que el usuario sea admin
-    // const isAdmin = await verifyAdmin(id);
-    // if (!isAdmin) {
-    //   return res.status(403).send({
-    //     status: "error",
-    //     message: "You do not have permission to perform this action",
-    //   });
-    // }
-
     // Duplica la experiencia original.
     const newExperienceId = await duplicateExperienceModel(id, req.user.id);
 
@@ -30,7 +20,7 @@ const duplicateExperienceController = async (req, res, next) => {
     // Si hay archivos en la solicitud, se procesan las fotos.
     if (req.files) {
       for (const photo of Object.values(req.files).slice(0, 3)) {
-        const photoName = await savePhotoService(photo, 500); // Guarda la foto y obtiene el nombre.
+        const photoName = await savePhotoUtils(photo, 500); // Guarda la foto y obtiene el nombre.
         const photoId = await insertPhotoModel(photoName, newExperienceId); // Inserta la foto en la base de datos.
         photos.push({ id: photoId, name: photoName }); // Añade la foto al array de fotos.
       }

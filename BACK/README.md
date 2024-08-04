@@ -19,7 +19,7 @@ npm run initDB
 ## RUTAS USERS
 
 POST /users/register -------------------> http://localhost:{PORT}/users/register
-PUT /users/validate/:registrarionCode --> http://localhost:{PORT}/user/validate/:registrarionCode
+PUT /users/validate/:registrarionCode --> http://localhost:{PORT}/users/validate/:registrarionCode
 POST /users/login ----------------------> http://localhost:{PORT}/users/login
 POST /users/recover-password -----------> http://localhost:{PORT}/users/recover-password
 PUT /users/password --------------------> http://localhost:{PORT}/users/password
