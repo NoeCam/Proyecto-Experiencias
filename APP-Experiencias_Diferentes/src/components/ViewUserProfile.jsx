@@ -66,6 +66,13 @@ const ViewUserProfile = () => {
           >
             Edit Profile
           </button>
+          {/* Botón para ir a la página de cambio de contraseña */}
+          <button
+            className="blue-Button"
+            onClick={() => navigate("/users/change-password")}
+          >
+            Change Password
+          </button>
         </div>
       </div>
     </>

@@ -16,6 +16,7 @@ import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
 import PageNotFound from "./components/PageNotFoundComponent";
+import ChangePassword from "./pages/ChangePassword.jsx";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/users/recover-password" element={<RecoverPassword />} />
           <Route path="/users/modify-password" element={<ModifyPassword />} />
           <Route path="/users/password" element={<NewPassword />} />
+          <Route path="/users/change-password" element={<ChangePassword />} />
           <Route path="/users/profile" element={<UserProfile />} />
           <Route path="/users/edit-profile" element={<ProfileUpdate />} />
           <Route

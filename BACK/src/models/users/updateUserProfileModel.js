@@ -1,12 +1,11 @@
 import getPool from "../../database/getPool.js";
-import bcrypt from "bcrypt";
 
 const updateUserProfileModel = async (userId, data) => {
   if (!userId || !data || Object.keys(data).length === 0) {
     throw new Error("Invalid input: No data provided for update.");
   }
 
-  const { username, firstname, lastname, email, role, password, avatar } = data; // Incluye el campo avatar
+  const { username, firstname, lastname, email, role, avatar } = data; // Excluye el campo password
   const pool = await getPool();
 
   const setFragments = [];
@@ -31,10 +30,6 @@ const updateUserProfileModel = async (userId, data) => {
   if (role) {
     setFragments.push(`role = ?`);
     values.push(role);
-  }
-  if (password !== undefined) {
-    setFragments.push(`password = ?`);
-    values.push(password);
   }
   if (avatar) {
     setFragments.push(`avatar = ?`); // Añade la actualización del campo avatar
