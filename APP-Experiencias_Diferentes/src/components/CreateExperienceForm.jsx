@@ -34,6 +34,7 @@ const CreateExperienceForm = () => {
 
     if (userLogged?.role && userLogged.role === "admin") {
       setIsAdmin(true);
+      setError("");
     } else {
       setError(error.message);
       toast.error(error.message);
@@ -50,10 +51,10 @@ const CreateExperienceForm = () => {
 
   // Manejar cambios en el campos del formulario booleano
   const handleChangeBoolean = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: checked,
     });
   };
   // Manejar cambios en los campos del formulario
@@ -81,12 +82,10 @@ const CreateExperienceForm = () => {
       // Llamar al servicio para crear una experiencia
       const response = await createExperienceService(token, formDataToSend);
       const experienceId = response.data.experience.id;
-      console.log(experienceId);
+
       // Establecer la respuesta en el estado
       //setResp(response);
       setError(null);
-
-
 
       if (response.status == "ok") {
         toast.success(response.message);
@@ -97,9 +96,6 @@ const CreateExperienceForm = () => {
         // Muestra un mensaje de error si el login falla
         toast.error("Failed redirection");
       }
-
-
-
     } catch (error) {
       // Establecer el error en el estado
       //setError(error.message);
@@ -164,7 +160,7 @@ const CreateExperienceForm = () => {
                 required
               />
             </div>
-            <div>
+            <div className="mt-3">
               <label>Date:</label>
               <input
                 className="input"
