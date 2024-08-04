@@ -9,7 +9,6 @@ const getAdminExperienceService = async (token) => {
     },
   });
   const json = await response.json();
-  console.log(json.data.experiences, "aqui");
 
   if (!response.ok) {
     throw new Error(json.message || "Error en la solicitud"); // Proporciona un mensaje de error si la solicitud falla

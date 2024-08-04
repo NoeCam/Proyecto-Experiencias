@@ -1,13 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import { RatingValue, ReadonlyRating } from "./RatingStar";
+import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
 import makeReservationService from "../services/makeReserevationService";
 import getExperienceService from "../services/getExperienceService";
-import { RatingValue, ReadonlyRating } from "./RatingStar";
-
-// Importa los componentes ToastContainer y toast de react-toastify para mostrar notificaciones
-import { ToastContainer, toast } from "react-toastify";
+import DuplicateExperienceComponent from "./DuplicateExperienceComponent";
 
 const GetExperienceById = () => {
   // Ruta al Back
@@ -257,12 +256,16 @@ const GetExperienceById = () => {
             ""
           )}
           {userLogged?.role && userLogged.role === "admin" ? (
-            <Link
-              className="blue-Button"
-              to={`/experiencias/edit/${experienceId}`}
-            >
-              Edit your experience
-            </Link>
+            <>
+              <Link
+                className="blue-Button"
+                to={`/experiencias/edit/${experienceId}`}
+              >
+                Edit your experience
+              </Link>
+
+              <DuplicateExperienceComponent />
+            </>
           ) : (
             ""
           )}
