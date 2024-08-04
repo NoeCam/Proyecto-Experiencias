@@ -25,7 +25,7 @@ const GetExperienceById = () => {
   // Estado para los datos del formulario
   const [reservation, setReservation] = useState({
     quantityPerPerson: 0,
-    state: false,
+    state: true,
   });
 
   // Estado para los errores
@@ -39,6 +39,7 @@ const GetExperienceById = () => {
         const experience = await getExperienceService(experienceId, token);
 
         setExperience(experience);
+        setError("");
       } catch (error) {
         // Establecer el error en el estado
         setError(error.message);
@@ -54,7 +55,11 @@ const GetExperienceById = () => {
       toast.error("No available places left");
       return;
     }
-    setReservation({ ...reservation, state: true });
+
+    if (reservation.quantityPerPerson === 0) {
+      toast.error("Number of reserves must be greater than 0");
+      return;
+    }
 
     try {
       const json = await makeReservationService(
@@ -103,9 +108,16 @@ const GetExperienceById = () => {
       return;
     }
 
+    let newState = false;
+
+    if (reservation.quantityPerPerson + amount > 0) {
+      newState = true;
+    }
+
     setReservation({
       ...reservation,
       quantityPerPerson: reservation.quantityPerPerson + amount,
+      state: newState,
     });
   };
   const formatDate = (dateString) => {

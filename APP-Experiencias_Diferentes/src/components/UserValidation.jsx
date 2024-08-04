@@ -21,6 +21,7 @@ const UserValidation = () => {
 
         if (response.status == "ok") {
           toast.success("User validated successfully");
+          setError("");
           setTimeout(() => {
             navigate("/users/login");
           }, 2000);

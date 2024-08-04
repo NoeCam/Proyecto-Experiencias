@@ -15,27 +15,27 @@ const selectSearchExperiencesService = async (
     : "ASC";
 
   const queryBaseinitial = `
-    SELECT
-      e.id,
-      e.title,
-      e.location,
-      e.description,
-      e.image,
-      e.date,
-      e.price,
-      e.numMinPlaces,
-      e.numTotalPlaces,
-      e.active,
-      IFNULL(v.rating, 0) AS rating,
-      IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
-      ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed`;
+  SELECT
+  e.id,
+  e.title,
+  e.location,
+  e.description,
+  e.image,
+  e.date,
+  e.price,
+  e.numMinPlaces,
+  e.numTotalPlaces,
+  e.active,
+  IFNULL(v.rating, 0) AS rating,
+  IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
+  ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed`;
 
   const queryIfUserIdFirst = `, 
-      IFNULL(va.valoratedByMe, 0) > 0 AS valoratedByMe,
-      IFNULL(re.reservedByMe, 0) > 0 AS reservedByMe`;
+  IFNULL(va.valoratedByMe, 0) > 0 AS valoratedByMe,
+  IFNULL(re.reservedByMe, 0) > 0 AS reservedByMe`;
 
   const queryBaseB = `
-    FROM experiences e
+  FROM experiences e
     LEFT JOIN (
       SELECT experienceId, AVG(value) AS rating
       FROM valorations
@@ -53,13 +53,13 @@ const selectSearchExperiencesService = async (
       FROM reservations
       WHERE userId = ?
       GROUP BY experienceId
-    ) re ON e.id = re.experienceId
-    LEFT JOIN (
-      SELECT experienceId, COUNT(*) AS valoratedByMe
-      FROM valorations
-      WHERE userId = ?
-      GROUP BY experienceId
-    ) va ON e.id = va.experienceId`;
+      ) re ON e.id = re.experienceId
+      LEFT JOIN (
+        SELECT experienceId, COUNT(*) AS valoratedByMe
+        FROM valorations
+        WHERE userId = ?
+        GROUP BY experienceId
+        ) va ON e.id = va.experienceId`;
 
   const searchCondition = search
     ? ` WHERE e.title LIKE ? OR e.description LIKE ?`

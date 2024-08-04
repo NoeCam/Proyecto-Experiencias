@@ -9,11 +9,14 @@ import getExperienceService from "../services/getExperienceService"; // Suponien
 
 const EditExperienceForm = () => {
   const { experienceId } = useParams();
+  const { VITE_API_URL } = import.meta.env;
+
   // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     title: "",
     location: "",
     description: "",
+    oldImage: "",
     image: "",
     date: "",
     price: "",
@@ -25,38 +28,40 @@ const EditExperienceForm = () => {
   const [error, setError] = useState("");
   // Estado para la respuesta de la API
   const [resp, setResp] = useState("");
-  
+
   const [isAdmin, setIsAdmin] = useState(false);
   const { userLogged, token } = useContext(AuthContext);
-  
+
   const navigate = useNavigate();
-  
+
   // Efecto para obtener los detalles de la experiencia cuando el componente se monta
   useEffect(() => {
     // Verificar si el usuario es administrador
-    
+
     if (userLogged?.role && userLogged.role === "admin") {
       setIsAdmin(true);
+      setError("");
     } else {
       setError("You do not have permission to edit an experience.");
       toast.error(error.message);
       return;
     }
-    
+
     const fetchExperience = async () => {
       try {
         // Llamar al servicio para obtener los detalles de la experiencia
         const experience = await getExperienceService(experienceId, token);
-        
+
         // Asegúrate de que la estructura de datos coincida con formData
         setFormData({
           title: experience.title || "",
           location: experience.location || "",
           description: experience.description || "",
-          image: experience.image || "",
+          oldImage: experience.image || "",
+          image: null,
           date: experience.date
-          ? new Date(experience.date).toISOString().split("T")[0]
-          : "",
+            ? new Date(experience.date).toISOString().split("T")[0]
+            : "",
           price: experience.price || "",
           numMinPlaces: experience.numMinPlaces || "",
           numTotalPlaces: experience.numTotalPlaces || "",
@@ -70,8 +75,7 @@ const EditExperienceForm = () => {
     };
     fetchExperience();
   }, [experienceId, userLogged]);
-  
-  console.log(formData);
+
   // Manejar cambios en el campo imagen
   const handleChangeImage = (e) => {
     setFormData({
@@ -111,6 +115,7 @@ const EditExperienceForm = () => {
       Object.keys(formData).forEach((key) => {
         formDataToSend.append(key, formData[key]);
       });
+
       const response = await updateExperienceService(
         token,
         experienceId,
@@ -187,14 +192,19 @@ const EditExperienceForm = () => {
               />
             </div>
             <div>
-              <label>Image URL:</label>
-              <input
-                type="file"
-                name="image"
-                
-                onChange={handleChangeImage}
-                required
-              />
+              <label>Current Image:</label>
+              {formData.oldImage && (
+                <img
+                  className="rounded-3xl my-2"
+                  src={`${VITE_API_URL}/uploads/${formData.oldImage}`}
+                  alt="Current image"
+                  width="500"
+                />
+              )}
+            </div>
+            <div className="mb-2">
+              <label>New Image URL:</label>
+              <input type="file" name="image" onChange={handleChangeImage} />
             </div>
             <div>
               <label>Date:</label>

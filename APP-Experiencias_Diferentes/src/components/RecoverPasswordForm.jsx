@@ -20,6 +20,7 @@ const RecoverPasswordForm = () => {
       const rta = await setRecoverPasswordService(email);
       setResp(rta.message);
       toast.success("Recovery email sent successfully");
+      setError("");
       setTimeout(() => {
         navigate("/users/modify-password");
       }, 2000);
