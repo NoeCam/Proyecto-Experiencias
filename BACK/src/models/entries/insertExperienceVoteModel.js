@@ -11,11 +11,11 @@ import { voteAlreadyExistsError } from '../../services/errorService.js';
 const insertExperienceVoteModel = async (value, experienceId, userId) => {
     const pool = await getPool();
 
-    // Verificar que el userId existe en la tabla users.
-    const [users] = await pool.query(`SELECT id FROM users WHERE id = ?`, [userId]);
-    if (users.length === 0) {
-        throw new Error('The user does not exist.');
-    }
+    // // Verificar que el userId existe en la tabla users.
+    // const [users] = await pool.query(`SELECT id FROM users WHERE id = ?`, [userId]);
+    // if (users.length === 0) {
+    //     throw new Error('The user does not exist.');
+    // }
 
     // Comprobamos si ya existe un voto previo por parte del usuario que está intentando
     // votar.
