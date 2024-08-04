@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContextProvider';
 import getAdminExperiencesService from '../services/getAdminExperiencesService';
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,20 +28,20 @@ const AdminExperiencesList = () => {
           <li key={experience.id}>
             <h2>{experience.title}</h2>
             <p>{experience.description}</p>
-            <p>Locate: {experience.location}</p>
-            <p>Date: {new Date(experience.date).toLocaleDateString()}</p>
-            <p>Price: €{experience.price}</p>
-            <p>Reserve:</p>
-            <ul>
-              {experience.reservations.map((reservation) => (
-                <li key={reservation.id}>
-                  <p>ID Reserve: {reservation.reservationId}</p>
-                  <p>ID User: {reservation.reservationUserId}</p>
-                  <p>Quantity per person: {reservation.quantityPerPerson}</p>
-                  <p>State: {reservation.state}</p>
+            <p>Ubicación: {experience.location}</p>
+            <p>Fecha: {new Date(experience.date).toLocaleDateString()}</p>
+            <p>Precio: €{experience.price}</p>
+            <p>Reservas:</p>
+            {/* <ul>
+              {experience.reservations && experience.reservations.map((reservation) => (
+                <li key={reservation.reservationId}>
+                  <p>ID de Reserva: {reservation.reservationId}</p>
+                  <p>ID de Usuario: {reservation.reservationUserId}</p>
+                  <p>Cantidad por Persona: {reservation.quantityPerPerson}</p>
+                  <p>Estado: {reservation.state}</p>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </li>
         ))}
       </ul>

@@ -1,12 +1,21 @@
-import axios from 'axios';
+const getAdminExperienceService = async (token) => {
+  const url = `${import.meta.env.VITE_API_URL}/admin/experiences`;
 
-const API_URL = import.meta.env.VITE_API_URL;
-
-const getAdminExperiencesService = async (token) => {
-  const response = await axios.get(`${API_URL}/api/admin/experiences`, {
-    params: { token }
+  const response = await fetch(url, {
+    method: "GET", // Asegúrate de especificar el método HTTP
+    headers: {
+      "Content-Type": "application/json", // Especifica el tipo de contenido
+      Authorization: token,
+    },
   });
-  return response.data;
+  const json = await response.json();
+  console.log(json.data.experiences, "aqui");
+
+  if (!response.ok) {
+    throw new Error(json.message || "Error en la solicitud"); // Proporciona un mensaje de error si la solicitud falla
+  }
+
+  return json.data.experiences; // Asegúrate de que la estructura de datos sea la correcta
 };
 
-export default getAdminExperiencesService;
+export default getAdminExperienceService;

@@ -8,7 +8,7 @@ import duplicateExperienceController from "./duplicateExperienceController.js";
 import getReservedExperiencesById from "./getReservedExperiencesById.js";
 import voteExperienceController from "./voteExperienceController.js";
 import makeReservationController from "./makeReservationController.js";
-import { getAdminExperiences } from "./getAdminExperiences.js";
+import getAdminExperiences from "./getAdminExperiences.js";
 
 export {
   adminEntryController,
