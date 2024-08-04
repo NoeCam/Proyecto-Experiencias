@@ -7,12 +7,12 @@ import { savePhotoUtils, deletePhotoUtils } from "../../utils/photoUtils.js";
 
 const editUserProfileController = async (req, res, next) => {
   try {
-    if (!req.user?.id) {
-      return res.status(401).json({
-        status: "error",
-        message: "Unauthenticated user",
-      });
-    }
+    // if (!req.user?.id) {
+    //   return res.status(401).json({
+    //     status: "error",
+    //     message: "Unauthenticated user",
+    //   });
+    // }
 
     // Validamos el body con Joi.
     await validateSchemaUtil(editUserProfileSchema, req.body);
