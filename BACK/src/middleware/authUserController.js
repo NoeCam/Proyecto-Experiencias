@@ -10,7 +10,6 @@ const authUserController = async (req, res, next) => {
     if (!authorization) {
       throw notAuthenticatedError();
     }
-
     const token = authorization; // El token se espera directamente en el encabezado `Authorization`
     if (!token) {
       throw notAuthenticatedError();

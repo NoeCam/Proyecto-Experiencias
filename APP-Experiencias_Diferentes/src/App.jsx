@@ -16,6 +16,7 @@ import EditExperience from "./pages/EditExperience";
 import ExperienceById from "./pages/ExperienceById";
 import ExperienceState from "./pages/ExperienceState";
 import PageNotFound from "./components/PageNotFoundComponent";
+import AdminReservationsList from "./pages/AdminReservationsList";
 
 import "./App.css";
 
@@ -50,6 +51,9 @@ function App() {
           <Route
             path="/experiencias/edit/:experienceId"
             element={<EditExperience />}
+          />
+          <Route path="/admin/experiences"
+          element={<AdminReservationsList/>}
           />
           <Route path="/" element={<Experience />} />
           <Route path="*" element={<PageNotFound />} />
