@@ -1,6 +1,5 @@
 import insertExperienceModel from "../../models/entries/insertExperienceModel.js";
 import { savePhotoUtils } from "../../utils/photoUtils.js";
-
 import experienciaSchema from "../../schemas/entries/experienceSchema.js";
 import imgSchema from "../../schemas/imgSchema.js"; // No sabemos si se usa, quizás deberíamos borrarlo.
 

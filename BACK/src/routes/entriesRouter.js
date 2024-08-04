@@ -19,6 +19,7 @@ import {
   getReservedExperiencesById,
   voteExperienceController,
   makeReservationController,
+  getAdminExperiences,
 } from "../controllers/entries/index.js";
 
 const router = express.Router();
@@ -69,6 +70,21 @@ router.get(
   authUserController,
   getExperienceController
 );
+
+
+
+
+
+// Endpoint para listar las experiencias creadas por el admin y reservadas por usuarios
+router.get(
+  "/admin/experiences",
+  authUserController,
+  verifyAdmin,
+  getAdminExperiences
+);
+
+
+
 
 //Endpoint modificar experiencia (admin)
 router.put(
