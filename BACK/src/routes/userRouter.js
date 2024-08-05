@@ -32,7 +32,11 @@ router.post("/users/recover-password", sendRecoverPassController);
 router.put("/users/password", editUserPassController);
 
 // Editar la contraseña estando logueado.
-router.post("/users/change-password", changeUserPasswordController);
+router.post(
+  "/users/change-password",
+  authUserController,
+  changeUserPasswordController
+);
 
 //Define la ruta para actualizar el perfirl de usuario.
 router.put("/users/profile", authUserController, editUserProfileController);
