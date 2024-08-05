@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const ProfileUpdateForm = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ const ProfileUpdateForm = () => {
   const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
   const { token } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   // Cargar datos del perfil cuando el componente se monta
   useEffect(() => {
     const fetchUserData = async () => {
@@ -75,7 +76,9 @@ const ProfileUpdateForm = () => {
 
       if (response.ok) {
         toast.success("Profile updated successfully");
-        // Opcional: Redirigir al usuario o limpiar el formulario
+        setTimeout(() => {
+          navigate("/users/profile");
+        }, 3000);
       } else {
         const textResponse = await response.text();
         let errorData = {};

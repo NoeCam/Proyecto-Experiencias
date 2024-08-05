@@ -20,7 +20,9 @@ const ChangePasswordForm = () => {
     try {
       await changePasswordService({ newPassword, confirmPassword });
       toast.success("Password changed successfully");
-      navigate("/users/profile");
+      setTimeout(() => {
+        navigate("/users/profile");
+      }, 3000);
     } catch (error) {
       toast.error("Error changing password");
     }
