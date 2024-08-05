@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import AdminExperiencesList from "./AdminExperiencesList";
 
 const ViewUserProfile = () => {
   const { userLogged, logout } = useContext(AuthContext);
@@ -51,20 +52,30 @@ const ViewUserProfile = () => {
           <p className="mb-3">
             <span className="font-bold">Role:</span> {userLogged.role}
           </p>
-          <button
-            className="blue-Button"
-            onClick={() => navigate("/experiencias/reservedExperiences")}
-          >
-            Check your reservations
-          </button>
-          <button
-            className="blue-Button"
-            type="submit"
-            value="logout"
-            onClick={handleSubmit}
-          >
-            Logout
-          </button>
+          {/* Botón para ir a la página de visualización de experiencias reservadas como usuario */}
+          {userLogged?.role && userLogged.role === "normal" ? (
+            <button
+              className="blue-Button"
+              onClick={() => navigate("/experiencias/reservedExperiences")}
+            >
+              Check your reservations
+            </button>
+          ) : (
+            ""
+          )}
+
+          {/* Botón para ir a la página de visualización de experiencias reservadas como Administrador */}
+          {userLogged?.role && userLogged.role === "admin" ? (
+            <button
+              className="blue-Button"
+              onClick={() => navigate("/admin/experiences")}
+            >
+              Reservations of your Experiences
+            </button>
+          ) : (
+            ""
+          )}
+
           {/* Botón para ir a la página de edición del perfil */}
           <button
             className="blue-Button"
@@ -78,6 +89,14 @@ const ViewUserProfile = () => {
             onClick={() => navigate("/users/change-password")}
           >
             Change Password
+          </button>
+          <button
+            className="blue-Button"
+            type="submit"
+            value="logout"
+            onClick={handleSubmit}
+          >
+            Logout
           </button>
         </div>
       </div>
