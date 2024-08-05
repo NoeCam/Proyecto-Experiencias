@@ -110,6 +110,15 @@ const EditExperienceForm = () => {
       toast.error(error.message);
       return;
     }
+
+    // Validar la fecha
+    const experienceDate = new Date(formData.date);
+    const currentDate = new Date();
+    if (experienceDate <= currentDate) {
+      toast.error("The date must be in the future.");
+      return;
+    }
+
     try {
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {

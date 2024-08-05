@@ -19,9 +19,17 @@ const adminEntryController = async (req, res, next) => {
 
     const userId = req.user?.id;
 
+    // Guardamos la imagen
     let image = null;
     if (req.files) {
       image = await savePhotoUtils(req.files.image, 500);
+    }
+
+    // Validamos que la fecha sea futura.
+    const currentDate = new Date();
+    const experienceDate = new Date(date);
+    if (experienceDate <= currentDate) {
+      throw new Error("The date of the experience must be in the future.");
     }
 
     // Validamos el body y la imagen con Joi.

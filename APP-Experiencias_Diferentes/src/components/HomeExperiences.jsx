@@ -6,7 +6,7 @@ import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
 import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
@@ -53,7 +53,7 @@ const HomeExperiences = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
 
-      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
+      <div className="md:grid md:grid-cols-2 xl:grid-cols-3 bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
         {error && <p>{error}</p>}
 
         {experiences &&

@@ -52,23 +52,28 @@ Este comando levantará la aplicación en modo de desarrollo. Escribe la ruta co
 
 A continuación se presenta un listado de las rutas disponibles en la aplicación:
 
-/: Página principal de la aplicación.
+/: Página principal de la aplicación. Lista de todas las experiencias disponibles.
+
 /users/register: Registro de nuevos usuarios.
 /users/validate/:registrationCode: Validación de usuarios registrados.
 /users/login: Página de inicio de sesión.
 /users/recover-password: Recuperación de contraseña.
 /users/modify-password: Modificación de contraseña.
 /users/password: Establecer nueva contraseña.
+/users/change-password: Cambio de contraseña de usuario logueado.
 /users/profile: Página de perfil de usuario.
-/experiencias: Lista de todas las experiencias disponibles.
+/users/edit-profile: Página de edición de perfil de usuario.
+
 /experiencias/:experienceId: Detalles de una experiencia en particular.
 /experiencias/:experienceId/experienceState: Estado de una experiencia.
 /experiencias/create: Creación de una nueva experiencia.
 /experiencias/edit/:experienceId: Edición de una experiencia existente.
+/admin/experiences: Lista de experiencias creadas por un admin, con las reservas realizadas por usuarios.
+
 *: Página de no encontrado (404).
+
 Variables de Entorno
 Asegúrate de configurar las siguientes variables de entorno en un archivo .env.local:
-
 
 VITE_API_URL=http://localhost:3020
 VITE_APP_URL=http://localhost:5173
@@ -92,20 +97,20 @@ Abre un Pull Request.
 
 ## Miembros del Proyecto
 
-Noelia Camelia
+Alberto Jiménez
 Ana Perez
-Alberto
-Tomás VB
-Ricardo Hidalgo
 Miguel Iglesias
+Noelia Camelia
+Ricardo Hidalgo
+Tomás Vázquez
 
 Contacto
 
 Para contactar con los creadores del proyecto, puedes ponerte en contacto directamente desde sus cuentas de LinkedIn:
 
-- https://www.linkedin.com/in/noelia-camelia-acosta
-- https://www.linkedin.com/in/ricardo-hidalgo-jiménez
-- https://www.linkedin.com/in/migueliglesiascami%C3%B1a/
-- https://www.linkedin.com/in/tomás-vázquez-blanco/
 - https://www.linkedin.com/in/alberto-jiménez-gonzález
 - https://www.linkedin.com/in/ana-pérez-santiago
+- https://www.linkedin.com/in/migueliglesiascami%C3%B1a/
+- https://www.linkedin.com/in/noelia-camelia-acosta
+- https://www.linkedin.com/in/ricardo-hidalgo-jiménez
+- https://www.linkedin.com/in/tomás-vázquez-blanco/

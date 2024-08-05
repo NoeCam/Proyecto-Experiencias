@@ -113,71 +113,72 @@ const ProfileUpdateForm = () => {
         <span className="text-cyan-500">D</span>iferentes
       </h2>
       <h3 className="h3">Update Profile</h3>
-
-      <div className="div-content">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              className="input"
-              type="text"
-              name="username"
-              placeholder="Enter username"
-              value={username}
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="firstname">First Name:</label>
-            <input
-              className="input"
-              type="text"
-              name="firstname"
-              placeholder="Enter first name"
-              value={firstname}
-              required
-              onChange={(e) => setFirstname(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="lastname">Last Name:</label>
-            <input
-              className="input"
-              type="text"
-              name="lastname"
-              placeholder="Enter last name"
-              value={lastname}
-              required
-              onChange={(e) => setLastname(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              className="input"
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              value={email}
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="avatar">Avatar:</label>
-            <input
-              className="input"
-              type="file"
-              accept="image/*"
-              onChange={(e) => setAvatar(e.target.files[0])}
-            />
-          </div>
-          <button className="blue-Button" type="submit" disabled={loading}>
-            {loading ? "Updating..." : "Update Profile"}
-          </button>
-          <ToastContainer />
-        </form>
+      <div className="flex sm:justify-center ">
+        <div className="div-content">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                className="input"
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                value={username}
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="firstname">First Name:</label>
+              <input
+                className="input"
+                type="text"
+                name="firstname"
+                placeholder="Enter first name"
+                value={firstname}
+                required
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="lastname">Last Name:</label>
+              <input
+                className="input"
+                type="text"
+                name="lastname"
+                placeholder="Enter last name"
+                value={lastname}
+                required
+                onChange={(e) => setLastname(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                className="input"
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                value={email}
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="avatar">Avatar:</label>
+              <input
+                className="input"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setAvatar(e.target.files[0])}
+              />
+            </div>
+            <button className="blue-Button" type="submit" disabled={loading}>
+              {loading ? "Updating..." : "Update Profile"}
+            </button>
+            <ToastContainer />
+          </form>
+        </div>
       </div>
     </>
   );

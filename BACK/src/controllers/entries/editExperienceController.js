@@ -32,6 +32,13 @@ const editExperienceController = async (req, res, next) => {
       image = await savePhotoUtils(req.files.image, 500);
     }
 
+    // Validamos que la fecha sea futura.
+    const currentDate = new Date();
+    const experienceDate = new Date(date);
+    if (experienceDate <= currentDate) {
+      throw new Error("The date of the experience must be in the future.");
+    }
+
     await updateExperienceService(
       title,
       location,
