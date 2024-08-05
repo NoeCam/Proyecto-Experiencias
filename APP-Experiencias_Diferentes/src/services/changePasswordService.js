@@ -1,20 +1,31 @@
-export const changePasswordService = async ({ newPassword }) => {
-  // Usamos import.meta.env para acceder a la variable de entorno en Vite
+export const changePasswordService = async ({
+  newPassword,
+  confirmPassword,
+}) => {
   const url = `${import.meta.env.VITE_API_URL}/users/change-password`;
-  // Hacemos la solicitud al endpoint de cambio de contraseña
+
+  // Recupera el token del almacenamiento local
+  const token = localStorage.getItem("token");
+
+  // Asegúrate de que el token esté presente
+  if (!token) {
+    throw new Error("No token found");
+  }
+
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: token, // Añade el token al encabezado Authorization
     },
-    body: JSON.stringify({ newPassword }),
+    body: JSON.stringify({ newPassword, confirmPassword }), // Envía ambos campos
   });
 
-  // Si la respuesta no es exitosa, lanzamos un error
   if (!response.ok) {
+    const errorDetails = await response.json();
+    console.error("Error details:", errorDetails);
     throw new Error("Failed to change password");
   }
 
-  // Devolvemos la respuesta en formato JSON
   return await response.json();
 };
