@@ -26,6 +26,8 @@ const selectSearchExperiencesService = async (
   e.numMinPlaces,
   e.numTotalPlaces,
   e.active,
+
+  
   IFNULL(v.rating, 0) AS rating,
   IFNULL(e.numTotalPlaces - r.availablePlaces, e.numTotalPlaces) AS availablePlaces,
   ifnull(r.availablePlaces > e.numMinPlaces,false) AS confirmed`;
