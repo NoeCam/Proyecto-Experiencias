@@ -18,6 +18,7 @@ import ExperienceState from "./pages/ExperienceState";
 import PageNotFound from "./components/PageNotFoundComponent";
 import ChangePassword from "./pages/ChangePassword.jsx";
 import AdminReservationsList from "./pages/AdminReservationsList";
+import UserReservedExperiences from "./pages/UserReservedExperiences.jsx";
 
 import "./App.css";
 
@@ -57,6 +58,10 @@ function App() {
           <Route
             path="/admin/experiences"
             element={<AdminReservationsList />}
+          />
+          <Route
+            path="/experiencias/reservedExperiences"
+            element={<UserReservedExperiences />}
           />
           <Route path="/" element={<Experience />} />
           <Route path="*" element={<PageNotFound />} />

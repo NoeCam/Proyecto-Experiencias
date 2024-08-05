@@ -28,6 +28,7 @@ const selectExperienceByReservationService = async (userId) => {
   );
 
   return reservedExperiences;
+
 };
 
 export default selectExperienceByReservationService;
