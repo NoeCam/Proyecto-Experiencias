@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
 const ViewUserProfile = () => {
@@ -51,6 +51,12 @@ const ViewUserProfile = () => {
           <p className="mb-3">
             <span className="font-bold">Role:</span> {userLogged.role}
           </p>
+          <button
+            className="blue-Button"
+            onClick={() => navigate("/experiencias/reservedExperiences")}
+          >
+            Check your reservations
+          </button>
           <button
             className="blue-Button"
             type="submit"
