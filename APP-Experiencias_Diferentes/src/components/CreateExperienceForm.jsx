@@ -67,11 +67,21 @@ const CreateExperienceForm = () => {
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!isAdmin) {
       setError("You do not have permission to create an experience.");
       toast.error(error.message);
       return;
     }
+
+    // Validar la fecha
+    const experienceDate = new Date(formData.date);
+    const currentDate = new Date();
+    if (experienceDate <= currentDate) {
+      toast.error("The date must be in the future.");
+      return;
+    }
+
     try {
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {
