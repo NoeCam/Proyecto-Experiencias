@@ -13,7 +13,7 @@ export const changePasswordService = async ({
   }
 
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: token, // Añade el token al encabezado Authorization

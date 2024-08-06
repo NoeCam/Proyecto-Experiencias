@@ -1,34 +1,40 @@
 import { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { AuthContext } from "../contexts/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 
 const ProfileUpdateForm = () => {
+  // Estados para manejar los datos del formulario y el estado de carga
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { token } = useContext(AuthContext);
+
+  // Acceso al contexto de autenticación
+  const { token, updateUserLogged } = useContext(AuthContext);
+
+  // Hook para la navegación
   const navigate = useNavigate();
-  // Cargar datos del perfil cuando el componente se monta
+
+  // useEffect para cargar los datos del perfil del usuario cuando se monta el componente
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        setLoading(true);
+        setLoading(true); // Comienza la carga
         const url = `${import.meta.env.VITE_API_URL}/users/profile`;
         const response = await fetch(url, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: token,
+            Authorization: token, // Enviar token para la autenticación
           },
         });
         if (response.ok) {
           const userData = await response.json();
+          // Rellenar los estados con los datos del usuario
           setUsername(userData.username || "");
           setFirstname(userData.firstname || "");
           setLastname(userData.lastname || "");
@@ -42,42 +48,43 @@ const ProfileUpdateForm = () => {
       } catch (error) {
         toast.error("Error loading user data");
       } finally {
-        setLoading(false);
+        setLoading(false); // Finaliza la carga
       }
     };
 
     fetchUserData();
-  }, [token]);
+  }, [token]); // Se ejecuta cuando cambia el token
 
-  // Manejar el envío del formulario
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  // Función para manejar la actualización del perfil del usuario
+  const handleEditProfile = async (updatedData) => {
     try {
-      setLoading(true);
+      setLoading(true); // Comienza la carga
       const url = `${import.meta.env.VITE_API_URL}/users/profile`;
 
       const formData = new FormData();
-      formData.append("username", username);
-      formData.append("firstname", firstname);
-      formData.append("lastname", lastname);
-      formData.append("email", email);
-      if (avatar) {
-        formData.append("avatar", avatar);
+      // Añadir datos al FormData para enviarlos al servidor
+      formData.append("username", updatedData.username);
+      formData.append("firstname", updatedData.firstname);
+      formData.append("lastname", updatedData.lastname);
+      formData.append("email", updatedData.email);
+      if (updatedData.avatar) {
+        formData.append("avatar", updatedData.avatar);
       }
 
       const response = await fetch(url, {
-        method: "PUT",
+        method: "PUT", // Método PUT para actualizar los datos
         headers: {
-          Authorization: token,
+          Authorization: token, // Enviar token para la autenticación
         },
-        body: formData,
+        body: formData, // Enviar los datos del formulario
       });
 
       if (response.ok) {
+        const updatedUser = await response.json();
+        updateUserLogged(updatedUser); // Actualiza el contexto con los nuevos datos del usuario
         toast.success("Profile updated successfully");
         setTimeout(() => {
-          navigate("/users/profile");
+          navigate("/users/profile"); // Redirige al perfil del usuario después de 3 segundos
         }, 3000);
       } else {
         const textResponse = await response.text();
@@ -102,8 +109,22 @@ const ProfileUpdateForm = () => {
     } catch (error) {
       toast.error(`Error updating profile: ${error.message}`);
     } finally {
-      setLoading(false);
+      setLoading(false); // Finaliza la carga
     }
+  };
+
+  // Función para manejar el envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Crea un objeto con los datos actualizados del usuario
+    const updatedData = {
+      username,
+      firstname,
+      lastname,
+      email,
+      avatar,
+    };
+    handleEditProfile(updatedData); // Llama a la función para actualizar el perfil
   };
 
   return (
@@ -179,7 +200,7 @@ const ProfileUpdateForm = () => {
             <button className="blue-Button" type="submit" disabled={loading}>
               {loading ? "Updating..." : "Update Profile"}
             </button>
-            <ToastContainer />
+            <ToastContainer />{" "}
           </form>
         </div>
       </div>
