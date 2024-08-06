@@ -11,19 +11,21 @@ Experiencias Inolvidables es una aplicación web que permite a los usuarios desc
 - **Usuarios**:
   - Registro y gestión de perfil.
   - Visualización y edición de datos de perfil.
-  - Cambio de contraseña.
+  - Cambio y recuperación de contraseña.
   - Subir o editar imagen de perfil.
-  - Cambio de rol a administrador.
   - Visualización y reserva de experiencias.
+  - Visualización listado de reservas de experiencias.
   - Cancelación de reservas.
   - Gestión de reservas (múltiples plazas o varias reservas).
+  - Valoración de una experiencia una vez disfrutada.
 
 - **Administradores**:
   - Todas las funcionalidades de un usuario.
   - Creación de nuevas experiencias.
-  - Edición y duplicación de experiencias existentes.
+  - Edición y duplicado de experiencias existentes.
   - Cambio del estado de una experiencia (activa/desactivada).
   - Reserva de experiencias.
+  - Visualización listado experiencias reservadas creadas por un Admin concreto.
 
 ## Requisitos Previos
 
@@ -68,7 +70,10 @@ A continuación se presenta un listado de las rutas disponibles en la aplicació
 /experiencias/:experienceId/experienceState: Estado de una experiencia.
 /experiencias/create: Creación de una nueva experiencia.
 /experiencias/edit/:experienceId: Edición de una experiencia existente.
-/admin/experiences: Lista de experiencias creadas por un admin, con las reservas realizadas por usuarios.
+
+/admin/experiences: Visualización de experiencias reservadas, creadas por un usuario Admin concreto.
+/experiencias/reservedExperiences: Visualización de experiencias reservadas por un usuario.
+
 
 *: Página de no encontrado (404).
 

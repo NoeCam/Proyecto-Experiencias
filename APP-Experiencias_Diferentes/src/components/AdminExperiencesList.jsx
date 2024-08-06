@@ -19,7 +19,7 @@ const AdminExperiencesList = () => {
       try {
         const experiencesData = await getAdminExperiencesService(token);
         setExperiences(experiencesData);
-        console.log(experiencesData);
+        
         setFilteredExperiences(experiencesData); // Inicialmente, todos los datos están sin filtrar
       } catch (error) {
         toast.error("Error fetching experiences");
@@ -99,10 +99,10 @@ const AdminExperiencesList = () => {
 
             <div className="ml-5 w-1/2">
               <h2 className="font-bold">{experience.title}</h2>
-              <p className="font-bold">Ubicación:</p> {experience.location}
-              <p className="font-bold">Fecha: </p>
+              <p className="font-bold">Location:</p> {experience.location}
+              <p className="font-bold">Date: </p>
               {new Date(experience.date).toLocaleDateString()}
-              <p className="font-bold">Precio: €</p>
+              <p className="font-bold">Price: €</p>
               {experience.price}
               
               <p className="font-bold">Reserves:</p>{experience.quantityPerPerson}
