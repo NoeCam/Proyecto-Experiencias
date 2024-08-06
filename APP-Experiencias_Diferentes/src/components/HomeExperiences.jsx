@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
-import Header from "./Header";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
 import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
