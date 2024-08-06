@@ -2,18 +2,10 @@ import selectUserByIdModel from "../../models/users/selectUserByIdModel.js";
 import updateUserProfileModel from "../../models/users/updateUserProfileModel.js";
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 import editUserProfileSchema from "../../schemas/users/editUserProfileSchema.js";
-import bcrypt from "bcrypt";
 import { savePhotoUtils, deletePhotoUtils } from "../../utils/photoUtils.js";
 
 const editUserProfileController = async (req, res, next) => {
   try {
-    // if (!req.user?.id) {
-    //   return res.status(401).json({
-    //     status: "error",
-    //     message: "Unauthenticated user",
-    //   });
-    // }
-
     // Validamos el body con Joi.
     await validateSchemaUtil(editUserProfileSchema, req.body);
 
@@ -27,20 +19,6 @@ const editUserProfileController = async (req, res, next) => {
       });
     }
 
-    // Verificamos la contraseña actual si se proporciona.
-    if (req.body.password) {
-      const passwordMatch = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
-      if (!passwordMatch) {
-        return res.status(400).json({
-          status: "error",
-          message: "Current password is incorrect",
-        });
-      }
-    }
-
     // Actualizamos los datos del usuario.
     const updatedData = {
       username: req.body.username,
@@ -48,11 +26,6 @@ const editUserProfileController = async (req, res, next) => {
       lastname: req.body.lastname,
       email: req.body.email,
     };
-
-    // Si se proporciona una nueva contraseña, la ciframos.
-    if (req.body.newPassword) {
-      updatedData.password = await bcrypt.hash(req.body.newPassword, 10);
-    }
 
     // Manejo del avatar.
     if (req.files?.avatar) {

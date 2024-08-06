@@ -5,16 +5,15 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-
   const [userLogged, setUserLogged] = useState(null);
 
   useEffect(() => {
-    // para traer el valor del token que se encuentre en localstorage
+    // Para traer el valor del token que se encuentre en localstorage
     localStorage.setItem("token", token);
-  }, [token]); //quiero seterarlo la primera vez y cada vez que se actualice el token
+  }, [token]);
 
   useEffect(() => {
-    //para traer los datos del usuario logueado
+    // Para traer los datos del usuario logueado
     const getDataUserLogged = async () => {
       try {
         const data = await getDataUserLoggedService(token);
@@ -31,8 +30,18 @@ const AuthContextProvider = ({ children }) => {
     setUserLogged(null);
   };
 
+  // Nueva función para actualizar los datos del usuario
+  const updateUserLogged = (updatedData) => {
+    setUserLogged((prevUser) => ({
+      ...prevUser,
+      ...updatedData,
+    }));
+  };
+
   return (
-    <AuthContext.Provider value={{ token, userLogged, setToken, logout }}>
+    <AuthContext.Provider
+      value={{ token, userLogged, setToken, logout, updateUserLogged }}
+    >
       {children}
     </AuthContext.Provider>
   );
