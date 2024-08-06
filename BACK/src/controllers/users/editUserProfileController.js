@@ -40,7 +40,10 @@ const editUserProfileController = async (req, res, next) => {
     }
 
     // Actualizamos los datos del usuario en la base de datos.
-    const updatedUser = await updateUserProfileModel(req.user.id, updatedData);
+    await updateUserProfileModel(req.user.id, updatedData);
+
+    // Volvemos a obtener los datos actualizados del usuario para devolverlos en la respuesta.
+    const updatedUser = await selectUserByIdModel(req.user.id);
 
     res.status(200).json({
       status: "ok",
