@@ -4,9 +4,6 @@ import getPool from "../../database/getPool.js";
 const changeUserPasswordModel = async (userId, newPassword) => {
   const pool = await getPool();
   try {
-    console.log("User ID:", userId); // Verifica el ID del usuario
-    console.log("New password:", newPassword ? "Provided" : "Not provided"); // Indica si se proporcionó una nueva contraseña
-
     const setFragments = [];
     const values = [];
 

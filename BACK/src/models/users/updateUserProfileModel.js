@@ -49,10 +49,6 @@ const updateUserProfileModel = async (userId, data) => {
     WHERE id = ?
   `;
 
-  // Log the query and values to the console for debugging
-  console.log("Generated SQL Query:", query);
-  console.log("Values:", values);
-
   // Execute the query
   await pool.query(query, values);
 
