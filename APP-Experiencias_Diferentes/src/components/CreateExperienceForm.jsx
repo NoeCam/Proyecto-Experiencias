@@ -34,8 +34,13 @@ const CreateExperienceForm = () => {
       setIsAdmin(true);
       setError("");
     } else {
-      setError(error.message);
-      toast.error(error.message);
+      setError(error.message || "You need to do log in");
+      toast.error(error.message || "You need to do log in");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return;
     }
   }, []);
 
@@ -106,7 +111,7 @@ const CreateExperienceForm = () => {
       }
     } catch (error) {
       // Establecer el error en el estado
-      //setError(error.message);
+      setError(error.message);
       toast.error(error.message);
     }
   };
