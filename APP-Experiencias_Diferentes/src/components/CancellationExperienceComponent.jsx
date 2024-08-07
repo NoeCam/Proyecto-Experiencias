@@ -63,11 +63,9 @@ const CancellationExperienceComponent = ({
           Cancel
         </button>
       ) : (
-        <button onClick={handleClick} className="red-Button">
+        <button onClick={handleClick} className="red-Button" disabled>
           Cancelled
         </button>
-
-        // disabled
       )}
     </>
   );

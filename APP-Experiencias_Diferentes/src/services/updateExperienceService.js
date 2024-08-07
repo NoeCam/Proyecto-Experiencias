@@ -17,7 +17,7 @@ const updateExperienceService = async (token, experienceId, data) => {
   const json = await response.json();
 
   // Si la respuesta no es exitosa, lanzar un error con el mensaje de la respuesta
-  if (!response.ok) throw new Error(json.message);
+  if (!response.ok) throw new Error(json.message || "Failed to request");
 
   // Devolver la respuesta en formato JSON
   return json;

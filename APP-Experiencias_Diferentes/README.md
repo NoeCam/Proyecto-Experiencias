@@ -4,7 +4,7 @@ Una plataforma donde los usuarios pueden explorar y reservar diversas experienci
 
 ## Descripción
 
-Experiencias Inolvidables es una aplicación web que permite a los usuarios descubrir, reservar y gestionar diversas experiencias. Ya sea un walking tour por Ferrol, un paseo en kayak desde Hoyos del Espino, o un city tour en bicicleta por Madrid, nuestra plataforma ofrece una amplia gama de actividades para todos los gustos.
+Experiencias Diferentes es una aplicación web que permite a los usuarios descubrir, reservar y gestionar diversas experiencias. Ya sea un walking tour por Ferrol, un paseo en kayak desde Hoyos del Espino, o un city tour en bicicleta por Madrid, nuestra plataforma ofrece una amplia gama de actividades para todos los gustos.
 
 ### Funcionalidades Principales
 
