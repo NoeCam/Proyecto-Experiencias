@@ -44,6 +44,11 @@ const EditExperienceForm = () => {
     } else {
       setError("You do not have permission to edit an experience.");
       toast.error(error.message);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+
       return;
     }
 

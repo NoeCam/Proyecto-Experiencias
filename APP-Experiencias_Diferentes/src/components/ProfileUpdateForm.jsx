@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileUpdateForm = () => {
   // Acceso al contexto de autenticación
-  const { token, updateUserLogged } = useContext(AuthContext);
+  const { token, userLogged, updateUserLogged } = useContext(AuthContext);
 
   // Estados para manejar los datos del formulario y el estado de carga
   const [username, setUsername] = useState("");
@@ -15,12 +15,24 @@ const ProfileUpdateForm = () => {
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Hook para la navegación
   const navigate = useNavigate();
 
   // useEffect para cargar los datos del perfil del usuario cuando se monta el componente
   useEffect(() => {
+    if (userLogged) {
+      setError("");
+    } else {
+      setError(error.message || "You must be logged");
+      toast.error(error.message || "You must be logged");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return;
+    }
     const fetchUserData = async () => {
       try {
         setLoading(true); // Comienza la carga
@@ -32,8 +44,10 @@ const ProfileUpdateForm = () => {
             Authorization: token, // Enviar token para la autenticación
           },
         });
+
         if (response.ok) {
           const userData = await response.json();
+
           // Rellenar los estados con los datos del usuario
           setUsername(userData.data.user.username || "");
           setFirstname(userData.data.user.firstname || "");
@@ -197,10 +211,12 @@ const ProfileUpdateForm = () => {
                 onChange={(e) => setAvatar(e.target.files[0])}
               />
             </div>
-            <button className="blue-Button" type="submit" disabled={loading}>
-              {loading ? "Updating..." : "Update Profile"}
-            </button>
-            <ToastContainer />{" "}
+            <div className="text-center">
+              <button className="blue-Button" type="submit" disabled={loading}>
+                {loading ? "Updating..." : "Update Profile"}
+              </button>
+            </div>
+            <ToastContainer />
           </form>
         </div>
       </div>

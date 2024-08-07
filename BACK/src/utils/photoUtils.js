@@ -62,3 +62,29 @@ export const deletePhotoUtils = async (imgName) => {
     deleteImageError();
   }
 };
+
+export const duplicatePhotoUtils = async (imgName) => {
+  try {
+    const uploadsDir = path.join(process.cwd(), `./${UPLOADS_DIR}`);
+
+    // Crea la ruta de la imagen a copiar
+    const imagePath = path.join(uploadsDir, imgName);
+
+    // Leer la imagen original desde la ruta proporcionada
+    const originalImage = await fs.readFile(imagePath);
+
+    // configuro el nombre que va a tener la imagen
+    const newImgName = `${uuidv4()}.jpg`;
+
+    // configuro el path del lugar donde voy a guardar la imagen
+    const pathImg = path.join(uploadsDir, newImgName);
+
+    // Guardar el archivo en el disco
+    await fs.writeFile(pathImg, originalImage);
+
+    return newImgName;
+  } catch (error) {
+    console.error(error);
+    saveImageError();
+  }
+};

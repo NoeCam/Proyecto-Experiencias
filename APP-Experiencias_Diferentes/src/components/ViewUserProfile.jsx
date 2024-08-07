@@ -1,10 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
+
+import { ToastContainer, toast } from "react-toastify";
 
 const ViewUserProfile = () => {
   const { userLogged, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (userLogged) {
+      setError("");
+    } else {
+      setError(error.message || "You must be logged");
+      toast.error(error.message || "You must be logged");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return;
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +33,7 @@ const ViewUserProfile = () => {
 
   return userLogged ? (
     <>
+      <ToastContainer />
       <h1 className="flex font-titleLicorice text-5xl font-black justify-center text-white tracking-wider mt-5">
         E<span className="text-yellow-500">x</span>periencias
       </h1>
@@ -48,9 +66,6 @@ const ViewUserProfile = () => {
           <p className="mb-3">
             <span className="font-bold">E-mail:</span> {userLogged.email}
           </p>
-          <p className="mb-3">
-            <span className="font-bold">Role:</span> {userLogged.role}
-          </p>
           {/* Botón para ir a la página de visualización de experiencias reservadas como usuario */}
           {userLogged?.role && userLogged.role === "normal" ? (
             <button
@@ -65,12 +80,17 @@ const ViewUserProfile = () => {
 
           {/* Botón para ir a la página de visualización de experiencias reservadas como Administrador */}
           {userLogged?.role && userLogged.role === "admin" ? (
-            <button
-              className="blue-Button"
-              onClick={() => navigate("/admin/experiences")}
-            >
-              Reservations of your Experiences
-            </button>
+            <>
+              <p className="mb-3">
+                <span className="font-bold">Role:</span> {userLogged.role}
+              </p>
+              <button
+                className="blue-Button"
+                onClick={() => navigate("/admin/experiences")}
+              >
+                Reservations of your Experiences
+              </button>
+            </>
           ) : (
             ""
           )}
@@ -101,7 +121,7 @@ const ViewUserProfile = () => {
       </div>
     </>
   ) : (
-    ""
+    <div>{error ? <p>{error}</p> : ""}</div>
   );
 };
 

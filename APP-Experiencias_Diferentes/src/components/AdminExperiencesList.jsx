@@ -1,19 +1,35 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import getAdminExperiencesService from "../services/getAdminExperiencesService";
 import { ToastContainer, toast } from "react-toastify";
 import ExperienceFilter from "./ExperienceFilter";
 
 const AdminExperiencesList = () => {
-  const { token } = useContext(AuthContext);
+  const { token, userLogged } = useContext(AuthContext);
   const [experiences, setExperiences] = useState([]);
   const [filteredExperiences, setFilteredExperiences] = useState([]);
   const { VITE_API_URL } = import.meta.env;
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("");
   const [direction, setDirection] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (userLogged?.role && userLogged.role === "admin") {
+      setError("");
+    } else {
+      setError(error.message || "You must be an administrator");
+      toast.error(error.message || "You must be an administrator");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return;
+    }
+
     const fetchExperiences = async () => {
       try {
         const experiencesData = await getAdminExperiencesService(token);

@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -10,7 +11,7 @@ import CancellationExperienceComponent from "./CancellationExperienceComponent";
 const ReservationsList = () => {
   const { VITE_API_URL } = import.meta.env;
 
-  const { token } = useContext(AuthContext);
+  const { token, userLogged } = useContext(AuthContext);
 
   const [filteredExperiences, setFilteredExperiences] = useState([]);
   const [search, setSearch] = useState("");
@@ -19,8 +20,22 @@ const ReservationsList = () => {
   const [error, setError] = useState("");
   const [ReservedExperience, setReservedExperience] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchExperience = async () => {
+      if (userLogged) {
+        setError("");
+      } else {
+        setError(error.message || "You must be logged");
+        toast.error(error.message || "You must be logged");
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+        return;
+      }
+
       try {
         // Llamar al servicio para obtener los detalles de la experiencia
         const ReservedExperience = await getReservationListService(token);
