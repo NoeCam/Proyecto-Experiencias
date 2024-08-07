@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
 import getReservationListService from "../services/getReservationsListService";
-import { ReadonlyRating } from "./RatingStar";
+import { RatingValue, ReadonlyRating } from "./RatingStar";
 import ExperienceFilter from "./ExperienceFilter";
 
 const ReservationsList = () => {
@@ -22,7 +22,6 @@ const ReservationsList = () => {
         // Llamar al servicio para obtener los detalles de la experiencia
         const ReservedExperience = await getReservationListService(token);
         setReservedExperience(ReservedExperience);
-        console.log(ReservedExperience);
       } catch (error) {
         // Establecer el error en el estado
         setError(error.message);
@@ -76,11 +75,11 @@ const ReservationsList = () => {
                 <p className="p">{ReservedExp.location}</p>
                 <p className="p">Date: {formatDate(ReservedExp.date)}</p>
                 <p className="p">Price: {ReservedExp.price} €</p>
-
-                <ReadonlyRating
-                  value={Number(ReservedExperience.rating)} // Por defecto, muestra 4 estrellas pintadas
-                  className="flex justify-center"
-                ></ReadonlyRating>
+                <div>
+                  <>
+                    <RatingValue value={ReservedExp}></RatingValue>
+                  </>
+                </div>
               </div>
             </div>
           ))}

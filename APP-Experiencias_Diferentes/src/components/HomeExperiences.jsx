@@ -77,29 +77,13 @@ const HomeExperiences = () => {
               <div className="ml-5 w-1/2">
                 <h4 className="h4">{experience.title}</h4>
                 <p className="p">{experience.location}</p>
-                {/* <p>Description: {experience.description}</p> */}
                 <p className="p">Date: {formatDate(experience.date)}</p>
                 <p className="p">Price: {experience.price} €</p>
-                {/* <p>Active: {experience.active ? "Yes" : "No"}</p>*/}
-                {/*<p>Rating: {experience.rating}</p>>*/}
 
                 <ReadonlyRating
                   value={Number(experience.rating)} // Por defecto, muestra 4 estrellas pintadas
                   className="flex justify-center"
                 />
-
-                {/*  <p>Available Places: {experience.availablePlaces}</p>
-                <p>Confirmed: {experience.confirmed ? "Yes" : "No"}</p> */}
-                {/* {userLogged ? (
-              <div>
-                <p>
-                  Valorated By Me: {experience.valoratedByMe ? "Yes" : "No"}
-                </p>
-                <p>Reserved By Me: {experience.reservedByMe ? "Yes" : "No"}</p>
-              </div>
-            ) : (
-              ""
-            )} */}
                 <Link
                   className="white-Button"
                   to={`/experiencias/${experience.id}`}

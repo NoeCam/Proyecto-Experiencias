@@ -104,7 +104,7 @@ router.post(
 
 // Votar una experiencia.
 router.post(
-  "/experiencias/:experienceId/votes",
+  "/experiencias/:reservationId/rating",
   authUserController,
   voteExperienceController
 );
