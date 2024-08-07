@@ -49,7 +49,22 @@ const GetExperienceById = () => {
   }, [experienceId, userLogged]);
 
   const handleClick = async () => {
-    // Verificar si hay plazas disponibles antes de intentar reservar
+    // Verifica la fecha de la reserva antes de poder reservar
+
+    const currentDate = new Date();
+    const reservationDateObj = new Date(experience.date);
+
+    if (reservationDateObj <= currentDate) {
+      setError(
+        "You cannot reserve for a date that has already passed or is today."
+      );
+      toast.error(
+        "You cannot reserve for a date that has already passed or is today."
+      );
+      return;
+    }
+
+    // Verifica si hay plazas disponibles antes de intentar reservar
     if (experience.availablePlaces <= 0) {
       toast.error("No available places left");
       return;

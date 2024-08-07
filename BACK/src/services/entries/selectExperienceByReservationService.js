@@ -18,6 +18,7 @@ const selectExperienceByReservationService = async (userId) => {
       e.price,
       e.active,
       r.quantityPerPerson,
+      r.state,
       r.userId,
       r.id AS reservationId,
       r.valoration
@@ -29,7 +30,6 @@ const selectExperienceByReservationService = async (userId) => {
   );
 
   return reservedExperiences;
-
 };
 
 export default selectExperienceByReservationService;

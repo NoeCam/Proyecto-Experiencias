@@ -16,18 +16,59 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDYzMTczMSwiZXhwIjoxNzIxMjM2NTMxfQ.eSQrfnxr9XHXbB00nGxHbw19lrx_LvboGjLZ3MrEIi0",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIyMDA4MTQzLCJleHAiOjE3MjI2MTI5NDN9.mVt3GjuYHM8-dNeeTSOY4BTPyTR0JySWP00V0b5w-ps",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"barranquismo\",\r\n    \"description\": \"Have a fanny good day with friends in a Jet ski route\",\r\n    \"location\": \"Ría de Pontevedra\",\r\n    \"image\": \"jet ski\",\r\n    \"date\": \"2024-09-28\",\r\n    \"price\": \"30 €/pers\",\r\n    \"numMinPlaces\": 3,\r\n    \"numTotalPlaces\": 15\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Tenis",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Barcelona",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "lorem ipsum",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Alberto/Downloads/antartic.jpeg"
+								},
+								{
+									"key": "date",
+									"value": "2024-11-30",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "numMinPlaces",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "numTotalPlaces",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "confirmedByAdmin",
+									"value": "true",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:3020/experiencias",
@@ -81,7 +122,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxMjM5NzcwLCJleHAiOjE3MjE4NDQ1NzB9.uE_LEPGQn9CYlFOD8LPh1XE37iPFHpgQwYdoQJLVJcs",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxOTIxMTg5LCJleHAiOjE3MjI1MjU5ODl9.xRNCHK7QC6Y_YTM_LmDbYPic_044JqcCSFYoK-C3nCE",
 								"type": "text"
 							}
 						],
@@ -117,7 +158,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxMjM5NzcwLCJleHAiOjE3MjE4NDQ1NzB9.uE_LEPGQn9CYlFOD8LPh1XE37iPFHpgQwYdoQJLVJcs",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxOTIxMTg5LCJleHAiOjE3MjI1MjU5ODl9.xRNCHK7QC6Y_YTM_LmDbYPic_044JqcCSFYoK-C3nCE",
 								"type": "text"
 							}
 						],
@@ -153,7 +194,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxMjM5NzcwLCJleHAiOjE3MjE4NDQ1NzB9.uE_LEPGQn9CYlFOD8LPh1XE37iPFHpgQwYdoQJLVJcs",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIxOTIxMTg5LCJleHAiOjE3MjI1MjU5ODl9.xRNCHK7QC6Y_YTM_LmDbYPic_044JqcCSFYoK-C3nCE",
 								"type": "text"
 							}
 						],
@@ -186,10 +227,16 @@
 					"name": "Reservar experiencia",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIyMDA4MTQzLCJleHAiOjE3MjI2MTI5NDN9.mVt3GjuYHM8-dNeeTSOY4BTPyTR0JySWP00V0b5w-ps",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"state\": true\r\n}",
+							"raw": "{\r\n    \"quantityPerPerson\": 5,\r\n    \"state\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +244,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3020/experiencias/1/reservation",
+							"raw": "http://localhost:3020/experiencias/24/reservation",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -205,7 +252,7 @@
 							"port": "3020",
 							"path": [
 								"experiencias",
-								"1",
+								"24",
 								"reservation"
 							]
 						}
@@ -383,76 +430,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Subir imagenes",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6Im5vcm1hbCIsImlhdCI6MTcyMDYzMTczMSwiZXhwIjoxNzIxMjM2NTMxfQ.eSQrfnxr9XHXbB00nGxHbw19lrx_LvboGjLZ3MrEIi0",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "Paseo a la antartida",
-									"type": "text"
-								},
-								{
-									"key": "location",
-									"value": "Antartic",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "lorem ipsum",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/C:/Users/Alberto/Downloads/antartic.jpeg"
-								},
-								{
-									"key": "date",
-									"value": "2024-11-30",
-									"type": "text"
-								},
-								{
-									"key": "numMinPlaces",
-									"value": "3",
-									"type": "text"
-								},
-								{
-									"key": "numTotalPlaces",
-									"value": "15",
-									"type": "text"
-								},
-								{
-									"key": "confirmedByAdmin",
-									"value": "true",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3020/experiencias",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3020",
-							"path": [
-								"experiencias"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -516,7 +493,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"mncameliaacosta@gmail.com\",\r\n    \"password\": \"12345cD?6\"\r\n}",
+							"raw": "{\r\n    \"email\": \"alberjghoyos@gmail.com\",\r\n    \"password\": \"Escoces3?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -632,6 +609,77 @@
 					"response": []
 				},
 				{
+					"name": "Añadir avatar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIyOTY0ODk1LCJleHAiOjE3MjM1Njk2OTV9.73cmf8MMrD9irx9OcsqwUUI4b0chROsy_QcrK3FYn-o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Alberto/OneDrive/Imágenes/cartelDj.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3020/users/avatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3020",
+							"path": [
+								"users",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar contraseña (logueado)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIyOTY0ODk1LCJleHAiOjE3MjM1Njk2OTV9.73cmf8MMrD9irx9OcsqwUUI4b0chROsy_QcrK3FYn-o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"Contrasena1?\",\r\n    \"confirmPassword\": \"Contrasena1?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3020/users/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3020",
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Mostrar perfil usuario",
 					"request": {
 						"method": "GET",
@@ -656,24 +704,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Votar experiencia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIyOTY0ODk1LCJleHAiOjE3MjM1Njk2OTV9.73cmf8MMrD9irx9OcsqwUUI4b0chROsy_QcrK3FYn-o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3020/experiencias/2/votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3020",
+							"path": [
+								"experiencias",
+								"2",
+								"votes"
+							]
+						}
+					},
+					"response": []
 				}
 			]
-		},
-		{
-			"name": "Inicio",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3020",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3020"
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "Not Found",

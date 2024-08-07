@@ -64,7 +64,7 @@ const ChangePasswordForm = () => {
               />
             </div>
             <div className="password-guidelines">
-              <h2>For a secure password:</h2>
+              <h2 className="font-bold text-lg my-3">For a secure password:</h2>
               <ul>
                 <li>Use at least 8 characters</li>
                 <li>Include at least one uppercase letter</li>
