@@ -4,7 +4,6 @@ import getAdminExperiencesService from "../services/getAdminExperiencesService";
 import { ToastContainer, toast } from "react-toastify";
 import ExperienceFilter from "./ExperienceFilter";
 
-
 const AdminExperiencesList = () => {
   const { token } = useContext(AuthContext);
   const [experiences, setExperiences] = useState([]);
@@ -19,7 +18,7 @@ const AdminExperiencesList = () => {
       try {
         const experiencesData = await getAdminExperiencesService(token);
         setExperiences(experiencesData);
-        
+
         setFilteredExperiences(experiencesData); // Inicialmente, todos los datos están sin filtrar
       } catch (error) {
         toast.error("Error fetching experiences");
@@ -97,15 +96,15 @@ const AdminExperiencesList = () => {
               />
             </div>
 
-            <div className="ml-5 w-1/2">
-              <h2 className="font-bold">{experience.title}</h2>
-              <p className="font-bold">Location:</p> {experience.location}
-              <p className="font-bold">Date: </p>
+            <div className="ml-5 w-1/2 text-center">
+              <h2 className="font-bold mb-2">{experience.title}</h2>
+              <p className="font-bold mb-1">Location:</p> {experience.location}
+              <p className="font-bold mb-1">Date: </p>
               {new Date(experience.date).toLocaleDateString()}
-              <p className="font-bold">Price: €</p>
+              <p className="font-bold mb-1">Price: €</p>
               {experience.price}
-              
-              <p className="font-bold">Reserves:</p>{experience.quantityPerPerson}
+              <p className="font-bold">Reserves:</p>
+              {experience.quantityPerPerson}
             </div>
           </div>
         ))}

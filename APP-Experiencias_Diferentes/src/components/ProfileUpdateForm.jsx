@@ -5,6 +5,9 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 
 const ProfileUpdateForm = () => {
+  // Acceso al contexto de autenticación
+  const { token, updateUserLogged } = useContext(AuthContext);
+
   // Estados para manejar los datos del formulario y el estado de carga
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -12,9 +15,6 @@ const ProfileUpdateForm = () => {
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // Acceso al contexto de autenticación
-  const { token, updateUserLogged } = useContext(AuthContext);
 
   // Hook para la navegación
   const navigate = useNavigate();
@@ -35,10 +35,10 @@ const ProfileUpdateForm = () => {
         if (response.ok) {
           const userData = await response.json();
           // Rellenar los estados con los datos del usuario
-          setUsername(userData.username || "");
-          setFirstname(userData.firstname || "");
-          setLastname(userData.lastname || "");
-          setEmail(userData.email || "");
+          setUsername(userData.data.user.username || "");
+          setFirstname(userData.data.user.firstname || "");
+          setLastname(userData.data.user.lastname || "");
+          setEmail(userData.data.user.email || "");
         } else {
           const errorData = await response.json();
           toast.error(
@@ -81,7 +81,7 @@ const ProfileUpdateForm = () => {
 
       if (response.ok) {
         const updatedUser = await response.json();
-        updateUserLogged(updatedUser); // Actualiza el contexto con los nuevos datos del usuario
+        updateUserLogged(updatedUser.data.user); // Actualiza el contexto con los nuevos datos del usuario
         toast.success("Profile updated successfully");
         setTimeout(() => {
           navigate("/users/profile"); // Redirige al perfil del usuario después de 3 segundos

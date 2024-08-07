@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -36,7 +36,7 @@ const ReservationsList = () => {
   const updateExperienceState = (experienceId, newState) => {
     setReservedExperience((prevState) =>
       prevState.map((experience) =>
-        experience.experienceId === experienceId
+        experience.id === experienceId
           ? { ...experience, state: newState }
           : experience
       )

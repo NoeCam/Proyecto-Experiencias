@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f770cbef-f45c-4e21-b9e7-2a7c0c30b4bf",
+		"_postman_id": "4152bb58-365e-41c1-a9de-37ced682b478",
 		"name": "Experiencias_Diferentes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "36578362"
+		"_exporter_id": "33879221"
 	},
 	"item": [
 		{
@@ -430,6 +430,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listado de Experiencias del Administrador Reservadas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIzMDIzMjY0LCJleHAiOjE3MjM2MjgwNjR9.tMDNeMpI9RsK7-9BNp-Sk2e8d3u0A5OFVdBi8Y8ysFc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3020/admin/experiences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3020",
+							"path": [
+								"admin",
+								"experiences"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -757,6 +783,26 @@
 					"port": "3020",
 					"path": [
 						"paginaNoExistente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recurso estático",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3020/uploads/098ff5cf-ee4c-4747-a369-f607967a14fa.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3020",
+					"path": [
+						"uploads",
+						"098ff5cf-ee4c-4747-a369-f607967a14fa.jpg"
 					]
 				}
 			},

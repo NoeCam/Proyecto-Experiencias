@@ -1,14 +1,10 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
 const ViewUserProfile = () => {
   const { userLogged, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("User data has been updated:", userLogged);
-  }, [userLogged]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
