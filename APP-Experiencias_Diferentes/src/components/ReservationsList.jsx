@@ -5,16 +5,18 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import getReservationListService from "../services/getReservationsListService";
 import { ReadonlyRating } from "./RatingStar";
 import ExperienceFilter from "./ExperienceFilter";
+import CancellationExperienceComponent from "./CancellationExperienceComponent";
 
 const ReservationsList = () => {
-  const { token } = useContext(AuthContext);
-  const [error, setError] = useState("");
   const { VITE_API_URL } = import.meta.env;
+
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("");
   const [direction, setDirection] = useState("");
-
+  const [error, setError] = useState("");
   const [ReservedExperience, setReservedExperience] = useState("");
+
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchExperience = async () => {
@@ -22,7 +24,6 @@ const ReservationsList = () => {
         // Llamar al servicio para obtener los detalles de la experiencia
         const ReservedExperience = await getReservationListService(token);
         setReservedExperience(ReservedExperience);
-        console.log(ReservedExperience);
       } catch (error) {
         // Establecer el error en el estado
         setError(error.message);
@@ -30,7 +31,17 @@ const ReservationsList = () => {
       }
     };
     fetchExperience();
-  }, []);
+  }, [token]);
+
+  const updateExperienceState = (experienceId, newState) => {
+    setReservedExperience((prevState) =>
+      prevState.map((experience) =>
+        experience.experienceId === experienceId
+          ? { ...experience, state: newState }
+          : experience
+      )
+    );
+  };
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
@@ -71,16 +82,24 @@ const ReservationsList = () => {
                   alt={ReservedExp.title}
                 />
               </div>
-              <div className="ml-5 w-1/2">
+              <div className="ml-5 w-1/2 text-center">
                 <h4 className="h4">{ReservedExp.title}</h4>
                 <p className="p">{ReservedExp.location}</p>
                 <p className="p">Date: {formatDate(ReservedExp.date)}</p>
                 <p className="p">Price: {ReservedExp.price} €</p>
-
+                <p className="p mb-3">
+                  Reserves: {ReservedExp.quantityPerPerson}{" "}
+                </p>
                 <ReadonlyRating
                   value={Number(ReservedExperience.rating)} // Por defecto, muestra 4 estrellas pintadas
                   className="flex justify-center"
                 ></ReadonlyRating>
+                <CancellationExperienceComponent
+                  experienceId={ReservedExp.id}
+                  state={ReservedExp.state}
+                  reservationDate={ReservedExp.date}
+                  changeState={updateExperienceState}
+                />
               </div>
             </div>
           ))}
