@@ -1,6 +1,6 @@
-const rateExperienceService = async (token, data) => {
+const rateExperienceService = async (token, data, ReservedExperience) => {
     // Construir la URL del endpoint de la API
-    const url = `${import.meta.env.VITE_API_URL}/experiencias/:experienceId/votes`;
+    const url = `${import.meta.env.VITE_API_URL}/experiencias/${ReservedExperience.reservationId}/rating`;
     // Realizar una solicitud POST para crear una nueva experiencia
   
     const response = await fetch(url, {
@@ -19,6 +19,6 @@ const rateExperienceService = async (token, data) => {
     // Devolver la respuesta en formato JSON
     return json;
   };
-  console.log(response);
-  export default createExperienceService;
+
+  export default rateExperienceService;
   

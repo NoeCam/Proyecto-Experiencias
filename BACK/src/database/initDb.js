@@ -75,6 +75,7 @@ async function createTables() {
         state BOOLEAN DEFAULT FALSE,
         userId INT NOT NULL,
         experienceId INT NOT NULL,
+        valoration INT,
         FOREIGN KEY (userId) REFERENCES users(id),
         FOREIGN KEY (experienceId) REFERENCES experiences(id)
       )
