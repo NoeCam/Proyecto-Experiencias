@@ -15,7 +15,7 @@ const loginService = async ({ email, password }) => {
   const json = await response.json();
 
   // Lanzar un error si la respuesta no es exitosa
-  if (!response.ok) throw new Error(json.message);
+  if (!response.ok) throw new Error(json.message || "Failed to request");
 
   // Retornar la respuesta JSON
   return json;

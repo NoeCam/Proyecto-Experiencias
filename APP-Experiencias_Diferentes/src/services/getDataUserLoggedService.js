@@ -12,7 +12,7 @@ const getDataUserLoggedService = async (token) => {
   const json = await response.json();
 
   if (!response.ok) {
-    throw new Error(json.message || "Error en la solicitud"); // Proporciona un mensaje de error si la solicitud falla
+    throw new Error(json.message || "Failed to request"); // Proporciona un mensaje de error si la solicitud falla
   }
 
   return json.data.user; // Asegúrate de que la estructura de datos sea la correcta

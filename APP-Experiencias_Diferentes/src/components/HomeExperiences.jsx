@@ -1,16 +1,14 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContextProvider";
 import ExperienceFilter from "./ExperienceFilter";
 import getExperiences from "../services/experienceService";
-import { RatingValue, DefaultRating, ReadonlyRating } from "./RatingStar";
+import { ReadonlyRating } from "./RatingStar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HomeExperiences = () => {
   const { VITE_API_URL } = import.meta.env;
 
-  const { userLogged } = useContext(AuthContext);
   const [experiences, setExperiences] = useState(null);
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("");
@@ -80,7 +78,7 @@ const HomeExperiences = () => {
                 <p className="p">Price: {experience.price} €</p>
 
                 <ReadonlyRating
-                  value={Number(experience.rating)} // Por defecto, muestra 4 estrellas pintadas
+                  value={Number(experience.rating)}
                   className="flex justify-center"
                 />
                 <Link

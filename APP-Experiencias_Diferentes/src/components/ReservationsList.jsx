@@ -1,22 +1,23 @@
-import { useState, useMemo, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
 import getReservationListService from "../services/getReservationsListService";
-import { RatingValue, ReadonlyRating } from "./RatingStar";
+import { RatingValue } from "./RatingStar";
 import ExperienceFilter from "./ExperienceFilter";
 import CancellationExperienceComponent from "./CancellationExperienceComponent";
 
 const ReservationsList = () => {
   const { VITE_API_URL } = import.meta.env;
 
+  const { token } = useContext(AuthContext);
+
+  const [filteredExperiences, setFilteredExperiences] = useState([]);
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("");
   const [direction, setDirection] = useState("");
   const [error, setError] = useState("");
   const [ReservedExperience, setReservedExperience] = useState("");
-
-  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchExperience = async () => {
@@ -24,6 +25,8 @@ const ReservationsList = () => {
         // Llamar al servicio para obtener los detalles de la experiencia
         const ReservedExperience = await getReservationListService(token);
         setReservedExperience(ReservedExperience);
+
+        setFilteredExperiences(ReservedExperience);
       } catch (error) {
         // Establecer el error en el estado
         setError(error.message);
@@ -32,6 +35,38 @@ const ReservationsList = () => {
     };
     fetchExperience();
   }, [token]);
+
+  useEffect(() => {
+    let filteredData = [...ReservedExperience];
+
+    // Filtro de búsqueda
+    if (search) {
+      filteredData = filteredData.filter((ReservedExp) =>
+        ReservedExp.title.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // Ordenación
+    if (order) {
+      filteredData.sort((a, b) => {
+        let aValue = a[order];
+        let bValue = b[order];
+
+        if (order === "date") {
+          aValue = new Date(aValue);
+          bValue = new Date(bValue);
+        }
+
+        if (direction === "ASC") {
+          return aValue > bValue ? 1 : -1;
+        } else {
+          return aValue < bValue ? 1 : -1;
+        }
+      });
+    }
+
+    setFilteredExperiences(filteredData);
+  }, [search, order, direction, ReservedExperience]);
 
   const updateExperienceState = (experienceId, newState) => {
     setReservedExperience((prevState) =>
@@ -65,8 +100,8 @@ const ReservationsList = () => {
       </h2>
 
       <div className="md:grid md:grid-cols-2 xl:grid-cols-3 bg-white bg-opacity-50 mb-10 mx-2 p-2 rounded-3xl">
-        {ReservedExperience &&
-          ReservedExperience.map((ReservedExp) => (
+        {filteredExperiences &&
+          filteredExperiences.map((ReservedExp) => (
             <div
               key={ReservedExp.id}
               className="flex grid-row md:grid-cols-4 bg-cyan-500 bg-opacity-50 m-2 p-5 rounded-3xl"

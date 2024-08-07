@@ -13,7 +13,7 @@ const makeReservationService = async (token, experienceId, data) => {
   const json = await response.json();
 
   if (!response.ok) {
-    throw new Error(json.message);
+    throw new Error(json.message || "Failed to request");
   }
 
   return json;

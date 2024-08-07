@@ -24,7 +24,7 @@ export const changePasswordService = async ({
   if (!response.ok) {
     const errorDetails = await response.json();
     console.error("Error details:", errorDetails);
-    throw new Error("Failed to change password");
+    throw new Error(errorDetails.message || "Failed to change password");
   }
 
   return await response.json();
