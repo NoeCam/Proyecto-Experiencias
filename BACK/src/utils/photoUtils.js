@@ -3,20 +3,18 @@ import path from "path";
 import sharp from "sharp";
 import { v4 as uuidv4 } from "uuid";
 
-import { UPLOADS_DIR } from "../../env.js";
+import { UPLOADS_DIR } from "../server.js";
 import { deleteImageError, saveImageError } from "../services/errorService.js";
 
 export const savePhotoUtils = async (img, width) => {
   try {
-    const uploadsDir = path.join(process.cwd(), `./${UPLOADS_DIR}`);
-
     // si no existe la carpeta uploads, la creamos, sino accedemos
     try {
       //intento acceder a la carpeta
-      await fs.access(uploadsDir);
+      await fs.access(UPLOADS_DIR);
     } catch {
       // si no pudo acceder es porque no existe, entonces creala
-      await fs.mkdir(uploadsDir);
+      await fs.mkdir(UPLOADS_DIR);
     }
 
     // tengo que procesar la imagen porque viene en un buffer
@@ -30,7 +28,7 @@ export const savePhotoUtils = async (img, width) => {
     const imgName = `${uuidv4()}.jpg`;
 
     // configuro el path del lugar donde voy a guardar la imagen
-    const pathImg = path.join(uploadsDir, imgName);
+    const pathImg = path.join(UPLOADS_DIR, imgName);
 
     // guardo el archivo en el disco
     await sharpImg.toFile(pathImg);
@@ -44,8 +42,8 @@ export const savePhotoUtils = async (img, width) => {
 
 export const deletePhotoUtils = async (imgName) => {
   try {
-    //especifica la ruta en donde está fuardado el archivo y el nombre del archivo a guardar
-    const imgPath = path.join(process.cwd(), `./${UPLOADS_DIR}`, imgName);
+    //especifica la ruta en donde está guardado el archivo y el nombre del archivo a guardar
+    const imgPath = path.join(UPLOADS_DIR, imgName);
 
     try {
       // intenta acceder a esa imagen
@@ -65,10 +63,8 @@ export const deletePhotoUtils = async (imgName) => {
 
 export const duplicatePhotoUtils = async (imgName) => {
   try {
-    const uploadsDir = path.join(process.cwd(), `./${UPLOADS_DIR}`);
-
     // Crea la ruta de la imagen a copiar
-    const imagePath = path.join(uploadsDir, imgName);
+    const imagePath = path.join(UPLOADS_DIR, imgName);
 
     // Leer la imagen original desde la ruta proporcionada
     const originalImage = await fs.readFile(imagePath);
@@ -77,7 +73,7 @@ export const duplicatePhotoUtils = async (imgName) => {
     const newImgName = `${uuidv4()}.jpg`;
 
     // configuro el path del lugar donde voy a guardar la imagen
-    const pathImg = path.join(uploadsDir, newImgName);
+    const pathImg = path.join(UPLOADS_DIR, newImgName);
 
     // Guardar el archivo en el disco
     await fs.writeFile(pathImg, originalImage);

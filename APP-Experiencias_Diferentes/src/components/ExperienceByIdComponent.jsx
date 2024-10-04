@@ -192,7 +192,7 @@ const GetExperienceById = () => {
             </div>
           ) : (
             <div>
-              <h3 className="font-bold">Experience's ratings</h3>{" "}
+              <h3 className="font-bold">Experience&apos;s ratings</h3>{" "}
               <ReadonlyRating />
             </div>
           )}
@@ -234,7 +234,7 @@ const GetExperienceById = () => {
                 >
                   <img
                     className="w-5 inline"
-                    src="/src/assets/iconMinusReservations.svg"
+                    src="/iconMinusReservations.svg"
                     alt="-"
                   />
                 </button>
@@ -254,7 +254,7 @@ const GetExperienceById = () => {
                 >
                   <img
                     className="w-5 inline"
-                    src="/src/assets/iconPlusReservations.svg"
+                    src="/iconPlusReservations.svg"
                     alt="+"
                   />
                 </button>
