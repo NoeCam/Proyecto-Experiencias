@@ -64,7 +64,7 @@ const insertUserModel = async (
 
       Thank you for registering at Different Experiences. To activate your account, click the following link:
 
-      <a href="http://localhost:${PORT_FRONT}/users/validate/${registrationCode}">Activate my account</a>
+      <a href="${PORT_FRONT}/users/validate/${registrationCode}">Activate my account</a>
     `;
 
     // Enviamos el email de verificación al usuario.

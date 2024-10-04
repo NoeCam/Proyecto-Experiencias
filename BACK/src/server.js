@@ -2,7 +2,9 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import routes from "./routes/index.js";
-import { UPLOADS_DIR } from "../env.js";
+import path from "path";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const server = express();
 
@@ -10,6 +12,8 @@ server.use(express.json());
 server.use(cors());
 server.use(fileUpload());
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+export const UPLOADS_DIR = path.join(__dirname, "uploads");
 server.use("/uploads", express.static(UPLOADS_DIR));
 
 server.use(routes);
